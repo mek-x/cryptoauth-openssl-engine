@@ -1,5 +1,4 @@
-/* atcatls_cfg.h
- *
+/**
  * \file
  *
  * \brief  Collection of functions for hardware abstraction of TLS implementations (e.g. OpenSSL)
@@ -49,42 +48,42 @@
    @{ */
 
 // Slot definitions for ECC508 used by the default TLS configuration.
-#define TLS_SLOT_AUTH_PRIV      ((uint8_t)0x0)	//!< Primary authentication private key
-#define TLS_SLOT_AUTH_PMK       ((uint8_t)0x1)	//!< Premaster key for ECDH cipher suites
-#define TLS_SLOT_ECDH_PRIV      ((uint8_t)0x2)	//!< ECDH private key
-#define TLS_SLOT_ECDHE_PRIV     ((uint8_t)0x2)	//!< ECDHE private key
-#define TLS_SLOT_ECDH_PMK       ((uint8_t)0x3)	//!< ECDH/ECDHE pmk slot.  This slot is encrypted with encParentSlot
-#define TLS_SLOT_ENC_PARENT     ((uint8_t)0x4)	//!< The parent encryption key.  This is a random key set on a per-platform basis.
-#define TLS_SLOT_SHAKEY         ((uint8_t)0x5)	//!< SHA key slot.  Used for SHA use cases
-#define TLS_SLOT_HOST_SHAKEY    ((uint8_t)0x6)	//!< Host SHA key slot.  Used for host SHA use cases
-#define TLS_SLOT_FEATURE_PRIV   ((uint8_t)0x7)	//!< Feature private key. Used for feature use cases
-#define TLS_SLOT8_ENC_STORE		((uint8_t)0x8)	//!< Encrypted storage for 416 bytes
-#define TLS_SLOT9_ENC_STORE		((uint8_t)0x9)	//!< Encrypted storage for 72 bytes
-#define TLS_SLOT_AUTH_CERT      ((uint8_t)0xA)	//!< Compressed certificate information for the authPrivSlot
-#define TLS_SLOT_SIGNER_PUBKEY  ((uint8_t)0xB)	//!< Public key of the signer of authCertSlot.
-#define TLS_SLOT_SIGNER_CERT    ((uint8_t)0xC)	//!< Compressed certificate information for the signerPubkey
-#define TLS_SLOT_FEATURE_CERT   ((uint8_t)0xD)	//!< Compressed certificate information for the featurePrivSlot
-#define TLS_SLOT_PKICA_PUBKEY   ((uint8_t)0xE)	//!< Public key for the PKI certificate authority
-#define TLS_SLOT_MFRCA_PUBKEY   ((uint8_t)0xF)	//!< Public key for the MFR certificate authority
+#define TLS_SLOT_AUTH_PRIV      ((uint8_t)0x0)  //!< Primary authentication private key
+#define TLS_SLOT_AUTH_PMK       ((uint8_t)0x1)  //!< Premaster key for ECDH cipher suites
+#define TLS_SLOT_ECDH_PRIV      ((uint8_t)0x2)  //!< ECDH private key
+#define TLS_SLOT_ECDHE_PRIV     ((uint8_t)0x2)  //!< ECDHE private key
+#define TLS_SLOT_ECDH_PMK       ((uint8_t)0x3)  //!< ECDH/ECDHE pmk slot.  This slot is encrypted with encParentSlot
+#define TLS_SLOT_ENC_PARENT     ((uint8_t)0x4)  //!< The parent encryption key.  This is a random key set on a per-platform basis.
+#define TLS_SLOT_SHAKEY         ((uint8_t)0x5)  //!< SHA key slot.  Used for SHA use cases
+#define TLS_SLOT_HOST_SHAKEY    ((uint8_t)0x6)  //!< Host SHA key slot.  Used for host SHA use cases
+#define TLS_SLOT_FEATURE_PRIV   ((uint8_t)0x7)  //!< Feature private key. Used for feature use cases
+#define TLS_SLOT8_ENC_STORE     ((uint8_t)0x8)  //!< Encrypted storage for 416 bytes
+#define TLS_SLOT9_ENC_STORE     ((uint8_t)0x9)  //!< Encrypted storage for 72 bytes
+#define TLS_SLOT_AUTH_CERT      ((uint8_t)0xA)  //!< Compressed certificate information for the authPrivSlot
+#define TLS_SLOT_SIGNER_PUBKEY  ((uint8_t)0xB)  //!< Public key of the signer of authCertSlot.
+#define TLS_SLOT_SIGNER_CERT    ((uint8_t)0xC)  //!< Compressed certificate information for the signerPubkey
+#define TLS_SLOT_FEATURE_CERT   ((uint8_t)0xD)  //!< Compressed certificate information for the featurePrivSlot
+#define TLS_SLOT_PKICA_PUBKEY   ((uint8_t)0xE)  //!< Public key for the PKI certificate authority
+#define TLS_SLOT_MFRCA_PUBKEY   ((uint8_t)0xF)  //!< Public key for the MFR certificate authority
 
 typedef struct {
-	uint8_t authPrivSlot;		//!< Primary authentication private key
-	uint8_t authPmkSlot;		//!< Premaster key for ECDH cipher suites
-	uint8_t ecdhPrivSlot;		//!< ECDH private key
-	uint8_t ecdhePrivSlot;		//!< ECDHE private key
-	uint8_t ecdhPmkSlot;		//!< ECDH/ECDHE pmk slot.  This slot is encrypted with encParentSlot
-	uint8_t encParentSlot;		//!< The parent encryption key.  This is a random key set on a per-platform basis.
-	uint8_t shaKeySlot;			//!< SHA key slot.  Used for SHA use cases
-	uint8_t hostShaKeySlot;		//!< Host SHA key slot.  Used for host SHA use cases
-	uint8_t featurePrivSlot;	//!< Feature private key. Used for feature use cases
-	uint8_t encStoreSlot8;		//!< Encrypted storage for 416 bytes
-	uint8_t encStoreSlot9;		//!< Encrypted storage for 72 bytes
-	uint8_t authCertSlot;		//!< Compressed certificate information for the authPrivSlot
-	uint8_t signerPubkeySlot;	//!< Public key of the signer of authCertSlot.
-	uint8_t signerCertSlot;		//!< Compressed certificate information for the signerPubkey
-	uint8_t featureCertSlot;	//!< Compressed certificate information for the featurePrivSlot
-	uint8_t pkiCaPubkeySlot;	//!< Public key for the PKI certificate authority
-	uint8_t mfrCaPubkeySlot;	//!< Public key for the MFR certificate authority
+	uint8_t authPrivSlot;       //!< Primary authentication private key
+	uint8_t authPmkSlot;        //!< Premaster key for ECDH cipher suites
+	uint8_t ecdhPrivSlot;       //!< ECDH private key
+	uint8_t ecdhePrivSlot;      //!< ECDHE private key
+	uint8_t ecdhPmkSlot;        //!< ECDH/ECDHE pmk slot.  This slot is encrypted with encParentSlot
+	uint8_t encParentSlot;      //!< The parent encryption key.  This is a random key set on a per-platform basis.
+	uint8_t shaKeySlot;         //!< SHA key slot.  Used for SHA use cases
+	uint8_t hostShaKeySlot;     //!< Host SHA key slot.  Used for host SHA use cases
+	uint8_t featurePrivSlot;    //!< Feature private key. Used for feature use cases
+	uint8_t encStoreSlot8;      //!< Encrypted storage for 416 bytes
+	uint8_t encStoreSlot9;      //!< Encrypted storage for 72 bytes
+	uint8_t authCertSlot;       //!< Compressed certificate information for the authPrivSlot
+	uint8_t signerPubkeySlot;   //!< Public key of the signer of authCertSlot.
+	uint8_t signerCertSlot;     //!< Compressed certificate information for the signerPubkey
+	uint8_t featureCertSlot;    //!< Compressed certificate information for the featurePrivSlot
+	uint8_t pkiCaPubkeySlot;    //!< Public key for the PKI certificate authority
+	uint8_t mfrCaPubkeySlot;    //!< Public key for the MFR certificate authority
 } TlsSlotDef;
 
 /** @} */

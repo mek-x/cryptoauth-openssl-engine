@@ -1,6 +1,8 @@
-/** \brief Host side methods to support CryptoAuth computations
+/**
+ * \file
+ * \brief Host side methods to support CryptoAuth computations
  *
- *  \copyright Copyright (c) 2014 Atmel Corporation. All rights reserved.
+ * \copyright Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *
  * \atmel_crypto_device_library_license_start
  *
@@ -51,7 +53,7 @@ uint8_t *atcah_include_data(struct atca_include_data_in_out *param)
 	if (param->mode & MAC_MODE_INCLUDE_OTP_88) {
 		memcpy(param->p_temp, param->otp, ATCA_OTP_SIZE_8 + ATCA_OTP_SIZE_3);            // use OTP[0:10], Mode:5 is overridden
 		param->p_temp += ATCA_OTP_SIZE_8 + ATCA_OTP_SIZE_3;
-	}else  {
+	}else {
 		if (param->mode & MAC_MODE_INCLUDE_OTP_64)
 			memcpy(param->p_temp, param->otp, ATCA_OTP_SIZE_8);         // use 8 bytes OTP[0:7] for (6)
 		else
@@ -501,7 +503,7 @@ ATCA_STATUS atcah_gen_dig(struct atca_gen_dig_in_out *param)
 	if ((param->zone == GENDIG_ZONE_DATA) && (param->key_id <= 15)) {
 		param->temp_key->gen_data = 1;
 		param->temp_key->key_id = (param->key_id & 0xF);    // mask lower 4-bit only
-	}else  {
+	}else {
 		param->temp_key->gen_data = 0;
 		param->temp_key->key_id = 0;
 	}
@@ -572,7 +574,7 @@ ATCA_STATUS atcah_gen_mac(struct atca_gen_dig_in_out *param)
 	if ((param->zone == GENDIG_ZONE_DATA) && (param->key_id <= 15)) {
 		param->temp_key->gen_data = 1;
 		param->temp_key->key_id = (param->key_id & 0xF);    // mask lower 4-bit only
-	}else  {
+	}else {
 		param->temp_key->gen_data = 0;
 		param->temp_key->key_id = 0;
 	}

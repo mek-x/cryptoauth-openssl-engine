@@ -1,4 +1,6 @@
-/** \brief Software implementation of the SHA1 algorithm.
+/**
+ * \file
+ * \brief Software implementation of the SHA1 algorithm.
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *
@@ -43,11 +45,12 @@
 void CL_hashInit(CL_HashContext *ctx)
 {
 	static const U32 hashContext_h_init[] = {
-    	0x67452301,
-    	0xefcdab89,
-    	0x98badcfe,
-    	0x10325476,
-    	0xc3d2e1f0 };
+		0x67452301,
+		0xefcdab89,
+		0x98badcfe,
+		0x10325476,
+		0xc3d2e1f0
+	};
 
 	// Initialize context
 	memset(ctx, 0, sizeof(*ctx));
@@ -74,7 +77,7 @@ void CL_hashUpdate(CL_HashContext *ctx, const U8 *src, int nbytes)
 	// assert may not be active in release versions.
 	//
 	//assert(sizeof(Buf64) == 64);
-    
+
 	// Get number of free bytes in the buf
 	freeBytes = (U8)(ctx->byteCount);
 	freeBytes &= 63;
@@ -123,7 +126,7 @@ void CL_hashFinal(CL_HashContext *ctx, U8 *dest)
 	U8 nbytes;
 	U32 temp;
 	U8 *ptr;
-    
+
 	/* Append pad byte, clear trailing bytes */
 	nbytes = (U8)(ctx->byteCount) & 63;
 	((U8*)ctx->buf)[nbytes] = 0x80;
@@ -163,13 +166,12 @@ void CL_hashFinal(CL_HashContext *ctx, U8 *dest)
 
 	/* Unpack chaining variables to dest bytes. */
 	memcpy(dest, ctx->h, 20);
-    for (i = 0; i < 5; i++)
-    {
-        dest[i*4 + 0] = (ctx->h[i] >> 24) & 0xFF;
-        dest[i*4 + 1] = (ctx->h[i] >> 16) & 0xFF;
-        dest[i*4 + 2] = (ctx->h[i] >>  8) & 0xFF;
-        dest[i*4 + 3] = (ctx->h[i] >>  0) & 0xFF;
-    }
+	for (i = 0; i < 5; i++) {
+		dest[i * 4 + 0] = (ctx->h[i] >> 24) & 0xFF;
+		dest[i * 4 + 1] = (ctx->h[i] >> 16) & 0xFF;
+		dest[i * 4 + 2] = (ctx->h[i] >>  8) & 0xFF;
+		dest[i * 4 + 3] = (ctx->h[i] >>  0) & 0xFF;
+	}
 }
 
 
@@ -224,11 +226,11 @@ void shaEngine(U32 *buf, U32 *h)
 	 */
 	//p = (U8*)h;
 	//for (t = 0; t < 5; t++) {
-		//temp = (temp << 8) | *p++;
-		//temp = (temp << 8) | *p++;
-		//temp = (temp << 8) | *p++;
-		//temp = (temp << 8) | *p++;
-		//h[t] = temp;
+	//temp = (temp << 8) | *p++;
+	//temp = (temp << 8) | *p++;
+	//temp = (temp << 8) | *p++;
+	//temp = (temp << 8) | *p++;
+	//h[t] = temp;
 	//}
 
 	/* Copy the chaining variables to a, b, c, d, e */
@@ -255,7 +257,7 @@ void shaEngine(U32 *buf, U32 *h)
 		}else if (t < 60) {
 			temp += (b & c) | (b & d) | (c & d);
 			temp += 0x8f1bbcdcL;
-		}else  {
+		}else {
 			temp += b ^ c ^ d;
 			temp += 0xca62c1d6L;
 		}
@@ -282,12 +284,12 @@ void shaEngine(U32 *buf, U32 *h)
 	/* Unpack the chaining variables into _h[] buffer. */
 	//p = (U8*)h;
 	//for (t = 0; t < 5; t++) {
-		//temp = h[t];
-		//p[3] = (U8)temp; temp >>= 8;
-		//p[2] = (U8)temp; temp >>= 8;
-		//p[1] = (U8)temp; temp >>= 8;
-		//p[0] = (U8)temp;
-		//p += 4;
+	//temp = h[t];
+	//p[3] = (U8)temp; temp >>= 8;
+	//p[2] = (U8)temp; temp >>= 8;
+	//p[1] = (U8)temp; temp >>= 8;
+	//p[0] = (U8)temp;
+	//p += 4;
 	//}
 
 }

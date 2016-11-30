@@ -1,4 +1,6 @@
-/** \brief cert DER length tests
+/**
+ * \file
+ * \brief cert DER length tests
  *
  * \copyright Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *
@@ -53,7 +55,7 @@ TEST_TEAR_DOWN(atcacert_der_enc_length)
 {
 }
 
-TEST(atcacert_der_enc_length, atcacert_der_enc_length__short_form)
+TEST(atcacert_der_enc_length, short_form)
 {
 	uint32_t length;
 	uint8_t der_length[8];
@@ -84,9 +86,9 @@ TEST(atcacert_der_enc_length, atcacert_der_enc_length__short_form)
 	TEST_ASSERT_EQUAL(1, der_length_size);
 }
 
-TEST(atcacert_der_enc_length, atcacert_der_enc_length__long_form_2byte)
+TEST(atcacert_der_enc_length, long_form_2byte)
 {
-    uint32_t length;
+	uint32_t length;
 	uint8_t der_len_min[] = { 0x81, 0x80 }; // 0x80
 	uint8_t der_len_max[] = { 0x81, 0xFF }; // 0xFF
 	uint8_t der_length[8];
@@ -117,9 +119,9 @@ TEST(atcacert_der_enc_length, atcacert_der_enc_length__long_form_2byte)
 	TEST_ASSERT_EQUAL(sizeof(der_len_max), der_length_size);
 }
 
-TEST(atcacert_der_enc_length, atcacert_der_enc_length__long_form_3byte)
+TEST(atcacert_der_enc_length, long_form_3byte)
 {
-    uint32_t length;
+	uint32_t length;
 	uint8_t der_len_min[] = { 0x82, 0x01, 0x00 };   // 0x0100
 	uint8_t der_len_max[] = { 0x82, 0xFF, 0xFF };   // 0xFFFF
 	uint8_t der_length[8];
@@ -150,9 +152,9 @@ TEST(atcacert_der_enc_length, atcacert_der_enc_length__long_form_3byte)
 	TEST_ASSERT_EQUAL(sizeof(der_len_max), der_length_size);
 }
 
-TEST(atcacert_der_enc_length, atcacert_der_enc_length__long_form_4byte)
+TEST(atcacert_der_enc_length, long_form_4byte)
 {
-    uint32_t length;
+	uint32_t length;
 	uint8_t der_len_min[] = { 0x83, 0x01, 0x00, 0x00 }; // 0x010000
 	uint8_t der_len_max[] = { 0x83, 0xFF, 0xFF, 0xFF }; // 0xFFFFFF
 	uint8_t der_length[8];
@@ -183,9 +185,9 @@ TEST(atcacert_der_enc_length, atcacert_der_enc_length__long_form_4byte)
 	TEST_ASSERT_EQUAL(sizeof(der_len_max), der_length_size);
 }
 
-TEST(atcacert_der_enc_length, atcacert_der_enc_length__long_form_5byte)
+TEST(atcacert_der_enc_length, long_form_5byte)
 {
-    uint32_t length;
+	uint32_t length;
 	uint8_t der_len_min[] = { 0x84, 0x01, 0x00, 0x00, 0x00 };   // 0x01000000
 	uint8_t der_len_max[] = { 0x84, 0xFF, 0xFF, 0xFF, 0xFF };   // 0xFFFFFFFF
 	uint8_t der_length[8];
@@ -216,9 +218,9 @@ TEST(atcacert_der_enc_length, atcacert_der_enc_length__long_form_5byte)
 	TEST_ASSERT_EQUAL(sizeof(der_len_max), der_length_size);
 }
 
-TEST(atcacert_der_enc_length, atcacert_der_enc_length__small_buf)
+TEST(atcacert_der_enc_length, small_buf)
 {
-    uint32_t length;
+	uint32_t length;
 	uint8_t der_length[3];
 	size_t der_length_size = sizeof(der_length);
 	int ret = 0;
@@ -230,9 +232,9 @@ TEST(atcacert_der_enc_length, atcacert_der_enc_length__small_buf)
 	TEST_ASSERT_EQUAL(5, der_length_size);
 }
 
-TEST(atcacert_der_enc_length, atcacert_der_enc_length__bad_params)
+TEST(atcacert_der_enc_length, bad_params)
 {
-    uint32_t length;
+	uint32_t length;
 	uint8_t der_length[8];
 	int ret = 0;
 
@@ -252,12 +254,12 @@ TEST_TEAR_DOWN(atcacert_der_dec_length)
 }
 
 struct atcacert_der_dec_length__good_s {
-    uint32_t length;
-	size_t   der_length_size;
-	uint8_t  der_length[5];
+	uint32_t length;
+	size_t der_length_size;
+	uint8_t der_length[5];
 };
 
-TEST(atcacert_der_dec_length, atcacert_der_dec_der_length__good)
+TEST(atcacert_der_dec_length, good)
 {
 	int ret = 0;
 	size_t i;
@@ -281,11 +283,12 @@ TEST(atcacert_der_dec_length, atcacert_der_dec_der_length__good)
 
 	for (i = 0; i < sizeof(tests) / sizeof(struct atcacert_der_dec_length__good_s); i++) {
 		size_t der_length_size = sizeof(tests[i].der_length);
-        uint32_t length = 0;
+		uint32_t length = 0;
+
 		ret = atcacert_der_dec_length(tests[i].der_length, &der_length_size, &length);
 		TEST_ASSERT_EQUAL(ATCACERT_E_SUCCESS, ret);
 		TEST_ASSERT_EQUAL(tests[i].der_length_size, der_length_size);
-		TEST_ASSERT_EQUAL(tests[i].length, length);
+		TEST_ASSERT_EQUAL_UINT32(tests[i].length, length);
 
 		// Size only
 		der_length_size = sizeof(tests[i].der_length);
@@ -295,56 +298,56 @@ TEST(atcacert_der_dec_length, atcacert_der_dec_der_length__good)
 	}
 }
 
-TEST(atcacert_der_dec_length, atcacert_der_dec_der_length__zero_size)
+TEST(atcacert_der_dec_length, zero_size)
 {
 	int ret = 0;
 	const uint8_t der_length[] = { 0x00 }; // Just needed for a valid pointer
 	size_t der_length_size = 0;
-    uint32_t length = 0;
+	uint32_t length = 0;
 
 	ret = atcacert_der_dec_length(der_length, &der_length_size, &length);
 	TEST_ASSERT_EQUAL(ATCACERT_E_DECODING_ERROR, ret);
 }
 
-TEST(atcacert_der_dec_length, atcacert_der_dec_der_length__not_enough_data)
+TEST(atcacert_der_dec_length, not_enough_data)
 {
 	int ret = 0;
 	const uint8_t der_length[] = { 0x82, 0x01 }; // Encoding indicates more data than is supplied
 	size_t der_length_size = sizeof(der_length);
-    uint32_t length = 0;
+	uint32_t length = 0;
 
 	ret = atcacert_der_dec_length(der_length, &der_length_size, &length);
 	TEST_ASSERT_EQUAL(ATCACERT_E_DECODING_ERROR, ret);
 }
 
-TEST(atcacert_der_dec_length, atcacert_der_dec_der_length__indefinite_form)
+TEST(atcacert_der_dec_length, indefinite_form)
 {
 	int ret = 0;
 	const uint8_t der_length[] = { 0x80, 0x01 }; // Indefinite form not supported
 	size_t der_length_size = sizeof(der_length);
-    uint32_t length = 0;
+	uint32_t length = 0;
 
 	ret = atcacert_der_dec_length(der_length, &der_length_size, &length);
 	TEST_ASSERT_EQUAL(ATCACERT_E_DECODING_ERROR, ret);
 }
 
-TEST(atcacert_der_dec_length, atcacert_der_dec_der_length__too_large)
+TEST(atcacert_der_dec_length, too_large)
 {
 	int ret = 0;
 	const uint8_t der_length[] = { 0x89, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09 }; // Too large for the return type (64 bit size_t)
 	size_t der_length_size = sizeof(der_length);
-    uint32_t length = 0;
+	uint32_t length = 0;
 
 	ret = atcacert_der_dec_length(der_length, &der_length_size, &length);
 	TEST_ASSERT_EQUAL(ATCACERT_E_DECODING_ERROR, ret);
 }
 
-TEST(atcacert_der_dec_length, atcacert_der_dec_der_length__bad_params)
+TEST(atcacert_der_dec_length, bad_params)
 {
 	int ret = 0;
 	const uint8_t der_length[] = { 0x82, 0x01, 0x0 };
 	size_t der_length_size = sizeof(der_length);
-    uint32_t length = 0;
+	uint32_t length = 0;
 
 	der_length_size = sizeof(der_length);
 	ret = atcacert_der_dec_length(NULL, &der_length_size, &length);

@@ -1,4 +1,6 @@
-/** \brief  Wrapper API for software SHA 256 routines
+/**
+ * \file
+ * \brief  Wrapper API for software SHA 256 routines
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *

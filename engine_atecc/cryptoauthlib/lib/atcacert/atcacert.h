@@ -1,4 +1,5 @@
 /**
+ * \file
  * \brief Declarations common to all atcacert code.
  *
  * These are common definitions used by all the atcacert code.

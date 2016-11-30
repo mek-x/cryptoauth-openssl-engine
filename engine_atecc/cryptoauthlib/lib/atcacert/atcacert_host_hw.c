@@ -1,4 +1,6 @@
-/** \brief host side methods using CryptoAuth hardware
+/**
+ * \file
+ * \brief host side methods using CryptoAuth hardware
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *

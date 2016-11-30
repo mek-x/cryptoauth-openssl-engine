@@ -1,4 +1,6 @@
-/** \brief cert definition tests
+/**
+ * \file
+ * \brief cert definition tests
  *
  * \copyright Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *
@@ -64,18 +66,18 @@ static void useCert(const atcacert_def_t* cert_def)
 	g_cert_def.cert_template = g_cert_def_cert_template;
 }
 
-TEST_GROUP(atcacert_def);
 
-TEST_SETUP(atcacert_def)
-{
-	useCert(&g_test_cert_def_1_signer);
-}
+TEST_GROUP(atcacert_get_key_id);
 
-TEST_TEAR_DOWN(atcacert_def)
+TEST_SETUP(atcacert_get_key_id)
 {
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_key_id)
+TEST_TEAR_DOWN(atcacert_get_key_id)
+{
+}
+
+TEST(atcacert_get_key_id, good)
 {
 	int ret = 0;
 	static const uint8_t public_key[64] = {
@@ -95,7 +97,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_key_id)
 	TEST_ASSERT_EQUAL_MEMORY(key_id_ref, key_id, sizeof(key_id));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_key_id_bad_params)
+TEST(atcacert_get_key_id, bad_params)
 {
 	int ret = 0;
 	uint8_t key_id[20];
@@ -110,7 +112,18 @@ TEST(atcacert_def, atcacert_def__atcacert_get_key_id_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_cert_element)
+
+TEST_GROUP(atcacert_set_cert_element);
+
+TEST_SETUP(atcacert_set_cert_element)
+{
+}
+
+TEST_TEAR_DOWN(atcacert_set_cert_element)
+{
+}
+
+TEST(atcacert_set_cert_element, good)
 {
 	int ret = 0;
 	uint8_t cert[] = { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05 };
@@ -123,7 +136,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_cert_element)
 	TEST_ASSERT_EQUAL_MEMORY(cert_ref, cert, sizeof(cert));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_cert_element_edge)
+TEST(atcacert_set_cert_element, edge)
 {
 	int ret = 0;
 	uint8_t cert[] = { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05 };
@@ -136,7 +149,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_cert_element_edge)
 	TEST_ASSERT_EQUAL_MEMORY(cert_ref, cert, sizeof(cert));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_cert_element_missing)
+TEST(atcacert_set_cert_element, missing)
 {
 	int ret = 0;
 	uint8_t cert[] = { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05 };
@@ -149,7 +162,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_cert_element_missing)
 	TEST_ASSERT_EQUAL_MEMORY(cert_ref, cert, sizeof(cert));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_cert_element_unexpected_size)
+TEST(atcacert_set_cert_element, unexpected_size)
 {
 	int ret = 0;
 	uint8_t cert[] = { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05 };
@@ -163,7 +176,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_cert_element_unexpected_size)
 	TEST_ASSERT_EQUAL(ATCACERT_E_UNEXPECTED_ELEM_SIZE, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_cert_element_out_of_bounds)
+TEST(atcacert_set_cert_element, out_of_bounds)
 {
 	int ret = 0;
 	uint8_t cert[] = { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05 };
@@ -181,7 +194,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_cert_element_out_of_bounds)
 	TEST_ASSERT_EQUAL(ATCACERT_E_ELEM_OUT_OF_BOUNDS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_cert_element_bad_params)
+TEST(atcacert_set_cert_element, bad_params)
 {
 	int ret = 0;
 	uint8_t cert[] = { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05 };
@@ -210,7 +223,18 @@ TEST(atcacert_def, atcacert_def__atcacert_set_cert_element_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_cert_element)
+
+TEST_GROUP(atcacert_get_cert_element);
+
+TEST_SETUP(atcacert_get_cert_element)
+{
+}
+
+TEST_TEAR_DOWN(atcacert_get_cert_element)
+{
+}
+
+TEST(atcacert_get_cert_element, good)
 {
 	int ret = 0;
 	uint8_t data[] = { 0x00, 0x00, 0x00 };
@@ -223,7 +247,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_cert_element)
 	TEST_ASSERT_EQUAL_MEMORY(data_ref, data, sizeof(data));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_cert_element_missing)
+TEST(atcacert_get_cert_element, missing)
 {
 	int ret = 0;
 	static const uint8_t cert[] = { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05 };
@@ -234,7 +258,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_cert_element_missing)
 	TEST_ASSERT_EQUAL(ATCACERT_E_ELEM_MISSING, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_cert_element_unexpected_size)
+TEST(atcacert_get_cert_element, unexpected_size)
 {
 	int ret = 0;
 	static const uint8_t cert[] = { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05 };
@@ -248,7 +272,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_cert_element_unexpected_size)
 	TEST_ASSERT_EQUAL(ATCACERT_E_UNEXPECTED_ELEM_SIZE, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_cert_element_out_of_bounds)
+TEST(atcacert_get_cert_element, out_of_bounds)
 {
 	int ret = 0;
 	static const uint8_t cert[] = { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05 };
@@ -266,7 +290,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_cert_element_out_of_bounds)
 	TEST_ASSERT_EQUAL(ATCACERT_E_ELEM_OUT_OF_BOUNDS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_cert_element_bad_params)
+TEST(atcacert_get_cert_element, bad_params)
 {
 	int ret = 0;
 	static const uint8_t cert[] = { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05 };
@@ -295,7 +319,19 @@ TEST(atcacert_def, atcacert_def__atcacert_get_cert_element_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_subj_public_key)
+
+TEST_GROUP(atcacert_set_subj_public_key);
+
+TEST_SETUP(atcacert_set_subj_public_key)
+{
+	useCert(&g_test_cert_def_1_signer);
+}
+
+TEST_TEAR_DOWN(atcacert_set_subj_public_key)
+{
+}
+
+TEST(atcacert_set_subj_public_key, good)
 {
 	int ret = 0;
 	static const uint8_t cert_template_ref[] = {
@@ -336,7 +372,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_subj_public_key)
 	TEST_ASSERT_EQUAL_MEMORY(cert_template_ref, g_cert_def_cert_template, g_cert_def.cert_template_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_subj_public_key_bad_params)
+TEST(atcacert_set_subj_public_key, bad_params)
 {
 	int ret = 0;
 
@@ -362,7 +398,19 @@ TEST(atcacert_def, atcacert_def__atcacert_set_subj_public_key_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_subj_public_key)
+
+TEST_GROUP(atcacert_get_subj_public_key);
+
+TEST_SETUP(atcacert_get_subj_public_key)
+{
+	useCert(&g_test_cert_def_1_signer);
+}
+
+TEST_TEAR_DOWN(atcacert_get_subj_public_key)
+{
+}
+
+TEST(atcacert_get_subj_public_key, good)
 {
 	int ret = 0;
 	static const uint8_t public_key_ref[64] = {
@@ -378,7 +426,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_subj_public_key)
 	TEST_ASSERT_EQUAL_MEMORY(public_key_ref, public_key, sizeof(public_key));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_subj_public_key_bad_params)
+TEST(atcacert_get_subj_public_key, bad_params)
 {
 	int ret = 0;
 	uint8_t public_key[64];
@@ -405,7 +453,19 @@ TEST(atcacert_def, atcacert_def__atcacert_get_subj_public_key_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_subj_key_id)
+
+TEST_GROUP(atcacert_get_subj_key_id);
+
+TEST_SETUP(atcacert_get_subj_key_id)
+{
+	useCert(&g_test_cert_def_1_signer);
+}
+
+TEST_TEAR_DOWN(atcacert_get_subj_key_id)
+{
+}
+
+TEST(atcacert_get_subj_key_id, good)
 {
 	int ret = 0;
 	static const uint8_t key_id_ref[20] = {
@@ -419,7 +479,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_subj_key_id)
 	TEST_ASSERT_EQUAL_MEMORY(key_id_ref, key_id, sizeof(key_id));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_subj_key_id_bad_params)
+TEST(atcacert_get_subj_key_id, bad_params)
 {
 	int ret = 0;
 	uint8_t key_id[20];
@@ -446,7 +506,19 @@ TEST(atcacert_def, atcacert_def__atcacert_get_subj_key_id_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_signature_non_x509)
+
+TEST_GROUP(atcacert_set_signature);
+
+TEST_SETUP(atcacert_set_signature)
+{
+	useCert(&g_test_cert_def_1_signer);
+}
+
+TEST_TEAR_DOWN(atcacert_set_signature)
+{
+}
+
+TEST(atcacert_set_signature, non_x509)
 {
 	int ret = 0;
 	static const uint8_t signature[64] = {
@@ -504,7 +576,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_signature_non_x509)
 	TEST_ASSERT_EQUAL_MEMORY(cert_template_ref, g_cert_def_cert_template, cert_template_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_signature_x509_same_size)
+TEST(atcacert_set_signature, x509_same_size)
 {
 	int ret = 0;
 	static const uint8_t signature[64] = {
@@ -559,7 +631,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_signature_x509_same_size)
 	TEST_ASSERT_EQUAL_MEMORY(cert_template_ref, g_cert_def_cert_template, cert_template_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_signature_x509_bigger)
+TEST(atcacert_set_signature, x509_bigger)
 {
 	int ret = 0;
 	static const uint8_t signature[64] = {
@@ -614,7 +686,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_signature_x509_bigger)
 	TEST_ASSERT_EQUAL_MEMORY(cert_template_ref, g_cert_def_cert_template, cert_template_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_signature_x509_smaller)
+TEST(atcacert_set_signature, x509_smaller)
 {
 	int ret = 0;
 	static const uint8_t signature[64] = {
@@ -669,7 +741,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_signature_x509_smaller)
 	TEST_ASSERT_EQUAL_MEMORY(cert_template_ref, g_cert_def_cert_template, cert_template_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_signature_x509_smallest)
+TEST(atcacert_set_signature, x509_smallest)
 {
 	int ret = 0;
 	static const uint8_t signature[64] = {
@@ -718,7 +790,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_signature_x509_smallest)
 	TEST_ASSERT_EQUAL_MEMORY(cert_template_ref, g_cert_def_cert_template, cert_template_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_signature_x509_out_of_bounds)
+TEST(atcacert_set_signature, x509_out_of_bounds)
 {
 	int ret = 0;
 	static const uint8_t signature[64] = {
@@ -740,7 +812,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_signature_x509_out_of_bounds)
 	TEST_ASSERT_EQUAL(ATCACERT_E_ELEM_OUT_OF_BOUNDS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_signature_x509_small_buf)
+TEST(atcacert_set_signature, x509_small_buf)
 {
 	int ret = 0;
 	static const uint8_t signature[64] = {
@@ -761,7 +833,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_signature_x509_small_buf)
 	TEST_ASSERT_EQUAL(g_cert_def.cert_template_size + 1, cert_template_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_signature_x509_bad_cert_length)
+TEST(atcacert_set_signature, x509_bad_cert_length)
 {
 	int ret = 0;
 	static const uint8_t signature[64] = {
@@ -783,7 +855,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_signature_x509_bad_cert_length)
 	TEST_ASSERT_EQUAL(ATCACERT_E_DECODING_ERROR, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_signature_x509_cert_length_change)
+TEST(atcacert_set_signature, x509_cert_length_change)
 {
 	int ret = 0;
 	static const uint8_t signature[64] = {
@@ -805,7 +877,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_signature_x509_cert_length_change)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_CERT, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_signature_bad_params)
+TEST(atcacert_set_signature, bad_params)
 {
 	int ret = 0;
 	static const uint8_t signature[64] = {
@@ -860,9 +932,21 @@ TEST(atcacert_def, atcacert_def__atcacert_set_signature_bad_params)
 
 	ret = atcacert_set_signature(NULL, NULL, NULL, sizeof(g_cert_def_cert_template), NULL);
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
-};
+}
 
-TEST(atcacert_def, atcacert_def__atcacert_get_signature_non_x509)
+
+TEST_GROUP(atcacert_get_signature);
+
+TEST_SETUP(atcacert_get_signature)
+{
+	useCert(&g_test_cert_def_1_signer);
+}
+
+TEST_TEAR_DOWN(atcacert_get_signature)
+{
+}
+
+TEST(atcacert_get_signature, non_x509)
 {
 	int ret = 0;
 	uint8_t signature[64];
@@ -885,7 +969,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_signature_non_x509)
 	TEST_ASSERT_EQUAL_MEMORY(signature_ref, signature, sizeof(signature));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_signature_x509_no_padding)
+TEST(atcacert_get_signature, x509_no_padding)
 {
 	int ret = 0;
 	uint8_t signature[64];
@@ -935,7 +1019,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_signature_x509_no_padding)
 	TEST_ASSERT_EQUAL_MEMORY(signature_ref, signature, sizeof(signature));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_signature_x509_r_padding)
+TEST(atcacert_get_signature, x509_r_padding)
 {
 	int ret = 0;
 	uint8_t signature[64];
@@ -955,7 +1039,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_signature_x509_r_padding)
 	TEST_ASSERT_EQUAL_MEMORY(signature_ref, signature, sizeof(signature));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_signature_x509_rs_padding)
+TEST(atcacert_get_signature, x509_rs_padding)
 {
 	int ret = 0;
 	uint8_t signature[64];
@@ -1005,7 +1089,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_signature_x509_rs_padding)
 	TEST_ASSERT_EQUAL_MEMORY(signature_ref, signature, sizeof(signature));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_signature_x509_bad_sig)
+TEST(atcacert_get_signature, x509_bad_sig)
 {
 	int ret = 0;
 	uint8_t signature[64];
@@ -1048,7 +1132,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_signature_x509_bad_sig)
 	TEST_ASSERT_EQUAL(ATCACERT_E_DECODING_ERROR, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_signature_x509_out_of_bounds)
+TEST(atcacert_get_signature, x509_out_of_bounds)
 {
 	int ret = 0;
 	uint8_t signature[64];
@@ -1063,7 +1147,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_signature_x509_out_of_bounds)
 	TEST_ASSERT_EQUAL(ATCACERT_E_ELEM_OUT_OF_BOUNDS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_signature_x509_bad_params)
+TEST(atcacert_get_signature, x509_bad_params)
 {
 	int ret = 0;
 	uint8_t signature[64];
@@ -1090,7 +1174,19 @@ TEST(atcacert_def, atcacert_def__atcacert_get_signature_x509_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_issue_date)
+
+TEST_GROUP(atcacert_set_issue_date);
+
+TEST_SETUP(atcacert_set_issue_date)
+{
+	useCert(&g_test_cert_def_1_signer);
+}
+
+TEST_TEAR_DOWN(atcacert_set_issue_date)
+{
+}
+
+TEST(atcacert_set_issue_date, good)
 {
 	int ret = 0;
 	static const atcacert_tm_utc_t date = {
@@ -1139,7 +1235,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_issue_date)
 	TEST_ASSERT_EQUAL_MEMORY(cert_template_ref, g_cert_def_cert_template, g_cert_def.cert_template_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_issue_date_bad_params)
+TEST(atcacert_set_issue_date, bad_params)
 {
 	int ret = 0;
 	static const atcacert_tm_utc_t date = {
@@ -1173,7 +1269,19 @@ TEST(atcacert_def, atcacert_def__atcacert_set_issue_date_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_issue_date)
+
+TEST_GROUP(atcacert_get_issue_date);
+
+TEST_SETUP(atcacert_get_issue_date)
+{
+	useCert(&g_test_cert_def_1_signer);
+}
+
+TEST_TEAR_DOWN(atcacert_get_issue_date)
+{
+}
+
+TEST(atcacert_get_issue_date, good)
 {
 	int ret = 0;
 	atcacert_tm_utc_t date;
@@ -1191,7 +1299,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_issue_date)
 	TEST_ASSERT_EQUAL_MEMORY(&date_ref, &date, sizeof(date));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_issue_date_bad_params)
+TEST(atcacert_get_issue_date, bad_params)
 {
 	int ret = 0;
 	atcacert_tm_utc_t date;
@@ -1218,7 +1326,19 @@ TEST(atcacert_def, atcacert_def__atcacert_get_issue_date_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_expire_date)
+
+TEST_GROUP(atcacert_set_expire_date);
+
+TEST_SETUP(atcacert_set_expire_date)
+{
+	useCert(&g_test_cert_def_1_signer);
+}
+
+TEST_TEAR_DOWN(atcacert_set_expire_date)
+{
+}
+
+TEST(atcacert_set_expire_date, good)
 {
 	int ret = 0;
 	static const atcacert_tm_utc_t date = {
@@ -1267,7 +1387,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_expire_date)
 	TEST_ASSERT_EQUAL_MEMORY(cert_template_ref, g_cert_def_cert_template, g_cert_def.cert_template_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_expire_date_bad_params)
+TEST(atcacert_set_expire_date, bad_params)
 {
 	int ret = 0;
 	static const atcacert_tm_utc_t date = {
@@ -1301,7 +1421,19 @@ TEST(atcacert_def, atcacert_def__atcacert_set_expire_date_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_expire_date)
+
+TEST_GROUP(atcacert_get_expire_date);
+
+TEST_SETUP(atcacert_get_expire_date)
+{
+	useCert(&g_test_cert_def_1_signer);
+}
+
+TEST_TEAR_DOWN(atcacert_get_expire_date)
+{
+}
+
+TEST(atcacert_get_expire_date, good)
 {
 	int ret = 0;
 	atcacert_tm_utc_t date;
@@ -1319,7 +1451,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_expire_date)
 	TEST_ASSERT_EQUAL_MEMORY(&date_ref, &date, sizeof(date));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_expire_date_bad_params)
+TEST(atcacert_get_expire_date, bad_params)
 {
 	int ret = 0;
 	atcacert_tm_utc_t date;
@@ -1346,7 +1478,19 @@ TEST(atcacert_def, atcacert_def__atcacert_get_expire_date_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_signer_id)
+
+TEST_GROUP(atcacert_set_signer_id);
+
+TEST_SETUP(atcacert_set_signer_id)
+{
+	useCert(&g_test_cert_def_1_signer);
+}
+
+TEST_TEAR_DOWN(atcacert_set_signer_id)
+{
+}
+
+TEST(atcacert_set_signer_id, good)
 {
 	int ret = 0;
 	static const uint8_t signer_id[2] = { 0x07, 0xAF };
@@ -1388,7 +1532,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_signer_id)
 	TEST_ASSERT_EQUAL_MEMORY(cert_template_ref, g_cert_def_cert_template, g_cert_def.cert_template_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_signer_id_bad_params)
+TEST(atcacert_set_signer_id, bad_params)
 {
 	int ret = 0;
 	static const uint8_t signer_id[2] = { 0x07, 0xAF };
@@ -1415,7 +1559,19 @@ TEST(atcacert_def, atcacert_def__atcacert_set_signer_id_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_signer_id_uppercase)
+
+TEST_GROUP(atcacert_get_signer_id);
+
+TEST_SETUP(atcacert_get_signer_id)
+{
+	useCert(&g_test_cert_def_1_signer);
+}
+
+TEST_TEAR_DOWN(atcacert_get_signer_id)
+{
+}
+
+TEST(atcacert_get_signer_id, uppercase)
 {
 	int ret = 0;
 	uint8_t signer_id[2];
@@ -1456,7 +1612,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_signer_id_uppercase)
 	TEST_ASSERT_EQUAL_MEMORY(signer_id_ref, signer_id, sizeof(signer_id));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_signer_id_lowercase)
+TEST(atcacert_get_signer_id, lowercase)
 {
 	int ret = 0;
 	uint8_t signer_id[2];
@@ -1497,7 +1653,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_signer_id_lowercase)
 	TEST_ASSERT_EQUAL_MEMORY(signer_id_ref, signer_id, sizeof(signer_id));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_signer_id_invalid)
+TEST(atcacert_get_signer_id, invalid)
 {
 	int ret = 0;
 	uint8_t signer_id[2];
@@ -1506,7 +1662,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_signer_id_invalid)
 	TEST_ASSERT_EQUAL(ATCACERT_E_DECODING_ERROR, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_signer_id_bad_params)
+TEST(atcacert_get_signer_id, bad_params)
 {
 	int ret = 0;
 	uint8_t signer_id[2];
@@ -1533,7 +1689,19 @@ TEST(atcacert_def, atcacert_def__atcacert_get_signer_id_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_cert_sn)
+
+TEST_GROUP(atcacert_set_cert_sn);
+
+TEST_SETUP(atcacert_set_cert_sn)
+{
+	useCert(&g_test_cert_def_1_signer);
+}
+
+TEST_TEAR_DOWN(atcacert_set_cert_sn)
+{
+}
+
+TEST(atcacert_set_cert_sn, good)
 {
 	int ret = 0;
 	static const uint8_t cert_sn[3] = { 0x01, 0x02, 0x03 };
@@ -1580,7 +1748,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_cert_sn)
 	TEST_ASSERT_EQUAL_MEMORY(cert_template_ref, g_cert_def_cert_template, g_cert_def.cert_template_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_cert_sn_unexpected_size)
+TEST(atcacert_set_cert_sn, unexpected_size)
 {
 	int ret = 0;
 	static const uint8_t cert_sn[3] = { 0x01, 0x02, 0x03 };
@@ -1589,7 +1757,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_cert_sn_unexpected_size)
 	TEST_ASSERT_EQUAL(ATCACERT_E_UNEXPECTED_ELEM_SIZE, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_cert_sn_bad_params)
+TEST(atcacert_set_cert_sn, bad_params)
 {
 	int ret = 0;
 	static const uint8_t cert_sn[3] = { 0x01, 0x02, 0x03 };
@@ -1616,7 +1784,19 @@ TEST(atcacert_def, atcacert_def__atcacert_set_cert_sn_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_stored)
+
+TEST_GROUP(atcacert_gen_cert_sn);
+
+TEST_SETUP(atcacert_gen_cert_sn)
+{
+	useCert(&g_test_cert_def_1_signer);
+}
+
+TEST_TEAR_DOWN(atcacert_gen_cert_sn)
+{
+}
+
+TEST(atcacert_gen_cert_sn, stored)
 {
 	int ret = 0;
 	uint8_t cert_ref[512];
@@ -1630,7 +1810,7 @@ TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_stored)
 	TEST_ASSERT_EQUAL_MEMORY(cert_ref, g_cert_def_cert_template, g_cert_def.cert_template_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_stored_bad_params)
+TEST(atcacert_gen_cert_sn, stored_bad_params)
 {
 	int ret = 0;
 
@@ -1646,7 +1826,7 @@ TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_stored_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_device_sn)
+TEST(atcacert_gen_cert_sn, device_sn)
 {
 	int ret = 0;
 	uint8_t clear_sn[10];
@@ -1701,7 +1881,7 @@ TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_device_sn)
 	TEST_ASSERT_EQUAL_MEMORY(cert_template_ref, g_cert_def_cert_template, g_cert_def.cert_template_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_device_sn_unexpected_size)
+TEST(atcacert_gen_cert_sn, device_sn_unexpected_size)
 {
 	int ret = 0;
 	static const uint8_t device_sn[9] = { 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xF0, 0x12 };
@@ -1717,7 +1897,7 @@ TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_device_sn_unexpected_size)
 	TEST_ASSERT_EQUAL(ATCACERT_E_UNEXPECTED_ELEM_SIZE, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_device_sn_bad_params)
+TEST(atcacert_gen_cert_sn, device_sn_bad_params)
 {
 	int ret = 0;
 	static const uint8_t device_sn[9] = { 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xF0, 0x12 };
@@ -1746,7 +1926,7 @@ TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_device_sn_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_signer_id)
+TEST(atcacert_gen_cert_sn, signer_id)
 {
 	int ret = 0;
 	uint8_t clear_sn[3];
@@ -1809,7 +1989,7 @@ TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_signer_id)
 	TEST_ASSERT_EQUAL_MEMORY(cert_template_ref, g_cert_def_cert_template, g_cert_def.cert_template_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_signer_id_unexpected_size)
+TEST(atcacert_gen_cert_sn, signer_id_unexpected_size)
 {
 	int ret = 0;
 	static const uint8_t signer_id[2] = { 0xC4, 0x8B };
@@ -1830,7 +2010,7 @@ TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_signer_id_unexpected_size)
 	TEST_ASSERT_EQUAL(ATCACERT_E_UNEXPECTED_ELEM_SIZE, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_signer_id_bad_signer_id)
+TEST(atcacert_gen_cert_sn, signer_id_bad_signer_id)
 {
 	int ret = 0;
 
@@ -1838,7 +2018,7 @@ TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_signer_id_bad_signer_id)
 	TEST_ASSERT_EQUAL(ATCACERT_E_DECODING_ERROR, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_signer_id_bad_params)
+TEST(atcacert_gen_cert_sn, signer_id_bad_params)
 {
 	int ret = 0;
 	static const uint8_t signer_id[2] = { 0xC4, 0x8B };
@@ -1867,7 +2047,7 @@ static const uint8_t g_hash_public_key[64] = {
 	0x8D, 0xC1, 0x61, 0x4F, 0x17, 0x27, 0xAF, 0x6D, 0xC4, 0x9C, 0x42, 0x83, 0xEE, 0x36, 0xE2, 0x31
 };
 
-TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_pub_key_hash)
+TEST(atcacert_gen_cert_sn, pub_key_hash)
 {
 	int ret = 0;
 	uint8_t clear_sn[10];
@@ -1931,7 +2111,7 @@ TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_pub_key_hash)
 }
 
 
-TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_pub_key_hash_pos)
+TEST(atcacert_gen_cert_sn, pub_key_hash_pos)
 {
 	int ret = 0;
 	uint8_t clear_sn[10];
@@ -1994,7 +2174,7 @@ TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_pub_key_hash_pos)
 	TEST_ASSERT_EQUAL_MEMORY(cert_template_ref, g_cert_def_cert_template, g_cert_def.cert_template_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_pub_key_hash_raw)
+TEST(atcacert_gen_cert_sn, pub_key_hash_raw)
 {
 	int ret = 0;
 	uint8_t clear_sn[10];
@@ -2057,7 +2237,7 @@ TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_pub_key_hash_raw)
 	TEST_ASSERT_EQUAL_MEMORY(cert_template_ref, g_cert_def_cert_template, g_cert_def.cert_template_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_pub_key_hash_unexpected_size)
+TEST(atcacert_gen_cert_sn, pub_key_hash_unexpected_size)
 {
 	int ret = 0;
 
@@ -2070,7 +2250,7 @@ TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_pub_key_hash_unexpected_si
 	TEST_ASSERT_EQUAL(ATCACERT_E_UNEXPECTED_ELEM_SIZE, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_pub_key_hash_bad_public_key)
+TEST(atcacert_gen_cert_sn, pub_key_hash_bad_public_key)
 {
 	int ret = 0;
 
@@ -2083,7 +2263,7 @@ TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_pub_key_hash_bad_public_ke
 	TEST_ASSERT_EQUAL(ATCACERT_E_ELEM_MISSING, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_pub_key_hash_bad_issue_date)
+TEST(atcacert_gen_cert_sn, pub_key_hash_bad_issue_date)
 {
 	int ret = 0;
 
@@ -2096,7 +2276,7 @@ TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_pub_key_hash_bad_issue_dat
 	TEST_ASSERT_EQUAL(ATCACERT_E_DECODING_ERROR, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_pub_key_hash_bad_params)
+TEST(atcacert_gen_cert_sn, pub_key_hash_bad_params)
 {
 	int ret = 0;
 
@@ -2114,7 +2294,7 @@ TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_pub_key_hash_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_device_sn_hash)
+TEST(atcacert_gen_cert_sn, device_sn_hash)
 {
 	int ret = 0;
 	uint8_t clear_sn[10];
@@ -2170,7 +2350,7 @@ TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_device_sn_hash)
 	TEST_ASSERT_EQUAL_MEMORY(cert_template_ref, g_cert_def_cert_template, g_cert_def.cert_template_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_device_sn_hash_pos)
+TEST(atcacert_gen_cert_sn, device_sn_hash_pos)
 {
 	int ret = 0;
 	uint8_t clear_sn[10];
@@ -2226,7 +2406,7 @@ TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_device_sn_hash_pos)
 	TEST_ASSERT_EQUAL_MEMORY(cert_template_ref, g_cert_def_cert_template, g_cert_def.cert_template_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_device_sn_hash_raw)
+TEST(atcacert_gen_cert_sn, device_sn_hash_raw)
 {
 	int ret = 0;
 	uint8_t clear_sn[10];
@@ -2282,7 +2462,7 @@ TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_device_sn_hash_raw)
 	TEST_ASSERT_EQUAL_MEMORY(cert_template_ref, g_cert_def_cert_template, g_cert_def.cert_template_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_device_sn_hash_unexpected_size)
+TEST(atcacert_gen_cert_sn, device_sn_hash_unexpected_size)
 {
 	int ret = 0;
 	static const uint8_t device_sn[9] = { 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xF0, 0x12 };
@@ -2296,7 +2476,7 @@ TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_device_sn_hash_unexpected_
 	TEST_ASSERT_EQUAL(ATCACERT_E_UNEXPECTED_ELEM_SIZE, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_device_sn_hash_bad_issue_date)
+TEST(atcacert_gen_cert_sn, device_sn_hash_bad_issue_date)
 {
 	int ret = 0;
 	static const uint8_t device_sn[9] = { 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xF0, 0x12 };
@@ -2310,7 +2490,7 @@ TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_device_sn_hash_bad_issue_d
 	TEST_ASSERT_EQUAL(ATCACERT_E_DECODING_ERROR, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_device_sn_hash_bad_params)
+TEST(atcacert_gen_cert_sn, device_sn_hash_bad_params)
 {
 	int ret = 0;
 	static const uint8_t device_sn[9] = { 0x12, 0x34, 0x56, 0x78, 0x9A, 0xBC, 0xDE, 0xF0, 0x12 };
@@ -2341,7 +2521,19 @@ TEST(atcacert_def, atcacert_def__atcacert_gen_cert_sn_device_sn_hash_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_cert_sn)
+
+TEST_GROUP(atcacert_get_cert_sn);
+
+TEST_SETUP(atcacert_get_cert_sn)
+{
+	useCert(&g_test_cert_def_1_signer);
+}
+
+TEST_TEAR_DOWN(atcacert_get_cert_sn)
+{
+}
+
+TEST(atcacert_get_cert_sn, good)
 {
 	int ret = 0;
 	uint8_t cert_sn[32];
@@ -2361,7 +2553,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_cert_sn)
 	TEST_ASSERT_EQUAL_MEMORY(cert_sn_ref, cert_sn, sizeof(cert_sn_ref));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_cert_sn_bad_params)
+TEST(atcacert_get_cert_sn, bad_params)
 {
 	int ret = 0;
 	uint8_t cert_sn[32];
@@ -2413,6 +2605,18 @@ TEST(atcacert_def, atcacert_def__atcacert_get_cert_sn_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
+
+TEST_GROUP(atcacert_set_auth_key_id);
+
+TEST_SETUP(atcacert_set_auth_key_id)
+{
+	useCert(&g_test_cert_def_1_signer);
+}
+
+TEST_TEAR_DOWN(atcacert_set_auth_key_id)
+{
+}
+
 static const uint8_t g_ca_public_key[64] = {
 	0x37, 0x0e, 0x32, 0x51, 0x2f, 0x52, 0x48, 0xcc, 0x30, 0x7b, 0x4d, 0x3c, 0x38, 0x61, 0x7f, 0xe7,
 	0x2e, 0x3b, 0xfa, 0x0f, 0xa4, 0x2b, 0xfc, 0xb5, 0x16, 0xed, 0xee, 0xea, 0x22, 0x67, 0xb9, 0x76,
@@ -2420,7 +2624,7 @@ static const uint8_t g_ca_public_key[64] = {
 	0x2f, 0x4f, 0xfa, 0x02, 0x4f, 0xf9, 0x95, 0x6d, 0xb4, 0x81, 0x45, 0x83, 0x5c, 0x1f, 0x1c, 0x35
 };
 
-TEST(atcacert_def, atcacert_def__atcacert_set_auth_key_id)
+TEST(atcacert_set_auth_key_id, good)
 {
 	int ret = 0;
 	static const uint8_t cert_template_ref[] = {
@@ -2465,7 +2669,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_auth_key_id)
 	TEST_ASSERT_EQUAL_MEMORY(cert_template_ref, g_cert_def_cert_template, sizeof(cert_template_ref));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_auth_key_id_bad_params)
+TEST(atcacert_set_auth_key_id, bad_params)
 {
 	int ret = 0;
 
@@ -2491,7 +2695,19 @@ TEST(atcacert_def, atcacert_def__atcacert_set_auth_key_id_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_auth_key_id)
+
+TEST_GROUP(atcacert_get_auth_key_id);
+
+TEST_SETUP(atcacert_get_auth_key_id)
+{
+	useCert(&g_test_cert_def_1_signer);
+}
+
+TEST_TEAR_DOWN(atcacert_get_auth_key_id)
+{
+}
+
+TEST(atcacert_get_auth_key_id, good)
 {
 	int ret = 0;
 	uint8_t key_id[20];
@@ -2509,7 +2725,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_auth_key_id)
 	TEST_ASSERT_EQUAL_MEMORY(key_id_ref, key_id, sizeof(key_id));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_auth_key_id_bad_params)
+TEST(atcacert_get_auth_key_id, bad_params)
 {
 	int ret = 0;
 	uint8_t key_id[20];
@@ -2544,7 +2760,19 @@ static const uint8_t g_comp_cert[72] = {
 	0xA9, 0x9D, 0x5C, 0xC4, 0x8B, 0x10, 0x90, 0x00
 };
 
-TEST(atcacert_def, atcacert_def__atcacert_set_comp_cert_same_size)
+
+TEST_GROUP(atcacert_set_comp_cert);
+
+TEST_SETUP(atcacert_set_comp_cert)
+{
+	useCert(&g_test_cert_def_1_signer);
+}
+
+TEST_TEAR_DOWN(atcacert_set_comp_cert)
+{
+}
+
+TEST(atcacert_set_comp_cert, same_size)
 {
 	int ret = 0;
 	static const uint8_t cert_template_ref[] = {
@@ -2592,7 +2820,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_comp_cert_same_size)
 	TEST_ASSERT_EQUAL_MEMORY(cert_template_ref, g_cert_def_cert_template, sizeof(cert_template_ref));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_comp_cert_bigger)
+TEST(atcacert_set_comp_cert, bigger)
 {
 	int ret = 0;
 	static const uint8_t comp_cert[72] = {
@@ -2647,7 +2875,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_comp_cert_bigger)
 	TEST_ASSERT_EQUAL_MEMORY(cert_template_ref, g_cert_def_cert_template, sizeof(cert_template_ref));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_comp_cert_bad_format)
+TEST(atcacert_set_comp_cert, bad_format)
 {
 	int ret = 0;
 	static const uint8_t comp_cert[72] = {
@@ -2668,7 +2896,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_comp_cert_bad_format)
 	TEST_ASSERT_EQUAL(ATCACERT_E_DECODING_ERROR, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_comp_cert_bad_template_id)
+TEST(atcacert_set_comp_cert, bad_template_id)
 {
 	int ret = 0;
 	static const uint8_t comp_cert[72] = {
@@ -2689,7 +2917,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_comp_cert_bad_template_id)
 	TEST_ASSERT_EQUAL(ATCACERT_E_WRONG_CERT_DEF, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_comp_cert_bad_chain_id)
+TEST(atcacert_set_comp_cert, bad_chain_id)
 {
 	int ret = 0;
 	static const uint8_t comp_cert[72] = {
@@ -2710,7 +2938,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_comp_cert_bad_chain_id)
 	TEST_ASSERT_EQUAL(ATCACERT_E_WRONG_CERT_DEF, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_comp_cert_bad_sn_source)
+TEST(atcacert_set_comp_cert, bad_sn_source)
 {
 	int ret = 0;
 	static const uint8_t comp_cert[72] = {
@@ -2731,7 +2959,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_comp_cert_bad_sn_source)
 	TEST_ASSERT_EQUAL(ATCACERT_E_WRONG_CERT_DEF, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_comp_cert_bad_enc_dates)
+TEST(atcacert_set_comp_cert, bad_enc_dates)
 {
 	int ret = 0;
 	static const uint8_t comp_cert[72] = {
@@ -2752,7 +2980,7 @@ TEST(atcacert_def, atcacert_def__atcacert_set_comp_cert_bad_enc_dates)
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_set_comp_cert_bad_params)
+TEST(atcacert_set_comp_cert, bad_params)
 {
 	int ret = 0;
 	size_t cert_template_size = g_cert_def.cert_template_size;
@@ -2803,7 +3031,19 @@ TEST(atcacert_def, atcacert_def__atcacert_set_comp_cert_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_comp_cert)
+
+TEST_GROUP(atcacert_get_comp_cert);
+
+TEST_SETUP(atcacert_get_comp_cert)
+{
+	useCert(&g_test_cert_def_1_signer);
+}
+
+TEST_TEAR_DOWN(atcacert_get_comp_cert)
+{
+}
+
+TEST(atcacert_get_comp_cert, good)
 {
 	int ret = 0;
 	uint8_t comp_cert[72];
@@ -2826,7 +3066,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_comp_cert)
 	TEST_ASSERT_EQUAL_MEMORY(comp_cert_ref, comp_cert, sizeof(comp_cert));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_comp_cert_bad_params)
+TEST(atcacert_get_comp_cert, bad_params)
 {
 	int ret = 0;
 	uint8_t comp_cert[72];
@@ -2853,7 +3093,19 @@ TEST(atcacert_def, atcacert_def__atcacert_get_comp_cert_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_tbs)
+
+TEST_GROUP(atcacert_get_tbs);
+
+TEST_SETUP(atcacert_get_tbs)
+{
+	useCert(&g_test_cert_def_1_signer);
+}
+
+TEST_TEAR_DOWN(atcacert_get_tbs)
+{
+}
+
+TEST(atcacert_get_tbs, good)
 {
 	int ret = 0;
 	const uint8_t* tbs = NULL;
@@ -2865,7 +3117,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_tbs)
 	TEST_ASSERT_EQUAL(g_cert_def.tbs_cert_loc.count, tbs_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_tbs_bad_cert)
+TEST(atcacert_get_tbs, bad_cert)
 {
 	int ret = 0;
 	const uint8_t* tbs = NULL;
@@ -2877,7 +3129,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_tbs_bad_cert)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_CERT, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_tbs_bad_params)
+TEST(atcacert_get_tbs, bad_params)
 {
 	int ret = 0;
 	const uint8_t* tbs = NULL;
@@ -2929,7 +3181,19 @@ TEST(atcacert_def, atcacert_def__atcacert_get_tbs_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_tbs_digest)
+
+TEST_GROUP(atcacert_get_tbs_digest);
+
+TEST_SETUP(atcacert_get_tbs_digest)
+{
+	useCert(&g_test_cert_def_1_signer);
+}
+
+TEST_TEAR_DOWN(atcacert_get_tbs_digest)
+{
+}
+
+TEST(atcacert_get_tbs_digest, good)
 {
 	int ret = 0;
 	uint8_t tbs_digest[32];
@@ -2943,7 +3207,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_tbs_digest)
 	TEST_ASSERT_EQUAL_MEMORY(tbs_digest_ref, tbs_digest, sizeof(tbs_digest_ref));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_tbs_digest_bad_params)
+TEST(atcacert_get_tbs_digest, bad_params)
 {
 	int ret = 0;
 	uint8_t tbs_digest[32];
@@ -2970,7 +3234,18 @@ TEST(atcacert_def, atcacert_def__atcacert_get_tbs_digest_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_empty_list)
+
+TEST_GROUP(atcacert_merge_device_loc);
+
+TEST_SETUP(atcacert_merge_device_loc)
+{
+}
+
+TEST_TEAR_DOWN(atcacert_merge_device_loc)
+{
+}
+
+TEST(atcacert_merge_device_loc, empty_list)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[16];
@@ -2995,7 +3270,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_empty_list)
 	TEST_ASSERT_EQUAL_MEMORY(&new_device_loc, &device_locs[0], sizeof(device_locs[0]));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_devzone_none)
+TEST(atcacert_merge_device_loc, devzone_none)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[16];
@@ -3019,7 +3294,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_devzone_none)
 	TEST_ASSERT_EQUAL(0, device_locs_count);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_count0)
+TEST(atcacert_merge_device_loc, count0)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[16];
@@ -3046,7 +3321,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_count0)
 // 0          16 32         40
 // |---new---|
 //               |---cur---|
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_align1)
+TEST(atcacert_merge_device_loc, align1)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[16];
@@ -3107,7 +3382,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_align1)
 // 0         16         24
 // |---new---|
 //           |---cur---|
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_align2)
+TEST(atcacert_merge_device_loc, align2)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[16];
@@ -3161,7 +3436,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_align2)
 // 0      14  16     22
 // |---new---|
 //        |---cur---|
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_align3)
+TEST(atcacert_merge_device_loc, align3)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[16];
@@ -3215,7 +3490,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_align3)
 // 16         45
 // |---new---|
 // |---cur---|
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_align4)
+TEST(atcacert_merge_device_loc, align4)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[16];
@@ -3269,7 +3544,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_align4)
 // 0  8          9  20
 // |------new------|
 //    |---cur---|
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_align5)
+TEST(atcacert_merge_device_loc, align5)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[16];
@@ -3323,7 +3598,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_align5)
 // 0  8          9  20
 //    |---new---|
 // |------cur------|
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_align6)
+TEST(atcacert_merge_device_loc, align6)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[16];
@@ -3377,7 +3652,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_align6)
 // 5     10        567
 //       |---new---|
 // |------cur------|
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_align7)
+TEST(atcacert_merge_device_loc, align7)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[16];
@@ -3431,7 +3706,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_align7)
 // 5     10        567
 // |------new------|
 //       |---cur---|
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_align8)
+TEST(atcacert_merge_device_loc, align8)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[16];
@@ -3485,7 +3760,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_align8)
 // 8      10 12     15
 //        |---new---|
 // |---cur---|
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_align9)
+TEST(atcacert_merge_device_loc, align9)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[16];
@@ -3539,7 +3814,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_align9)
 // 1         15        1000
 //           |---new---|
 // |---cur---|
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_align10)
+TEST(atcacert_merge_device_loc, align10)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[16];
@@ -3593,7 +3868,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_align10)
 // 8          9 50         100
 //              |---new---|
 // |---cur---|
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_align11)
+TEST(atcacert_merge_device_loc, align11)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[16];
@@ -3651,7 +3926,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_align11)
 	TEST_ASSERT_EQUAL_MEMORY(device_locs_ref, device_locs, sizeof(device_locs[0]) * device_locs_count);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_32block_no_change)
+TEST(atcacert_merge_device_loc, 32block_no_change)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[16];
@@ -3683,7 +3958,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_32block_no_change)
 	TEST_ASSERT_EQUAL_MEMORY(&ref_device_loc, &device_locs[0], sizeof(device_locs[0]));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_32block_round_down)
+TEST(atcacert_merge_device_loc, 32block_round_down)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[16];
@@ -3715,7 +3990,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_32block_round_down)
 	TEST_ASSERT_EQUAL_MEMORY(&ref_device_loc, &device_locs[0], sizeof(device_locs[0]));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_32block_round_up)
+TEST(atcacert_merge_device_loc, 32block_round_up)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[16];
@@ -3747,7 +4022,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_32block_round_up)
 	TEST_ASSERT_EQUAL_MEMORY(&ref_device_loc, &device_locs[0], sizeof(device_locs[0]));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_32block_round_both)
+TEST(atcacert_merge_device_loc, 32block_round_both)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[16];
@@ -3779,7 +4054,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_32block_round_both)
 	TEST_ASSERT_EQUAL_MEMORY(&ref_device_loc, &device_locs[0], sizeof(device_locs[0]));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_32block_round_down_merge)
+TEST(atcacert_merge_device_loc, 32block_round_down_merge)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[1] = {
@@ -3819,7 +4094,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_32block_round_down_me
 	TEST_ASSERT_EQUAL_MEMORY(&ref_device_loc, &device_locs[0], sizeof(device_locs[0]));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_32block_round_up_merge)
+TEST(atcacert_merge_device_loc, 32block_round_up_merge)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[1] = {
@@ -3859,7 +4134,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_32block_round_up_merg
 	TEST_ASSERT_EQUAL_MEMORY(&ref_device_loc, &device_locs[0], sizeof(device_locs[0]));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_data_diff_slot)
+TEST(atcacert_merge_device_loc, data_diff_slot)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[16];
@@ -3917,7 +4192,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_data_diff_slot)
 	TEST_ASSERT_EQUAL_MEMORY(device_locs_ref, device_locs, sizeof(device_locs[0]) * device_locs_count);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_data_diff_genkey)
+TEST(atcacert_merge_device_loc, data_diff_genkey)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[16];
@@ -3975,7 +4250,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_data_diff_genkey)
 	TEST_ASSERT_EQUAL_MEMORY(device_locs_ref, device_locs, sizeof(device_locs[0]) * device_locs_count);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_config)
+TEST(atcacert_merge_device_loc, config)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[16];
@@ -4027,7 +4302,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_config)
 }
 
 
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_otp)
+TEST(atcacert_merge_device_loc, otp)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[16];
@@ -4078,7 +4353,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_otp)
 	TEST_ASSERT_EQUAL_MEMORY(device_locs_ref, device_locs, sizeof(device_locs[0]) * device_locs_count);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_first)
+TEST(atcacert_merge_device_loc, first)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[5] = {
@@ -4162,7 +4437,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_first)
 	TEST_ASSERT_EQUAL_MEMORY(&ref_device_locs[0], &device_locs[0], sizeof(ref_device_locs));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_mid)
+TEST(atcacert_merge_device_loc, mid)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[5] = {
@@ -4246,7 +4521,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_mid)
 	TEST_ASSERT_EQUAL_MEMORY(&ref_device_locs[0], &device_locs[0], sizeof(ref_device_locs));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_last)
+TEST(atcacert_merge_device_loc, last)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[5] = {
@@ -4330,7 +4605,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_last)
 	TEST_ASSERT_EQUAL_MEMORY(&ref_device_locs[0], &device_locs[0], sizeof(ref_device_locs));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_add)
+TEST(atcacert_merge_device_loc, add)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[5] = {
@@ -4421,7 +4696,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_add)
 	TEST_ASSERT_EQUAL_MEMORY(&ref_device_locs[0], &device_locs[0], sizeof(ref_device_locs));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_small_buf)
+TEST(atcacert_merge_device_loc, small_buf)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[4] = {
@@ -4473,7 +4748,7 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_small_buf)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BUFFER_TOO_SMALL, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_bad_params)
+TEST(atcacert_merge_device_loc, bad_params)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[4];
@@ -4533,7 +4808,19 @@ TEST(atcacert_def, atcacert_def__atcacert_merge_device_loc_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_device_locs_device)
+
+TEST_GROUP(atcacert_get_device_locs);
+
+TEST_SETUP(atcacert_get_device_locs)
+{
+	useCert(&g_test_cert_def_1_signer);
+}
+
+TEST_TEAR_DOWN(atcacert_get_device_locs)
+{
+}
+
+TEST(atcacert_get_device_locs, device)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[16];
@@ -4638,7 +4925,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_device_locs_device)
 	TEST_ASSERT_EQUAL_MEMORY(&ref_device_locs[0], &device_locs[0], sizeof(ref_device_locs));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_device_locs_signer_device)
+TEST(atcacert_get_device_locs, signer_device)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[16];
@@ -4769,7 +5056,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_device_locs_signer_device)
 	TEST_ASSERT_EQUAL_MEMORY(&ref_device_locs[0], &device_locs[0], sizeof(ref_device_locs));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_device_locs_32block_signer_device)
+TEST(atcacert_get_device_locs, 32block_signer_device)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[16];
@@ -4900,7 +5187,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_device_locs_32block_signer_device)
 	TEST_ASSERT_EQUAL_MEMORY(&ref_device_locs[0], &device_locs[0], sizeof(ref_device_locs));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_device_locs_small_buf)
+TEST(atcacert_get_device_locs, small_buf)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[2];
@@ -4924,7 +5211,7 @@ TEST(atcacert_def, atcacert_def__atcacert_get_device_locs_small_buf)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BUFFER_TOO_SMALL, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_device_locs_bad_params)
+TEST(atcacert_get_device_locs, bad_params)
 {
 	int ret = 0;
 	atcacert_device_loc_t device_locs[5];
@@ -4976,7 +5263,19 @@ TEST(atcacert_def, atcacert_def__atcacert_get_device_locs_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_cert_build_start_signer)
+
+TEST_GROUP(atcacert_cert_build);
+
+TEST_SETUP(atcacert_cert_build)
+{
+	useCert(&g_test_cert_def_1_signer);
+}
+
+TEST_TEAR_DOWN(atcacert_cert_build)
+{
+}
+
+TEST(atcacert_cert_build, start_signer)
 {
 	int ret = 0;
 	static const uint8_t cert_ref[] = {
@@ -5017,7 +5316,7 @@ TEST(atcacert_def, atcacert_def__atcacert_cert_build_start_signer)
 		.cert_size		= &cert_size,
 		.max_cert_size	= cert_size,
 		.is_device_sn	= FALSE,
-		.device_sn		= { 0x00,	  0x00,0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }
+		.device_sn		= { 0x00,	  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }
 	};
 	atcacert_build_state_t build_state;
 
@@ -5041,7 +5340,7 @@ static const uint8_t g_padded_public_key[72] = {
 	0x40, 0x06, 0xF2, 0x52, 0x7C, 0xFE, 0xA2, 0x3E
 };
 
-TEST(atcacert_def, atcacert_def__atcacert_cert_build_process_signer_public_key)
+TEST(atcacert_cert_build, process_signer_public_key)
 {
 	int ret = 0;
 	static const atcacert_device_loc_t device_loc_public_key = {
@@ -5099,7 +5398,7 @@ TEST(atcacert_def, atcacert_def__atcacert_cert_build_process_signer_public_key)
 	TEST_ASSERT_EQUAL_MEMORY(cert_ref, cert, cert_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_cert_build_process_signer_comp_cert)
+TEST(atcacert_cert_build, process_signer_comp_cert)
 {
 	int ret = 0;
 	static const atcacert_device_loc_t device_loc_public_key = {
@@ -5167,7 +5466,7 @@ TEST(atcacert_def, atcacert_def__atcacert_cert_build_process_signer_comp_cert)
 	TEST_ASSERT_EQUAL_MEMORY(cert_ref, cert, cert_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_cert_build_finish_signer)
+TEST(atcacert_cert_build, finish_signer)
 {
 	int ret = 0;
 	static const atcacert_device_loc_t device_loc_public_key = {
@@ -5238,7 +5537,7 @@ TEST(atcacert_def, atcacert_def__atcacert_cert_build_finish_signer)
 	TEST_ASSERT_EQUAL_MEMORY(cert_ref, cert, cert_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_cert_build_start_device)
+TEST(atcacert_cert_build, start_device)
 {
 	int ret = 0;
 	static const uint8_t cert_ref[] = {
@@ -5276,7 +5575,7 @@ TEST(atcacert_def, atcacert_def__atcacert_cert_build_start_device)
 		.cert_size		= &cert_size,
 		.max_cert_size	= cert_size,
 		.is_device_sn	= FALSE,
-		.device_sn		= { 0x00,	  0x00,0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }
+		.device_sn		= { 0x00,	  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }
 	};
 	atcacert_build_state_t build_state;
 
@@ -5294,7 +5593,7 @@ TEST(atcacert_def, atcacert_def__atcacert_cert_build_start_device)
 	TEST_ASSERT_EQUAL_MEMORY(cert_ref, cert, cert_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_cert_build_process_device_public_key)
+TEST(atcacert_cert_build, process_device_public_key)
 {
 	int ret = 0;
 	static const atcacert_device_loc_t device_loc_public_key = {
@@ -5357,7 +5656,7 @@ TEST(atcacert_def, atcacert_def__atcacert_cert_build_process_device_public_key)
 	TEST_ASSERT_EQUAL_MEMORY(cert_ref, cert, cert_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_cert_build_process_device_comp_cert)
+TEST(atcacert_cert_build, process_device_comp_cert)
 {
 	int ret = 0;
 	static const atcacert_device_loc_t device_loc_public_key = {
@@ -5437,7 +5736,7 @@ TEST(atcacert_def, atcacert_def__atcacert_cert_build_process_device_comp_cert)
 	TEST_ASSERT_EQUAL_MEMORY(cert_ref, cert, cert_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_cert_build_process_device_comp_cert_new_expire)
+TEST(atcacert_cert_build, process_device_comp_cert_new_expire)
 {
 	int ret = 0;
 	static const atcacert_device_loc_t device_loc_public_key = {
@@ -5517,7 +5816,7 @@ TEST(atcacert_def, atcacert_def__atcacert_cert_build_process_device_comp_cert_ne
 	TEST_ASSERT_EQUAL_MEMORY(cert_ref, cert, cert_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_cert_build_finish_device)
+TEST(atcacert_cert_build, finish_device)
 {
 	int ret = 0;
 	static const atcacert_device_loc_t device_loc_public_key = {
@@ -5614,7 +5913,7 @@ TEST(atcacert_def, atcacert_def__atcacert_cert_build_finish_device)
 	TEST_ASSERT_EQUAL_MEMORY(cert_ref, cert, cert_size);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_cert_build_start_small_buf)
+TEST(atcacert_cert_build, start_small_buf)
 {
 	int ret = 0;
 	static const uint8_t ca_public_key[64];
@@ -5640,7 +5939,7 @@ TEST(atcacert_def, atcacert_def__atcacert_cert_build_start_small_buf)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BUFFER_TOO_SMALL, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_cert_build_start_bad_params)
+TEST(atcacert_cert_build, start_bad_params)
 {
 	int ret = 0;
 	static const uint8_t ca_public_key[64];
@@ -5742,7 +6041,7 @@ TEST(atcacert_def, atcacert_def__atcacert_cert_build_start_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_cert_build_process_bad_params)
+TEST(atcacert_cert_build, process_bad_params)
 {
 	int ret = 0;
 	static const uint8_t ca_public_key[64];
@@ -5788,7 +6087,7 @@ TEST(atcacert_def, atcacert_def__atcacert_cert_build_process_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_cert_build_finish_missing_device_sn)
+TEST(atcacert_cert_build, finish_missing_device_sn)
 {
 	int ret = 0;
 	uint8_t cert[512];
@@ -5809,7 +6108,7 @@ TEST(atcacert_def, atcacert_def__atcacert_cert_build_finish_missing_device_sn)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_cert_build_finish_bad_params)
+TEST(atcacert_cert_build, finish_bad_params)
 {
 	int ret = 0;
 
@@ -5817,10 +6116,22 @@ TEST(atcacert_def, atcacert_def__atcacert_cert_build_finish_bad_params)
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
+
+TEST_GROUP(atcacert_is_device_loc_overlap);
+
+TEST_SETUP(atcacert_is_device_loc_overlap)
+{
+	useCert(&g_test_cert_def_1_signer);
+}
+
+TEST_TEAR_DOWN(atcacert_is_device_loc_overlap)
+{
+}
+
 // 0        10 15       25
 // |---1---|
 //             |---2---|
-TEST(atcacert_def, atcacert_def__atcacert_is_device_loc_overlap_align1)
+TEST(atcacert_is_device_loc_overlap, align1)
 {
 	int ret = 0;
 	static const atcacert_device_loc_t device_loc1 = {
@@ -5845,7 +6156,7 @@ TEST(atcacert_def, atcacert_def__atcacert_is_device_loc_overlap_align1)
 // 0       10       20
 // |---1---|
 //         |---2---|
-TEST(atcacert_def, atcacert_def__atcacert_is_device_loc_overlap_align2)
+TEST(atcacert_is_device_loc_overlap, align2)
 {
 	int ret = 0;
 	static const atcacert_device_loc_t device_loc1 = {
@@ -5870,7 +6181,7 @@ TEST(atcacert_def, atcacert_def__atcacert_is_device_loc_overlap_align2)
 // 0      9 10     20
 // |---1---|
 //        |---2---|
-TEST(atcacert_def, atcacert_def__atcacert_is_device_loc_overlap_align3)
+TEST(atcacert_is_device_loc_overlap, align3)
 {
 	int ret = 0;
 	static const atcacert_device_loc_t device_loc1 = {
@@ -5895,7 +6206,7 @@ TEST(atcacert_def, atcacert_def__atcacert_is_device_loc_overlap_align3)
 // 5  10       25 30
 // |------1------|
 //    |---2---|
-TEST(atcacert_def, atcacert_def__atcacert_is_device_loc_overlap_align4)
+TEST(atcacert_is_device_loc_overlap, align4)
 {
 	int ret = 0;
 	static const atcacert_device_loc_t device_loc1 = {
@@ -5920,7 +6231,7 @@ TEST(atcacert_def, atcacert_def__atcacert_is_device_loc_overlap_align4)
 // 5  10       25 30
 //    |---1---|
 // |------2------|
-TEST(atcacert_def, atcacert_def__atcacert_is_device_loc_overlap_align5)
+TEST(atcacert_is_device_loc_overlap, align5)
 {
 	int ret = 0;
 	static const atcacert_device_loc_t device_loc1 = {
@@ -5945,7 +6256,7 @@ TEST(atcacert_def, atcacert_def__atcacert_is_device_loc_overlap_align5)
 // 0      9 10     20
 //        |---1---|
 // |---2---|
-TEST(atcacert_def, atcacert_def__atcacert_is_device_loc_overlap_align6)
+TEST(atcacert_is_device_loc_overlap, align6)
 {
 	int ret = 0;
 	static const atcacert_device_loc_t device_loc1 = {
@@ -5970,7 +6281,7 @@ TEST(atcacert_def, atcacert_def__atcacert_is_device_loc_overlap_align6)
 // 0       10       20
 //         |---1---|
 // |---2---|
-TEST(atcacert_def, atcacert_def__atcacert_is_device_loc_overlap_align7)
+TEST(atcacert_is_device_loc_overlap, align7)
 {
 	int ret = 0;
 	static const atcacert_device_loc_t device_loc1 = {
@@ -5995,7 +6306,7 @@ TEST(atcacert_def, atcacert_def__atcacert_is_device_loc_overlap_align7)
 // 0        10 15       25
 //             |---1---|
 // |---2---|
-TEST(atcacert_def, atcacert_def__atcacert_is_device_loc_overlap_align8)
+TEST(atcacert_is_device_loc_overlap, align8)
 {
 	int ret = 0;
 	static const atcacert_device_loc_t device_loc1 = {
@@ -6017,7 +6328,19 @@ TEST(atcacert_def, atcacert_def__atcacert_is_device_loc_overlap_align8)
 	TEST_ASSERT_EQUAL(FALSE, ret);
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_get_device_data_flow)
+
+TEST_GROUP(atcacert_get_device_data);
+
+TEST_SETUP(atcacert_get_device_data)
+{
+	useCert(&g_test_cert_def_1_signer);
+}
+
+TEST_TEAR_DOWN(atcacert_get_device_data)
+{
+}
+
+TEST(atcacert_get_device_data, flow)
 {
 	int ret = 0;
 	size_t i = 0;
@@ -6106,7 +6429,18 @@ TEST(atcacert_def, atcacert_def__atcacert_get_device_data_flow)
 	}
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_public_key_add_padding)
+
+TEST_GROUP(atcacert_public_key_add_padding);
+
+TEST_SETUP(atcacert_public_key_add_padding)
+{
+}
+
+TEST_TEAR_DOWN(atcacert_public_key_add_padding)
+{
+}
+
+TEST(atcacert_public_key_add_padding, separate)
 {
 	uint8_t padded_key[72];
 
@@ -6114,7 +6448,7 @@ TEST(atcacert_def, atcacert_def__atcacert_public_key_add_padding)
 	TEST_ASSERT_EQUAL_MEMORY(g_padded_public_key, padded_key, sizeof(g_padded_public_key));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_public_key_add_padding_in_place)
+TEST(atcacert_public_key_add_padding, in_place)
 {
 	uint8_t key[72] = {
 		0x9F, 0x61, 0xEB, 0xA0, 0xD7, 0x9E, 0xF2, 0xC4, 0x96, 0xF1, 0x32, 0xF2, 0x50, 0x29, 0x01, 0xEF,
@@ -6128,7 +6462,18 @@ TEST(atcacert_def, atcacert_def__atcacert_public_key_add_padding_in_place)
 	TEST_ASSERT_EQUAL_MEMORY(g_padded_public_key, key, sizeof(g_padded_public_key));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_public_key_remove_padding)
+
+TEST_GROUP(atcacert_public_key_remove_padding);
+
+TEST_SETUP(atcacert_public_key_remove_padding)
+{
+}
+
+TEST_TEAR_DOWN(atcacert_public_key_remove_padding)
+{
+}
+
+TEST(atcacert_public_key_remove_padding, separate)
 {
 	uint8_t raw_key[64];
 
@@ -6136,7 +6481,7 @@ TEST(atcacert_def, atcacert_def__atcacert_public_key_remove_padding)
 	TEST_ASSERT_EQUAL_MEMORY(g_test_public_key, raw_key, sizeof(g_test_public_key));
 }
 
-TEST(atcacert_def, atcacert_def__atcacert_public_key_remove_padding_in_place)
+TEST(atcacert_public_key_remove_padding, in_place)
 {
 	uint8_t key[72] = {
 		0x00, 0x00, 0x00, 0x00, 0x9F, 0x61, 0xEB, 0xA0, 0xD7, 0x9E, 0xF2, 0xC4, 0x96, 0xF1, 0x32, 0xF2,

@@ -1,6 +1,7 @@
-/** \file atca_compiler.h
- * ATCA is meant to be portable across architectures, even non-Atmel architectures and compiler environments.
- * This file is for isolating compiler specific macros.
+/**
+ * \file
+ * \brief ATCA is meant to be portable across architectures, even non-Atmel architectures and compiler environments.
+ *        This file is for isolating compiler specific macros.
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *

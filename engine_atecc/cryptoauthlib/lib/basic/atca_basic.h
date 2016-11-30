@@ -1,4 +1,5 @@
-/** \file atca_basic.h
+/**
+ * \file
  * \brief CryptoAuthLib Basic API methods - a simple crypto authentication api.
  * These methods manage a global ATCADevice object behind the scenes.  They also
  * manage the wake/idle state transitions so callers don't need to.
@@ -92,6 +93,7 @@ ATCA_STATUS atcab_read_bytes_zone(ATCADeviceType dev_type, uint8_t zone, uint16_
 
 ATCA_STATUS atcab_read_serial_number(uint8_t* serial_number);
 ATCA_STATUS atcab_read_pubkey(uint8_t slot8toF, uint8_t *pubkey);
+ATCA_STATUS atcab_write_pubkey(uint8_t slot8toF, uint8_t *pubkey);
 ATCA_STATUS atcab_read_sig(uint8_t slot8toF, uint8_t *sig);
 ATCA_STATUS atcab_read_ecc_config_zone(uint8_t* config_data);
 ATCA_STATUS atcab_write_ecc_config_zone(const uint8_t* config_data);
@@ -110,11 +112,12 @@ ATCA_STATUS atcab_lock_data_slot(uint8_t slot, uint8_t* lock_response);
 
 ATCA_STATUS atcab_priv_write(uint8_t slot, const uint8_t priv_key[36], uint8_t write_key_slot, const uint8_t write_key[32]);
 ATCA_STATUS atcab_genkey( int slot, uint8_t *pubkey );
-ATCA_STATUS atcab_get_pubkey(uint8_t slot, uint8_t *pubkey);
+ATCA_STATUS atcab_get_pubkey(uint8_t privSlotId, uint8_t *pubkey);
+ATCA_STATUS atcab_calc_pubkey(uint8_t privSlotId, uint8_t *pubkey);
 ATCA_STATUS atcab_sign(uint16_t slot, const uint8_t *msg, uint8_t *signature);
 ATCA_STATUS atcab_verify_extern(const uint8_t *message, const uint8_t *signature, const uint8_t *pubkey, bool *verified);
 ATCA_STATUS atcab_ecdh(uint16_t key_id, const uint8_t* pub_key, uint8_t* ret_ecdh);
-ATCA_STATUS atcab_ecdh_enc(uint16_t key_id, const uint8_t* pub_key, uint8_t* ret_ecdh, const uint8_t* enckey, const uint8_t enckeyid);
+ATCA_STATUS atcab_ecdh_enc(uint16_t slotid, const uint8_t* pubkey, uint8_t* ret_ecdh, const uint8_t* enckey, const uint8_t enckeyid);
 ATCA_STATUS atcab_gendig(uint8_t zone, uint16_t key_id);
 ATCA_STATUS atcab_gendig_host(uint8_t zone, uint16_t key_id, uint8_t *other_data, uint8_t len);
 ATCA_STATUS atcab_mac( uint8_t mode, uint16_t key_id, const uint8_t* challenge, uint8_t* digest );
@@ -122,7 +125,7 @@ ATCA_STATUS atcab_checkmac( uint8_t mode, uint16_t key_id, const uint8_t *challe
 
 ATCA_STATUS atcab_sha_start(void);
 ATCA_STATUS atcab_sha_update(uint16_t length, const uint8_t *message);
-ATCA_STATUS atcab_sha_end(uint8_t *digest);
+ATCA_STATUS atcab_sha_end(uint8_t *digest, uint16_t length, const uint8_t *message);
 ATCA_STATUS atcab_sha(uint16_t length, const uint8_t *message, uint8_t *digest);
 
 #ifdef __cplusplus

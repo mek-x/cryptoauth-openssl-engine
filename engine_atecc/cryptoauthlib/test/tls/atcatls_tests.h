@@ -1,4 +1,5 @@
 /**
+ * \file
  *
  * \copyright Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *
@@ -56,7 +57,7 @@ void test_atcatls_sign(void);
 void test_atcatls_verify(void);
 void test_atcatls_ecdh(void);
 void test_atcatls_ecdhe(void);
-void test_atcatls_gen_pubkey(void);
+void test_atcatls_calc_pubkey(void);
 void test_atcatls_read_pubkey(void);
 void test_atcatls_random(void);
 void test_atcatls_get_sn(void);
@@ -64,7 +65,7 @@ void test_atcatls_get_sn(void);
 // Certificate Handling
 void test_atcatls_verify_cert_chain(void);
 void test_atcatls_verify_default_certs(void);
-void test_atcatls_get_ca_pubkey(void);
+void test_atcatls_ca_pubkey_write_read(void);
 void test_atcatls_get_ca_cert(void);
 
 // Encrypted Read/Write

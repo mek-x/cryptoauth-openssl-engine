@@ -1,4 +1,6 @@
-/** \brief Wrapper API for SHA 1 routines
+/**
+ * \file
+ * \brief Wrapper API for SHA 1 routines
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *

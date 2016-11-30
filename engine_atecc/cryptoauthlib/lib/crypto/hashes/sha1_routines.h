@@ -1,4 +1,6 @@
-/** \brief Software implementation of the SHA1 algorithm.
+/**
+ * \file
+ * \brief Software implementation of the SHA1 algorithm.
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *
@@ -79,8 +81,8 @@
 #endif
 
 typedef struct {
-	U32 h[20 / 4];   // Ensure it's word aligned
-	U32 buf[64 / 4]; // Ensure it's word aligned
+	U32 h[20 / 4];      // Ensure it's word aligned
+	U32 buf[64 / 4];    // Ensure it's word aligned
 	U32 byteCount;
 	U32 byteCountHi;
 } CL_HashContext;

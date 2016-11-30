@@ -1,4 +1,5 @@
 /**
+ * \file
  *
  * \copyright Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *
@@ -36,7 +37,7 @@
  *
  * \atmel_crypto_device_library_license_stop
  */
- 
+
 #include "test/unity.h"
 #include "test/unity_fixture.h"
 

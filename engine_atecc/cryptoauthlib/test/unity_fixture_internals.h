@@ -9,10 +9,10 @@
 #define UNITY_FIXTURE_INTERNALS_H_
 
 typedef struct _UNITY_FIXTURE_T {
-  int Verbose;
-  unsigned int RepeatCount;
-  const char* NameFilter;
-  const char* GroupFilter;
+	int Verbose;
+	unsigned int RepeatCount;
+	const char* NameFilter;
+	const char* GroupFilter;
 } UNITY_FIXTURE_T;
 
 typedef void unityfunction (void);

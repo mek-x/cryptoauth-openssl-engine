@@ -1,5 +1,4 @@
-/* kit_protocol.h
- *
+/**
  * \file
  *
  * \brief  Atmel Crypto Auth hardware interface object

@@ -1,4 +1,6 @@
-/** \brief Helpers to support the CryptoAuthLib Basic API methods
+/**
+ * \file
+ * \brief Helpers to support the CryptoAuthLib Basic API methods
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *
@@ -61,7 +63,7 @@ ATCA_STATUS atcab_bin2hex(const uint8_t* binary, int binLen, char* asciihex, int
  *  \param[in] inbuff input buffer to convert
  *  \param[in] inbuffLen length of buffer to convert
  *  \param[out] asciihex buffer that receives hex string
- *  \param[inout] hexlen the length of the asciihex buffer
+ *  \param[inout] asciihexlen the length of the asciihex buffer
  *  \param[inout] addspace indicates whether spaces and returns should be added for pretty printing
  * \return ATCA_STATUS
  */
@@ -87,7 +89,7 @@ ATCA_STATUS atcab_bin2hex_(const uint8_t* binary, int binLen, char* asciihex, in
 		if (addspace) {
 			sprintf(&asciihex[hexlen], "%02X ", *binary++);
 			hexlen += 3;
-		}else  {
+		}else {
 			sprintf(&asciihex[hexlen], "%02X", *binary++);
 			hexlen += 2;
 		}
@@ -144,41 +146,52 @@ ATCA_STATUS atcab_hex2bin(const char* asciiHex, int asciiHexLen, uint8_t* binary
 
 #endif
 
-/// <summary>Checks to see if a character is an ASCII representation of a digit ((c ge '0') and (c le '9'))</summary>
-/// <param name="c">character to check</param>
-/// <returns>True if the character is a digit</returns>
+/**
+ * \brief Checks to see if a character is an ASCII representation of a digit ((c ge '0') and (c le '9'))
+ * \param[in] c  character to check
+ * \return True if the character is a digit
+ */
 bool isDigit(char c)
 {
 	return (c >= '0') && (c <= '9');
 }
 
-/// <summary>Checks to see if a character is whitespace ((c == '\n') || (c == '\r') || (c == '\t') || (c == ' '))</summary>
-/// <param name="c">character to check</param>
-/// <returns>True if the character is whitespace</returns>
+/**
+ * \brief Checks to see if a character is whitespace ((c == '\n') || (c == '\r') || (c == '\t') || (c == ' '))
+ * \param[in] c  character to check
+ * \return True if the character is whitespace
+ */
 bool isWhiteSpace(char c)
 {
 	return (c == '\n') || (c == '\r') || (c == '\t') || (c == ' ');
 }
 
-/// <summary>Checks to see if a character is an ASCII representation of hex ((c ge 'A') and (c le 'F')) || ((c ge 'a') and (c le 'f'))</summary>
-/// <param name="c">character to check</param>
-/// <returns>True if the character is a hex</returns>
+/**
+ * \brief Checks to see if a character is an ASCII representation of hex ((c ge 'A') and (c le 'F')) || ((c ge 'a') and (c le 'f'))
+ * \param[in] c  character to check
+ * \return True if the character is a hex
+ */
 bool isHexAlpha(char c)
 {
 	return ((c >= 'A') && (c <= 'F')) || ((c >= 'a') && (c <= 'f'));
 }
 
-/// <summary>Returns true if this character is a valid hex character or if this is whitespace (The character can be included in a valid hexstring).</summary>
-/// <param name="c">input character</param>
-/// <returns>True if the character can be included in a valid hexstring</returns>
+/**
+ * \brief Returns true if this character is a valid hex character or if this is whitespace (The character can be
+ *        included in a valid hexstring).
+ * \param[in] c  character to check
+ * \return True if the character can be included in a valid hexstring
+ */
 bool isHex(char c)
 {
 	return isDigit(c) || isWhiteSpace(c) || isHexAlpha(c);
 }
 
-/// <summary>Returns true if this character is a valid hex character.</summary>
-/// <param name="c">input character</param>
-/// <returns>True if the character can be included in a valid hexstring</returns>
+/**
+ * \brief Returns true if this character is a valid hex character.
+ * \param[in] c  character to check
+ * \return True if the character can be included in a valid hexstring
+ */
 bool isHexDigit(char c)
 {
 	return isDigit(c) || isHexAlpha(c);

@@ -1,5 +1,6 @@
-/* \file atca_command.c
- * Atmel CryptoAuthentication device command builder - this is the main object that builds the command
+/**
+ * \file
+ * \brief Atmel CryptoAuthentication device command builder - this is the main object that builds the command
  * byte strings for the given device.  It does not execute the command.  The basic flow is to call
  * a command method to build the command you want given the parameters and then send that byte string
  * through the device interface.
@@ -87,8 +88,8 @@ ATCACommand newATCACommand( ATCADeviceType device_type )  // constructor
 // full superset of commands goes here
 
 /** \brief ATCACommand CheckMAC method
- * \param[in] ATCACommand instance
- * \param[in] ATCAPacket pointer to the packet containing the command being built
+ * \param[in] cacmd   instance
+ * \param[in] packet  pointer to the packet containing the command being built
  * \return ATCA_STATUS
  */
 ATCA_STATUS atCheckMAC(ATCACommand cacmd, ATCAPacket *packet )
@@ -103,8 +104,8 @@ ATCA_STATUS atCheckMAC(ATCACommand cacmd, ATCAPacket *packet )
 }
 
 /** \brief ATCACommand Counter method
- * \param[in] ATCACommand instance
- * \param[in] ATCAPacket pointer to the packet containing the command being built
+ * \param[in] cacmd   instance
+ * \param[in] packet  pointer to the packet containing the command being built
  * \return ATCA_STATUS
  */
 ATCA_STATUS atCounter(ATCACommand cacmd, ATCAPacket *packet )
@@ -122,9 +123,9 @@ ATCA_STATUS atCounter(ATCACommand cacmd, ATCAPacket *packet )
 }
 
 /** \brief ATCACommand DeriveKey method
- * \param[in] ATCACommand instance
- * \param[in] ATCAPacket pointer to the packet containing the command being built
- * \param[in] bool hasMAC determines if MAC data is present in the packet input
+ * \param[in] cacmd   instance
+ * \param[in] packet  pointer to the packet containing the command being built
+ * \param[in] hasMAC  hasMAC determines if MAC data is present in the packet input
  * \return ATCA_STATUS
  */
 ATCA_STATUS atDeriveKey(ATCACommand cacmd, ATCAPacket *packet, bool hasMAC )
@@ -149,8 +150,8 @@ ATCA_STATUS atDeriveKey(ATCACommand cacmd, ATCAPacket *packet, bool hasMAC )
 }
 
 /** \brief ATCACommand ECDH method
- * \param[in] ATCACommand instance
- * \param[in] ATCAPacket pointer to the packet containing the command being built
+ * \param[in] cacmd   instance
+ * \param[in] packet  pointer to the packet containing the command being built
  * \return ATCA_STATUS
  */
 ATCA_STATUS atECDH(ATCACommand cacmd, ATCAPacket *packet )
@@ -166,8 +167,9 @@ ATCA_STATUS atECDH(ATCACommand cacmd, ATCAPacket *packet )
 }
 
 /** \brief ATCACommand Generate Digest method
- * \param[in] ATCACommand instance
- * \param[in] ATCAPacket pointer to the packet containing the command being built
+ * \param[in] cacmd     instance
+ * \param[in] packet    pointer to the packet containing the command being built
+ * \param[in] hasMACKey
  * \return ATCA_STATUS
  */
 ATCA_STATUS atGenDig(ATCACommand cacmd, ATCAPacket *packet, bool hasMACKey )
@@ -190,9 +192,9 @@ ATCA_STATUS atGenDig(ATCACommand cacmd, ATCAPacket *packet, bool hasMACKey )
 }
 
 /** \brief ATCACommand Generate Key method
- * \param[in] ATCACommand instance
- * \param[in] ATCAPacket pointer to the packet containing the command being built
- * \param[in] isPubKey indicates whether "other data" is present in packet
+ * \param[in] cacmd     instance
+ * \param[in] packet    pointer to the packet containing the command being built
+ * \param[in] isPubKey  indicates whether "other data" is present in packet
  * \return ATCA_STATUS
  */
 ATCA_STATUS atGenKey(ATCACommand cacmd, ATCAPacket *packet, bool isPubKey )
@@ -217,8 +219,8 @@ ATCA_STATUS atGenKey(ATCACommand cacmd, ATCAPacket *packet, bool isPubKey )
 }
 
 /** \brief ATCACommand HMAC method
- * \param[in] ATCACommand instance
- * \param[in] ATCAPacket pointer to the packet containing the command being built
+ * \param[in] cacmd   instance
+ * \param[in] packet  pointer to the packet containing the command being built
  * \return ATCA_STATUS
  */
 ATCA_STATUS atHMAC(ATCACommand cacmd, ATCAPacket *packet )
@@ -234,11 +236,11 @@ ATCA_STATUS atHMAC(ATCACommand cacmd, ATCAPacket *packet )
 }
 
 /** \brief ATCACommand Info method
- * \param[in] ATCACommand instance
- * \param[in] ATCAPacket pointer to the packet containing the command being built
+ * \param[in] cacmd   instance
+ * \param[in] packet  pointer to the packet containing the command being built
  * \return ATCA_STATUS
  */
-ATCA_STATUS atInfo( ATCACommand cacmd,  ATCAPacket *packet )
+ATCA_STATUS atInfo( ATCACommand cacmd, ATCAPacket *packet )
 {
 
 	// Set the opcode & parameters
@@ -251,8 +253,8 @@ ATCA_STATUS atInfo( ATCACommand cacmd,  ATCAPacket *packet )
 }
 
 /** \brief ATCACommand Lock method
- * \param[in] ATCACommand instance
- * \param[in] ATCAPacket pointer to the packet containing the command being built
+ * \param[in] cacmd   instance
+ * \param[in] packet  pointer to the packet containing the command being built
  * \return ATCA_STATUS
  */
 ATCA_STATUS atLock(  ATCACommand cacmd, ATCAPacket *packet )
@@ -268,8 +270,8 @@ ATCA_STATUS atLock(  ATCACommand cacmd, ATCAPacket *packet )
 }
 
 /** \brief ATCACommand MAC method
- * \param[in] ATCACommand instance
- * \param[in] ATCAPacket pointer to the packet containing the command being built
+ * \param[in] cacmd   instance
+ * \param[in] packet  pointer to the packet containing the command being built
  * \return ATCA_STATUS
  */
 ATCA_STATUS atMAC( ATCACommand cacmd, ATCAPacket *packet )
@@ -290,8 +292,8 @@ ATCA_STATUS atMAC( ATCACommand cacmd, ATCAPacket *packet )
 }
 
 /** \brief ATCACommand Nonce method
- * \param[in] ATCACommand instance
- * \param[in] ATCAPacket pointer to the packet containing the command being built
+ * \param[in] cacmd   instance
+ * \param[in] packet  pointer to the packet containing the command being built
  * \return ATCA_STATUS
  */
 ATCA_STATUS atNonce( ATCACommand cacmd, ATCAPacket *packet )
@@ -315,8 +317,8 @@ ATCA_STATUS atNonce( ATCACommand cacmd, ATCAPacket *packet )
 }
 
 /** \brief ATCACommand Pause method
- * \param[in] ATCACommand instance
- * \param[in] ATCAPacket pointer to the packet containing the command being built
+ * \param[in] cacmd   instance
+ * \param[in] packet  pointer to the packet containing the command being built
  * \return ATCA_STATUS
  */
 ATCA_STATUS atPause( ATCACommand cacmd, ATCAPacket *packet )
@@ -331,8 +333,8 @@ ATCA_STATUS atPause( ATCACommand cacmd, ATCAPacket *packet )
 }
 
 /** \brief ATCACommand PrivWrite method
- * \param[in] ATCACommand instance
- * \param[in] ATCAPacket pointer to the packet containing the command being built
+ * \param[in] cacmd   instance
+ * \param[in] packet  pointer to the packet containing the command being built
  * \return ATCA_STATUS
  */
 ATCA_STATUS atPrivWrite( ATCACommand cacmd, ATCAPacket *packet )
@@ -347,8 +349,8 @@ ATCA_STATUS atPrivWrite( ATCACommand cacmd, ATCAPacket *packet )
 }
 
 /** \brief ATCACommand Random method
- * \param[in] ATCACommand instance
- * \param[in] ATCAPacket pointer to the packet containing the command being built
+ * \param[in] cacmd   instance
+ * \param[in] packet  pointer to the packet containing the command being built
  * \return ATCA_STATUS
  */
 ATCA_STATUS atRandom( ATCACommand cacmd, ATCAPacket *packet )
@@ -364,8 +366,8 @@ ATCA_STATUS atRandom( ATCACommand cacmd, ATCAPacket *packet )
 }
 
 /** \brief ATCACommand Read method
- * \param[in] ATCACommand instance
- * \param[in] ATCAPacket pointer to the packet containing the command being built
+ * \param[in] cacmd   instance
+ * \param[in] packet  pointer to the packet containing the command being built
  * \return ATCA_STATUS
  */
 ATCA_STATUS atRead( ATCACommand cacmd, ATCAPacket *packet )
@@ -386,30 +388,38 @@ ATCA_STATUS atRead( ATCACommand cacmd, ATCAPacket *packet )
 }
 
 /** \brief ATCACommand SHA method
- * \param[in] ATCACommand instance
- * \param[in] ATCAPacket pointer to the packet containing the command being built
+ * \param[in] cacmd   instance
+ * \param[in] packet  pointer to the packet containing the command being built
  * \return ATCA_STATUS
  */
 ATCA_STATUS atSHA( ATCACommand cacmd, ATCAPacket *packet )
 {
-	if ( packet->param2 > SHA_DATA_MAX )
+	if ( packet->param2 > SHA_BLOCK_SIZE )
+		return ATCA_BAD_PARAM;
+
+	if ( packet->param1 == 0x01 && packet->param2 != SHA_BLOCK_SIZE )
+		return ATCA_BAD_PARAM;                                              // updates should always have 64 bytes of data
+
+	if ( packet->param1 == 0x02 && packet->param2 > SHA_BLOCK_SIZE - 1 )    // END should be 0-63 bytes
 		return ATCA_BAD_PARAM;
 
 	// Set the opcode & parameters
 	packet->opcode = ATCA_SHA;
 
 	switch ( packet->param1 ) {
-	case 0x00:
+	case 0x00: // START
 		packet->rxsize = SHA_RSP_SIZE_SHORT;
 		packet->txsize = SHA_COUNT_LONG;
 		break;
-	case 0x01:
+	case 0x01: // UPDATE
 		packet->rxsize = SHA_RSP_SIZE_SHORT;
-		packet->txsize = SHA_COUNT_LONG + SHA_DATA_MAX;
+		packet->txsize = SHA_COUNT_LONG + SHA_BLOCK_SIZE;
 		break;
-	case 0x02:
+	case 0x02: // END
 		packet->rxsize = SHA_RSP_SIZE_LONG;
-		packet->txsize = SHA_COUNT_LONG;
+		// check the given packet for a size variable in param2.  If it is > 0, it should
+		// be 0-63, incorporate that size into the packet
+		packet->txsize = SHA_COUNT_LONG + packet->param2;
 		break;
 	}
 
@@ -418,8 +428,8 @@ ATCA_STATUS atSHA( ATCACommand cacmd, ATCAPacket *packet )
 }
 
 /** \brief ATCACommand Sign method
- * \param[in] ATCACommand instance
- * \param[in] ATCAPacket pointer to the packet containing the command being built
+ * \param[in] cacmd   instance
+ * \param[in] packet  pointer to the packet containing the command being built
  * \return ATCA_STATUS
  */
 ATCA_STATUS atSign( ATCACommand cacmd, ATCAPacket *packet )
@@ -437,8 +447,8 @@ ATCA_STATUS atSign( ATCACommand cacmd, ATCAPacket *packet )
 }
 
 /** \brief ATCACommand UpdateExtra method
- * \param[in] ATCACommand instance
- * \param[in] ATCAPacket pointer to the packet containing the command being built
+ * \param[in] cacmd   instance
+ * \param[in] packet  pointer to the packet containing the command being built
  * \return ATCA_STATUS
  */
 ATCA_STATUS atUpdateExtra( ATCACommand cacmd, ATCAPacket *packet )
@@ -454,8 +464,8 @@ ATCA_STATUS atUpdateExtra( ATCACommand cacmd, ATCAPacket *packet )
 }
 
 /** \brief ATCACommand ECDSA Verify method
- * \param[in] ATCACommand instance
- * \param[in] ATCAPacket pointer to the packet containing the command being built
+ * \param[in] cacmd   instance
+ * \param[in] packet  pointer to the packet containing the command being built
  * \return ATCA_STATUS
  */
 ATCA_STATUS atVerify( ATCACommand cacmd, ATCAPacket *packet )
@@ -489,8 +499,8 @@ ATCA_STATUS atVerify( ATCACommand cacmd, ATCAPacket *packet )
 }
 
 /** \brief ATCACommand Write method
- * \param[in] ATCACommand instance
- * \param[in] ATCAPacket pointer to the packet containing the command being built
+ * \param[in] cacmd   instance
+ * \param[in] packet  pointer to the packet containing the command being built
  * \return ATCA_STATUS
  */
 ATCA_STATUS atWrite( ATCACommand cacmd, ATCAPacket *packet )
@@ -519,8 +529,8 @@ ATCA_STATUS atWrite( ATCACommand cacmd, ATCAPacket *packet )
 }
 
 /** \brief ATCACommand Write encrypted method
- * \param[in] ATCACommand instance
- * \param[in] ATCAPacket pointer to the packet containing the command being built
+ * \param[in] cacmd   instance
+ * \param[in] packet  pointer to the packet containing the command being built
  * \return ATCA_STATUS
  */
 ATCA_STATUS atWriteEnc(ATCACommand cacmd, ATCAPacket *packet)
@@ -534,7 +544,7 @@ ATCA_STATUS atWriteEnc(ATCACommand cacmd, ATCAPacket *packet)
 }
 
 /** \brief ATCACommand destructor
- * \param[in] instance of a command object
+ * \param[in] cacmd instance of a command object
  */
 
 void deleteATCACommand( ATCACommand *cacmd )  // destructor
@@ -667,7 +677,7 @@ void atCRC( uint8_t length, uint8_t *data, uint8_t *crc)
 
 
 /** \brief This function calculates CRC and adds it to the correct offset in the packet data
- * \param[in] ATCAPacket *
+ * \param[in] packet Packet to calculate CRC data for
  */
 
 void atCalcCrc( ATCAPacket *packet )

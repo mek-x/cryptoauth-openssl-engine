@@ -1,5 +1,7 @@
-/** \brief host side methods using software implementations.  host-side, the one authenticating
- * a client, of the authentication process. Crypto functions are performed using a software library.
+/**
+ * \file
+ * \brief Host side methods using software implementations.  host-side, the one authenticating
+ *        a client, of the authentication process. Crypto functions are performed using a software library.
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *

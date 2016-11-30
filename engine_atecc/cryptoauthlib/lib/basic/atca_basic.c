@@ -1,4 +1,6 @@
-/** \brief CryptoAuthLib Basic API methods.  These methods provide a simpler way to access the core crypto
+/**
+ * \file
+ * \brief CryptoAuthLib Basic API methods.  These methods provide a simpler way to access the core crypto
  * methods.  Their design center is around the most common modes and functions of each command
  * rather than the complete implementation of each possible feature of the chip.  If you need a feature
  * not supplied in the Basic API, you can achieve the feature through the datasheet level command
@@ -49,7 +51,7 @@
 #include "atca_basic.h"
 #include "host/atca_host.h"
 
-char atca_version[] = { "20151130" };  // change for each release, yyyymmdd
+char atca_version[] = { "20160108" };  // change for each release, yyyymmdd
 
 /** \brief returns a version string for the CryptoAuthLib release.
  *  The format of the version string returned is "yyyymmdd"
@@ -294,11 +296,11 @@ ATCA_STATUS atcab_info( uint8_t *revision )
 
 		execution_time = atGetExecTime( _gCommandObj, CMD_INFO);
 
-		if ( (status = atcab_wakeup()) != ATCA_SUCCESS ) 
+		if ( (status = atcab_wakeup()) != ATCA_SUCCESS )
 			break;
 
 		// send the command
-		if ( (status = atsend( _gIface, (uint8_t*)&packet, packet.txsize )) != ATCA_SUCCESS ) 
+		if ( (status = atsend( _gIface, (uint8_t*)&packet, packet.txsize )) != ATCA_SUCCESS )
 			break;
 
 		// delay the appropriate amount of time for command to execute
@@ -306,17 +308,16 @@ ATCA_STATUS atcab_info( uint8_t *revision )
 
 		// receive the response
 		if ( (status = atreceive( _gIface, &(packet.data[0]), &(packet.rxsize) )) != ATCA_SUCCESS )
-            break;
+			break;
 
-        // Check response size
-        if (packet.rxsize < 4)
-        {
-            if (packet.rxsize > 0)
-                status = ATCA_RX_FAIL;
-            else
-                status = ATCA_RX_NO_RESPONSE;
-            break;
-        }
+		// Check response size
+		if (packet.rxsize < 4) {
+			if (packet.rxsize > 0)
+				status = ATCA_RX_FAIL;
+			else
+				status = ATCA_RX_NO_RESPONSE;
+			break;
+		}
 
 		if ( (status = isATCAError(packet.data)) != ATCA_SUCCESS )
 			break;
@@ -324,7 +325,7 @@ ATCA_STATUS atcab_info( uint8_t *revision )
 		memcpy( revision, &packet.data[1], 4 );  // don't include the receive length, only payload
 	} while (0);
 
-	if ( status != ATCA_COMM_FAIL )	  // don't keep shoving more stuff at the chip if there's something wrong with comm
+	if ( status != ATCA_COMM_FAIL )   // don't keep shoving more stuff at the chip if there's something wrong with comm
 		_atcab_exit();
 
 	return status;
@@ -362,17 +363,16 @@ ATCA_STATUS atcab_random(uint8_t *rand_out)
 
 		// receive the response
 		if ( (status = atreceive( _gIface, packet.data, &packet.rxsize)) != ATCA_SUCCESS)
-            break;
+			break;
 
-        // Check response size
-        if (packet.rxsize < 4)
-        {
-            if (packet.rxsize > 0)
-                status = ATCA_RX_FAIL;
-            else
-                status = ATCA_RX_NO_RESPONSE;
-            break;
-        }
+		// Check response size
+		if (packet.rxsize < 4) {
+			if (packet.rxsize > 0)
+				status = ATCA_RX_FAIL;
+			else
+				status = ATCA_RX_NO_RESPONSE;
+			break;
+		}
 
 		if ( (status = isATCAError(packet.data)) != ATCA_SUCCESS )
 			break;
@@ -385,8 +385,8 @@ ATCA_STATUS atcab_random(uint8_t *rand_out)
 }
 
 /** \brief generate a key on given slot
- *   \param[in] slot number where ECC key is configured
- *   \param[out] 64 bytes of returned public key for given slot
+ *   \param[in]  slot    slot number where ECC key is configured
+ *   \param[out] pubkey  64 bytes of returned public key for given slot
  *   \return ATCA_STATUS
  */
 ATCA_STATUS atcab_genkey( int slot, uint8_t *pubkey )
@@ -417,17 +417,16 @@ ATCA_STATUS atcab_genkey( int slot, uint8_t *pubkey )
 
 		// receive the response
 		if ( (status = atreceive( _gIface, packet.data, &(packet.rxsize) )) != ATCA_SUCCESS )
-            break;
+			break;
 
-        // Check response size
-        if (packet.rxsize < 4)
-        {
-            if (packet.rxsize > 0)
-                status = ATCA_RX_FAIL;
-            else
-                status = ATCA_RX_NO_RESPONSE;
-            break;
-        }
+		// Check response size
+		if (packet.rxsize < 4) {
+			if (packet.rxsize > 0)
+				status = ATCA_RX_FAIL;
+			else
+				status = ATCA_RX_NO_RESPONSE;
+			break;
+		}
 
 		if ( (status = isATCAError(packet.data)) != ATCA_SUCCESS )
 			break;
@@ -497,17 +496,16 @@ ATCA_STATUS atcab_challenge(const uint8_t *challenge)
 
 		// receive the response
 		if ((status = atreceive( _gIface, packet.data, &(packet.rxsize))) != ATCA_SUCCESS )
-            break;
+			break;
 
-        // Check response size
-        if (packet.rxsize < 4)
-        {
-            if (packet.rxsize > 0)
-                status = ATCA_RX_FAIL;
-            else
-                status = ATCA_RX_NO_RESPONSE;
-            break;
-        }
+		// Check response size
+		if (packet.rxsize < 4) {
+			if (packet.rxsize > 0)
+				status = ATCA_RX_FAIL;
+			else
+				status = ATCA_RX_NO_RESPONSE;
+			break;
+		}
 
 		if ( (status = isATCAError(packet.data)) != ATCA_SUCCESS )
 			break;
@@ -554,17 +552,16 @@ ATCA_STATUS atcab_challenge_seed_update( const uint8_t *seed, uint8_t* rand_out 
 		atca_delay_ms(execution_time);
 
 		// receive the response
-        if ((status = atreceive(_gIface, packet.data, &(packet.rxsize))) != ATCA_SUCCESS) break;
+		if ((status = atreceive(_gIface, packet.data, &(packet.rxsize))) != ATCA_SUCCESS) break;
 
-        // Check response size
-        if (packet.rxsize < 4)
-        {
-            if (packet.rxsize > 0)
-                status = ATCA_RX_FAIL;
-            else
-                status = ATCA_RX_NO_RESPONSE;
-            break;
-        }
+		// Check response size
+		if (packet.rxsize < 4) {
+			if (packet.rxsize > 0)
+				status = ATCA_RX_FAIL;
+			else
+				status = ATCA_RX_NO_RESPONSE;
+			break;
+		}
 
 		if ((status = isATCAError(packet.data)) != ATCA_SUCCESS) break;
 
@@ -577,7 +574,7 @@ ATCA_STATUS atcab_challenge_seed_update( const uint8_t *seed, uint8_t* rand_out 
 }
 
 /** \brief read the serial number of the device
- *  \param[out] pointer to space to receive serial number.  This space should be 9 bytes long
+ *  \param[out] serial_number  pointer to space to receive serial number. This space should be 9 bytes long
  *  \return ATCA_STATUS
  */
 ATCA_STATUS atcab_read_serial_number(uint8_t* serial_number)
@@ -622,10 +619,10 @@ ATCA_STATUS atcab_read_serial_number(uint8_t* serial_number)
 }
 
 /** \brief verify a signature using CryptoAuth hardware (as opposed to an ECDSA software implementation)
- *  \param[in] message pointer
- *  \param[in] signature pointer
- *  \param[in] pubkey pointer
- *  \param[out] result boolean whether or not the challenge/signature/pubkey verified
+ *  \param[in]  message    pointer
+ *  \param[in]  signature  pointer
+ *  \param[in]  pubkey     pointer
+ *  \param[out] verified   boolean whether or not the challenge/signature/pubkey verified
  *  \return ATCA_STATUS
  */
 ATCA_STATUS atcab_verify_extern(const uint8_t *message, const uint8_t *signature, const uint8_t *pubkey, bool *verified)
@@ -666,15 +663,14 @@ ATCA_STATUS atcab_verify_extern(const uint8_t *message, const uint8_t *signature
 		if ( (status = atreceive( _gIface, packet.data, &(packet.rxsize) )) != ATCA_SUCCESS )
 			break;
 
-        // Check response size
-        if (packet.rxsize < 4)
-        {
-            if (packet.rxsize > 0)
-                status = ATCA_RX_FAIL;
-            else
-                status = ATCA_RX_NO_RESPONSE;
-            break;
-        }
+		// Check response size
+		if (packet.rxsize < 4) {
+			if (packet.rxsize > 0)
+				status = ATCA_RX_FAIL;
+			else
+				status = ATCA_RX_NO_RESPONSE;
+			break;
+		}
 
 		status = isATCAError(packet.data);
 		*verified = (status == 0);
@@ -720,17 +716,16 @@ ATCA_STATUS atcab_ecdh(uint16_t key_id, const uint8_t* pubkey, uint8_t* ret_ecdh
 
 		atca_delay_ms(execution_time);
 
-        if ((status = atreceive(_gIface, packet.data, &packet.rxsize)) != ATCA_SUCCESS) break;
+		if ((status = atreceive(_gIface, packet.data, &packet.rxsize)) != ATCA_SUCCESS) break;
 
-        // Check response size
-        if (packet.rxsize < 4)
-        {
-            if (packet.rxsize > 0)
-                status = ATCA_RX_FAIL;
-            else
-                status = ATCA_RX_NO_RESPONSE;
-            break;
-        }
+		// Check response size
+		if (packet.rxsize < 4) {
+			if (packet.rxsize > 0)
+				status = ATCA_RX_FAIL;
+			else
+				status = ATCA_RX_NO_RESPONSE;
+			break;
+		}
 
 		if ( (status = isATCAError(packet.data)) != ATCA_SUCCESS ) break;
 
@@ -744,7 +739,7 @@ ATCA_STATUS atcab_ecdh(uint16_t key_id, const uint8_t* pubkey, uint8_t* ret_ecdh
 }
 
 /** \brief issues ecdh command
- *  \param[in] key_id slot of key for ECDH computation
+ *  \param[in] slotid slot of key for ECDH computation
  *  \param[in] pubkey public key
  *  \param[out] ret_ecdh - computed ECDH key - A buffer with size of ATCA_KEY_SIZE
  *  \return ATCA_STATUS
@@ -787,7 +782,6 @@ ATCA_STATUS atcab_ecdh_enc(uint16_t slotid, const uint8_t* pubkey, uint8_t* ret_
  *  \param[in] block
  *  \param[in] offset
  *  \param[in] addr
- *  \param[out] operation return status
  *  \return ATCA_STATUS
  */
 ATCA_STATUS atcab_get_addr(uint8_t zone, uint8_t slot, uint8_t block, uint8_t offset, uint16_t* addr)
@@ -807,7 +801,7 @@ ATCA_STATUS atcab_get_addr(uint8_t zone, uint8_t slot, uint8_t block, uint8_t of
 		if ((memzone == ATCA_ZONE_CONFIG) || (memzone == ATCA_ZONE_OTP)) {
 			*addr = block << 3;
 			*addr |= offset;
-		}else  { // ATCA_ZONE_DATA
+		}else {  // ATCA_ZONE_DATA
 			*addr = slot << 3;
 			*addr  |= offset;
 			*addr |= block << 8;
@@ -820,8 +814,8 @@ ATCA_STATUS atcab_get_addr(uint8_t zone, uint8_t slot, uint8_t block, uint8_t of
 
 
 /** \brief Query to see if the specified slot is locked
- *  \param[in] slot The slot to query for locked (slot 0-15)
- *  \param[out] lock_state true if the specified slot is locked
+ *  \param[in]  slot      The slot to query for locked (slot 0-15)
+ *  \param[out] islocked  true if the specified slot is locked
  *  \return ATCA_STATUS
  */
 ATCA_STATUS atcab_is_slot_locked(uint8_t slot, bool *islocked)
@@ -870,8 +864,8 @@ ATCA_STATUS atcab_is_slot_locked(uint8_t slot, bool *islocked)
 }
 
 /** \brief Query to see if the specified zone is locked
- *  \param[in] zone The zone to query for locked (use LOCK_ZONE_CONFIG or LOCK_ZONE_DATA)
- *  \param[out] lock_state true if the specified zone is locked
+ *  \param[in]  zone      The zone to query for locked (use LOCK_ZONE_CONFIG or LOCK_ZONE_DATA)
+ *  \param[out] islocked  true if the specified zone is locked
  *  \return ATCA_STATUS
  */
 ATCA_STATUS atcab_is_locked(uint8_t zone, bool *islocked)
@@ -900,17 +894,18 @@ ATCA_STATUS atcab_is_locked(uint8_t zone, bool *islocked)
 	return ret;
 }
 
-/** \brief write either 4 or 32 bytes of data into the device zone
+/** \brief Write either 4 or 32 bytes of data into a device zone.
  *
- *  see ECC108A datasheet, datazone address values, table 9-8
+ *  See ECC108A datasheet, datazone address values, table 9-8
  *
- *  \param[in] zone
- *  \param[in] slot
- *  \param[in] block
- *  \param[in] offset
- *  \param[in] data
- *  \param[in] len  Must be either 4 or 32
- *  \return ATCA_STATUS
+ *  \param[in] zone    Device zone to write to (0=config, 1=OTP, 2=data).
+ *  \param[in] slot    If writing to the data zone, whit is the slot to write to, otherwise it should be 0.
+ *  \param[in] block   32-byte block to write to.
+ *  \param[in] offset  4-byte word within the specified block to write to. If performing a 32-byte write, this should
+ *                     be 0.
+ *  \param[in] data    Data to be written.
+ *  \param[in] len     Number of bytes to be written. Must be either 4 or 32.
+ *  \return ATCA_SUCCESS on success
  */
 ATCA_STATUS atcab_write_zone(uint8_t zone, uint8_t slot, uint8_t block, uint8_t offset, const uint8_t *data, uint8_t len)
 {
@@ -957,17 +952,16 @@ ATCA_STATUS atcab_write_zone(uint8_t zone, uint8_t slot, uint8_t block, uint8_t 
 
 		// receive the response
 		if ( (status = atreceive( _gIface, packet.data, &(packet.rxsize) )) != ATCA_SUCCESS )
-            break;
+			break;
 
-        // Check response size
-        if (packet.rxsize < 4)
-        {
-            if (packet.rxsize > 0)
-                status = ATCA_RX_FAIL;
-            else
-                status = ATCA_RX_NO_RESPONSE;
-            break;
-        }
+		// Check response size
+		if (packet.rxsize < 4) {
+			if (packet.rxsize > 0)
+				status = ATCA_RX_FAIL;
+			else
+				status = ATCA_RX_NO_RESPONSE;
+			break;
+		}
 
 		status = isATCAError(packet.data);
 
@@ -1035,17 +1029,16 @@ ATCA_STATUS atcab_read_zone(uint8_t zone, uint8_t slot, uint8_t block, uint8_t o
 
 		// receive the response
 		if ( (status = atreceive( _gIface, packet.data, &(packet.rxsize) )) != ATCA_SUCCESS )
-            break;
+			break;
 
-        // Check response size
-        if (packet.rxsize < 4)
-        {
-            if (packet.rxsize > 0)
-                status = ATCA_RX_FAIL;
-            else
-                status = ATCA_RX_NO_RESPONSE;
-            break;
-        }
+		// Check response size
+		if (packet.rxsize < 4) {
+			if (packet.rxsize > 0)
+				status = ATCA_RX_FAIL;
+			else
+				status = ATCA_RX_NO_RESPONSE;
+			break;
+		}
 
 		if ( (status = isATCAError(packet.data)) != ATCA_SUCCESS )
 			break;
@@ -1060,11 +1053,11 @@ ATCA_STATUS atcab_read_zone(uint8_t zone, uint8_t slot, uint8_t block, uint8_t o
 /** \brief Read 32 bytes of data from the given slot.
  *		The function returns clear text bytes. Encrypted bytes are read over the wire, then subsequently decrypted
  *		Data zone must be locked and the slot configuration must be set to encrypted read for the block to be successfully read
- *  \param[in] slot
- *  \param[in] block
- *  \param[out] data  The 32 bytes of clear text data that was read encrypted from the slot, then decrypted
- *  \param[in] enckey  The key to encrypt with for writing
- *  \param[in] enckeyid  The keyid of the parent encryption key
+ *  \param[in]  slotid    The slot id for the encrypted read
+ *  \param[in]  block     The block id in the specified slot
+ *  \param[out] data      The 32 bytes of clear text data that was read encrypted from the slot, then decrypted
+ *  \param[in]  enckey    The key to encrypt with for writing
+ *  \param[in]  enckeyid  The keyid of the parent encryption key
  *  returns ATCA_STATUS
  */
 ATCA_STATUS atcab_read_enc(uint8_t slotid, uint8_t block, uint8_t *data, const uint8_t* enckey, const uint16_t enckeyid)
@@ -1127,10 +1120,10 @@ ATCA_STATUS atcab_read_enc(uint8_t slotid, uint8_t block, uint8_t *data, const u
 /** \brief Write 32 bytes of data into given slot.
  *		The function takes clear text bytes, but encrypts them for writing over the wire
  *		Data zone must be locked and the slot configuration must be set to encrypted write for the block to be successfully written
- *  \param[in] slot
+ *  \param[in] slotid
  *  \param[in] block
- *  \param[in] data  The 32 bytes of clear text data to be written to the slot
- *  \param[in] enckey  The key to encrypt with for writing
+ *  \param[in] data      The 32 bytes of clear text data to be written to the slot
+ *  \param[in] enckey    The key to encrypt with for writing
  *  \param[in] enckeyid  The keyid of the parent encryption key
  *  returns ATCA_STATUS
  */
@@ -1213,17 +1206,16 @@ ATCA_STATUS atcab_write_enc(uint8_t slotid, uint8_t block, const uint8_t *data, 
 		atca_delay_ms(execution_time);
 
 		// receive the response
-        if ((status = atreceive(_gIface, packet.data, &(packet.rxsize))) != ATCA_SUCCESS) BREAK(status, "receive write command bytes failed");
+		if ((status = atreceive(_gIface, packet.data, &(packet.rxsize))) != ATCA_SUCCESS) BREAK(status, "receive write command bytes failed");
 
-        // Check response size
-        if (packet.rxsize < 4)
-        {
-            if (packet.rxsize > 0)
-                status = ATCA_RX_FAIL;
-            else
-                status = ATCA_RX_NO_RESPONSE;
-            break;
-        }
+		// Check response size
+		if (packet.rxsize < 4) {
+			if (packet.rxsize > 0)
+				status = ATCA_RX_FAIL;
+			else
+				status = ATCA_RX_NO_RESPONSE;
+			break;
+		}
 
 		status = isATCAError(packet.data);
 
@@ -1277,17 +1269,16 @@ ATCA_STATUS atcab_read_ecc_config_zone(uint8_t* config_data)
 
 			// receive the response
 			if ( (status = atreceive( _gIface, packet.data, &packet.rxsize)) != ATCA_SUCCESS )
-                break;
+				break;
 
-            // Check response size
-            if (packet.rxsize < 4)
-            {
-                if (packet.rxsize > 0)
-                    status = ATCA_RX_FAIL;
-                else
-                    status = ATCA_RX_NO_RESPONSE;
-                break;
-            }
+			// Check response size
+			if (packet.rxsize < 4) {
+				if (packet.rxsize > 0)
+					status = ATCA_RX_FAIL;
+				else
+					status = ATCA_RX_NO_RESPONSE;
+				break;
+			}
 
 			if ( (status = atcab_idle()) != ATCA_SUCCESS )
 				break;
@@ -1304,7 +1295,7 @@ ATCA_STATUS atcab_read_ecc_config_zone(uint8_t* config_data)
 			// copy the contents to a config data buffer
 			memcpy(&config_data[index], &packet.data[1], ATCA_WORD_SIZE );
 			index += ATCA_WORD_SIZE;
-		}else  {
+		}else {
 			// build a read command (read from the start of zone)
 			offset = 0;
 			// read 32 bytes at once
@@ -1331,17 +1322,16 @@ ATCA_STATUS atcab_read_ecc_config_zone(uint8_t* config_data)
 
 			// receive the response
 			if ( (status = atreceive( _gIface, packet.data, &packet.rxsize)) != ATCA_SUCCESS )
-                break;
+				break;
 
-            // Check response size
-            if (packet.rxsize < 4)
-            {
-                if (packet.rxsize > 0)
-                    status = ATCA_RX_FAIL;
-                else
-                    status = ATCA_RX_NO_RESPONSE;
-                break;
-            }
+			// Check response size
+			if (packet.rxsize < 4) {
+				if (packet.rxsize > 0)
+					status = ATCA_RX_FAIL;
+				else
+					status = ATCA_RX_NO_RESPONSE;
+				break;
+			}
 
 			if ( (status = atcab_idle()) != ATCA_SUCCESS )
 				break;
@@ -1406,17 +1396,16 @@ ATCA_STATUS atcab_write_ecc_config_zone(const uint8_t* config_data)
 
 				// receive the response
 				if ( (status = atreceive( _gIface, packet.data, &packet.rxsize)) != ATCA_SUCCESS )
-                    break;
+					break;
 
-                // Check response size
-                if (packet.rxsize < 4)
-                {
-                    if (packet.rxsize > 0)
-                        status = ATCA_RX_FAIL;
-                    else
-                        status = ATCA_RX_NO_RESPONSE;
-                    break;
-                }
+				// Check response size
+				if (packet.rxsize < 4) {
+					if (packet.rxsize > 0)
+						status = ATCA_RX_FAIL;
+					else
+						status = ATCA_RX_NO_RESPONSE;
+					break;
+				}
 
 				if ( (status = atcab_idle()) != ATCA_SUCCESS ) break;
 
@@ -1429,11 +1418,11 @@ ATCA_STATUS atcab_write_ecc_config_zone(const uint8_t* config_data)
 					// words above (block 2 offset 5 cant be written)
 					++offset; index += ATCA_WORD_SIZE;
 				}
-			}else  {
+			}else {
 				// update the word address after completely reading each block
 				++block; offset = 0;
 			}
-		}else  {
+		}else {
 			memset(packet.data, 0x00, 130);
 			// read 32 bytes at once
 			packet.param1 = ATCA_ZONE_CONFIG | ATCA_ZONE_READWRITE_32;
@@ -1458,17 +1447,16 @@ ATCA_STATUS atcab_write_ecc_config_zone(const uint8_t* config_data)
 
 			// receive the response
 			if ( (status = atreceive( _gIface, packet.data, &packet.rxsize)) != ATCA_SUCCESS )
-                break;
+				break;
 
-            // Check response size
-            if (packet.rxsize < 4)
-            {
-                if (packet.rxsize > 0)
-                    status = ATCA_RX_FAIL;
-                else
-                    status = ATCA_RX_NO_RESPONSE;
-                break;
-            }
+			// Check response size
+			if (packet.rxsize < 4) {
+				if (packet.rxsize > 0)
+					status = ATCA_RX_FAIL;
+				else
+					status = ATCA_RX_NO_RESPONSE;
+				break;
+			}
 
 			if ( (status = atcab_idle()) != ATCA_SUCCESS ) break;
 
@@ -1536,7 +1524,8 @@ ATCA_STATUS atcab_write_sha_config_zone(const uint8_t* config_data)
 }
 
 /** \brief given an SHA configuration zone buffer and dev type, read its parts from the device's config zone
- *  \param[out] config_data pointer to buffer containing a contiguous set of bytes to write to the config zone
+ *  \param[in]  dev_type     device type
+ *  \param[out] config_data  pointer to buffer containing a contiguous set of bytes to write to the config zone
  *  \returns ATCA_STATUS
  */
 ATCA_STATUS atcab_read_config_zone(ATCADeviceType dev_type, uint8_t* config_data)
@@ -1595,8 +1584,8 @@ ATCA_STATUS atcab_write_config_zone(ATCADeviceType dev_type, const uint8_t* conf
 
 /** \brief This function compares all writable bytes in the configuration zone that is passed in to the bytes on the device
  *
- *  \param[in] config_data pointer to all 128 bytes in configuration zone. Not used if NULL.
- *  \param[out] pointer to boolean status whether config data passed in matches the actual config zone
+ *  \param[in]  config_data  pointer to all 128 bytes in configuration zone. Not used if NULL.
+ *  \param[out] same_config  pointer to boolean status whether config data passed in matches the actual config zone
  *  \return ATCA_STATUS
  */
 ATCA_STATUS atcab_cmp_config_zone(uint8_t* config_data, bool* same_config)
@@ -1658,17 +1647,16 @@ ATCA_STATUS atcab_lock_config_zone(uint8_t* lock_response)
 
 		// receive the response
 		if ( (status = atreceive( _gIface, packet.data, &packet.rxsize)) != ATCA_SUCCESS )
-            break;
+			break;
 
-        // Check response size
-        if (packet.rxsize < 4)
-        {
-            if (packet.rxsize > 0)
-                status = ATCA_RX_FAIL;
-            else
-                status = ATCA_RX_NO_RESPONSE;
-            break;
-        }
+		// Check response size
+		if (packet.rxsize < 4) {
+			if (packet.rxsize > 0)
+				status = ATCA_RX_FAIL;
+			else
+				status = ATCA_RX_NO_RESPONSE;
+			break;
+		}
 
 		//check the response for error
 		if ( (status = isATCAError(packet.data)) != ATCA_SUCCESS )
@@ -1713,17 +1701,16 @@ ATCA_STATUS atcab_lock_data_zone(uint8_t* lock_response)
 
 		// receive the response
 		if ((status = atreceive( _gIface, packet.data, &packet.rxsize)) != ATCA_SUCCESS )
-            break;
+			break;
 
-        // Check response size
-        if (packet.rxsize < 4)
-        {
-            if (packet.rxsize > 0)
-                status = ATCA_RX_FAIL;
-            else
-                status = ATCA_RX_NO_RESPONSE;
-            break;
-        }
+		// Check response size
+		if (packet.rxsize < 4) {
+			if (packet.rxsize > 0)
+				status = ATCA_RX_FAIL;
+			else
+				status = ATCA_RX_NO_RESPONSE;
+			break;
+		}
 
 		//check the response for error
 		if ((status = isATCAError(packet.data)) != ATCA_SUCCESS )
@@ -1769,17 +1756,16 @@ ATCA_STATUS atcab_lock_data_slot(uint8_t slot, uint8_t* lock_response)
 
 		// receive the response
 		if ( (status = atreceive( _gIface, packet.data, &packet.rxsize)) != ATCA_SUCCESS )
-            break;
+			break;
 
-        // Check response size
-        if (packet.rxsize < 4)
-        {
-            if (packet.rxsize > 0)
-                status = ATCA_RX_FAIL;
-            else
-                status = ATCA_RX_NO_RESPONSE;
-            break;
-        }
+		// Check response size
+		if (packet.rxsize < 4) {
+			if (packet.rxsize > 0)
+				status = ATCA_RX_FAIL;
+			else
+				status = ATCA_RX_NO_RESPONSE;
+			break;
+		}
 
 		//check the response for error
 		if ( (status = isATCAError(packet.data)) != ATCA_SUCCESS )
@@ -1831,17 +1817,16 @@ ATCA_STATUS atcab_sign(uint16_t slot, const uint8_t *msg, uint8_t *signature)
 
 		// receive the response
 		if ( (status = atreceive( _gIface, packet.data, &(packet.rxsize))) != ATCA_SUCCESS )
-            break;
+			break;
 
-        // Check response size
-        if (packet.rxsize < 4)
-        {
-            if (packet.rxsize > 0)
-                status = ATCA_RX_FAIL;
-            else
-                status = ATCA_RX_NO_RESPONSE;
-            break;
-        }
+		// Check response size
+		if (packet.rxsize < 4) {
+			if (packet.rxsize > 0)
+				status = ATCA_RX_FAIL;
+			else
+				status = ATCA_RX_NO_RESPONSE;
+			break;
+		}
 
 		// check for response
 		if ( (status = isATCAError(packet.data)) != ATCA_SUCCESS )
@@ -1923,17 +1908,16 @@ ATCA_STATUS atcab_gendig_host(uint8_t zone, uint16_t key_id, uint8_t *other_data
 
 		// receive the response
 		if ( (status = atreceive( _gIface, packet.data, &(packet.rxsize))) != ATCA_SUCCESS )
-            break;
+			break;
 
-        // Check response size
-        if (packet.rxsize < 4)
-        {
-            if (packet.rxsize > 0)
-                status = ATCA_RX_FAIL;
-            else
-                status = ATCA_RX_NO_RESPONSE;
-            break;
-        }
+		// Check response size
+		if (packet.rxsize < 4) {
+			if (packet.rxsize > 0)
+				status = ATCA_RX_FAIL;
+			else
+				status = ATCA_RX_NO_RESPONSE;
+			break;
+		}
 
 		// check for response
 		if ( (status = isATCAError(packet.data)) != ATCA_SUCCESS )
@@ -1990,11 +1974,22 @@ ATCA_STATUS atcab_read_sig(uint8_t slot8toF, uint8_t *sig)
 
 /** \brief returns a public key found in a designated slot.  The slot must be configured as a slot with a private key.
  *  This method will use GenKey t geenrate the corresponding public key from the private key in the given slot.
- *  \param[in] slot
+ *  \param[in] privSlotId ID of the private key slot
  *  \param[out] pubkey - pointer to space receiving the contents of the public key that was generated
  *  \return ATCA_STATUS
  */
-ATCA_STATUS atcab_get_pubkey(uint8_t slot, uint8_t *pubkey)
+ATCA_STATUS atcab_calc_pubkey(uint8_t privSlotId, uint8_t *pubkey)
+{
+	return atcab_get_pubkey(privSlotId, pubkey);
+}
+
+/** \brief returns a public key found in a designated slot.  The slot must be configured as a slot with a private key.
+ *  This method will use GenKey t geenrate the corresponding public key from the private key in the given slot.
+ *  \param[in] privSlotId ID of the private key slot
+ *  \param[out] pubkey - pointer to space receiving the contents of the public key that was generated
+ *  \return ATCA_STATUS
+ */
+ATCA_STATUS atcab_get_pubkey(uint8_t privSlotId, uint8_t *pubkey)
 {
 	ATCAPacket packet;
 	uint16_t execution_time = 0;
@@ -2003,7 +1998,7 @@ ATCA_STATUS atcab_get_pubkey(uint8_t slot, uint8_t *pubkey)
 	do {
 		// build a genkey command
 		packet.param1 = GENKEY_MODE_PUBLIC;
-		packet.param2 = (uint16_t)(slot);
+		packet.param2 = (uint16_t)(privSlotId);
 
 		if ( (status = atGenKey( _gCommandObj, &packet, false )) != ATCA_SUCCESS ) break;
 
@@ -2020,17 +2015,16 @@ ATCA_STATUS atcab_get_pubkey(uint8_t slot, uint8_t *pubkey)
 
 		// receive the response
 		if ( (status = atreceive( _gIface, packet.data, &(packet.rxsize) )) != ATCA_SUCCESS )
-            break;
+			break;
 
-        // Check response size
-        if (packet.rxsize < 4)
-        {
-            if (packet.rxsize > 0)
-                status = ATCA_RX_FAIL;
-            else
-                status = ATCA_RX_NO_RESPONSE;
-            break;
-        }
+		// Check response size
+		if (packet.rxsize < 4) {
+			if (packet.rxsize > 0)
+				status = ATCA_RX_FAIL;
+			else
+				status = ATCA_RX_NO_RESPONSE;
+			break;
+		}
 
 		if ( (status = isATCAError(packet.data)) != ATCA_SUCCESS )
 			break;
@@ -2078,7 +2072,7 @@ ATCA_STATUS atcab_priv_write(uint8_t slot, const uint8_t priv_key[36], uint8_t w
 			packet.param2 = slot;                   // Key ID
 			memcpy(&packet.data[0], priv_key, 36);  // Private key
 			memset(&packet.data[36], 0, 32);        // MAC (ignored for unencrypted write)
-		}else  {
+		}else {
 			// Copy the buffers to honor the const designation
 			memcpy(privKey, priv_key, 36);
 			memcpy(writeKey, write_key, 32);
@@ -2141,17 +2135,16 @@ ATCA_STATUS atcab_priv_write(uint8_t slot, const uint8_t priv_key[36], uint8_t w
 
 		// receive the response
 		if ((status = atreceive(_gIface, packet.data, &packet.rxsize)) != ATCA_SUCCESS)
-            break;
+			break;
 
-        // Check response size
-        if (packet.rxsize < 4)
-        {
-            if (packet.rxsize > 0)
-                status = ATCA_RX_FAIL;
-            else
-                status = ATCA_RX_NO_RESPONSE;
-            break;
-        }
+		// Check response size
+		if (packet.rxsize < 4) {
+			if (packet.rxsize > 0)
+				status = ATCA_RX_FAIL;
+			else
+				status = ATCA_RX_NO_RESPONSE;
+			break;
+		}
 
 		if ( (status = isATCAError(packet.data)) != ATCA_SUCCESS )
 			break;
@@ -2159,6 +2152,80 @@ ATCA_STATUS atcab_priv_write(uint8_t slot, const uint8_t priv_key[36], uint8_t w
 	} while (0);
 
 	_atcab_exit();
+	return status;
+}
+
+/** \brief Writes a pub key from to a data slot
+ *  \param[in] slot8toF Slot number to write, expected value is 0x8 through 0xF
+ *  \param[out] pubkey The public key to write into the slot specified
+ *  \return ATCA_STATUS
+ */
+ATCA_STATUS atcab_write_pubkey(uint8_t slot8toF, uint8_t *pubkey)
+{
+	ATCA_STATUS status = ATCA_SUCCESS;
+	uint8_t write_block[ATCA_BLOCK_SIZE];
+	uint8_t block = 0;
+	uint8_t offset = 0;
+	uint8_t cpyIndex = 0;
+	uint8_t cpySize = 0;
+	uint8_t writeIndex = 0;
+
+	do {
+		// Check the pointers
+		if (pubkey == NULL) {
+			status = ATCA_BAD_PARAM;
+			break;
+		}
+		// Check the value of the slot
+		if (slot8toF < 8 || slot8toF > 0xF) {
+			status = ATCA_BAD_PARAM;
+			break;
+		}
+		// The 64 byte P256 public key gets written to a 72 byte slot in the following pattern
+		// | Block 1                     | Block 2                                      | Block 3       |
+		// | Pad: 4 Bytes | PubKey[0:27] | PubKey[28:31] | Pad: 4 Bytes | PubKey[32:55] | PubKey[56:63] |
+
+		// Setup the first write block accounting for the 4 byte pad
+		block = 0;
+		writeIndex = ATCA_PUB_KEY_PAD;
+		memset(write_block, 0, sizeof(write_block));
+		cpySize = ATCA_BLOCK_SIZE - ATCA_PUB_KEY_PAD;
+		memcpy(&write_block[writeIndex], &pubkey[cpyIndex], cpySize);
+		cpyIndex += cpySize;
+		// Write the first block
+		status = atcab_write_zone(ATCA_ZONE_DATA, slot8toF, block, offset, write_block, ATCA_BLOCK_SIZE);
+		if (status != ATCA_SUCCESS) break;
+
+		// Setup the second write block accounting for the 4 byte pad
+		block = 1;
+		writeIndex = 0;
+		memset(write_block, 0, sizeof(write_block));
+		// Setup for write 4 bytes starting at 0
+		cpySize = ATCA_PUB_KEY_PAD;
+		memcpy(&write_block[writeIndex], &pubkey[cpyIndex], cpySize);
+		cpyIndex += cpySize;
+		// Setup for write skip 4 bytes and fill the remaining block
+		writeIndex += cpySize + ATCA_PUB_KEY_PAD;
+		cpySize = ATCA_BLOCK_SIZE - writeIndex;
+		memcpy(&write_block[writeIndex], &pubkey[cpyIndex], cpySize);
+		cpyIndex += cpySize;
+		// Write the second block
+		status = atcab_write_zone(ATCA_ZONE_DATA, slot8toF, block, offset, write_block, ATCA_BLOCK_SIZE);
+		if (status != ATCA_SUCCESS) break;
+
+		// Setup the third write block
+		block = 2;
+		writeIndex = 0;
+		memset(write_block, 0, sizeof(write_block));
+		// Setup for write 8 bytes starting at 0
+		cpySize = ATCA_PUB_KEY_PAD + ATCA_PUB_KEY_PAD;
+		memcpy(&write_block[writeIndex], &pubkey[cpyIndex], cpySize);
+		// Write the third block
+		status = atcab_write_zone(ATCA_ZONE_DATA, slot8toF, block, offset, write_block, ATCA_BLOCK_SIZE);
+		if (status != ATCA_SUCCESS) break;
+
+	} while (0);
+
 	return status;
 }
 
@@ -2272,11 +2339,11 @@ ATCA_STATUS atcab_write_bytes_slot(uint8_t slot, uint16_t offset, const uint8_t 
 }
 
 /** \brief write data into config, otp or data zone with given zone and offset
- *  \param[in] dev_type to identify device
- *  \param[in] zone to write data
- *  \param[in] offset of pointed zone
- *  \param[in] data pointer of to write data
- *  \param[in] data length corresponding to data
+ *  \param[in] dev_type  to identify device
+ *  \param[in] zone      to write data
+ *  \param[in] address   to pointed zone
+ *  \param[in] data      pointer of to write data
+ *  \param[in] len       data length corresponding to data
  *  \return ATCA_STATUS
  */
 ATCA_STATUS atcab_write_bytes_zone(ATCADeviceType dev_type, uint8_t zone, uint16_t address, const uint8_t *data, uint8_t len)
@@ -2399,11 +2466,11 @@ ATCA_STATUS atcab_write_bytes_zone(ATCADeviceType dev_type, uint8_t zone, uint16
 }
 
 /** \brief read data from config, otp or data zone with given zone, offset and len
- *  \param[in] dev_type to identify device
- *  \param[in] zone to write data
- *  \param[in] offset of pointed zone
- *  \param[in] data length to be read
- *  \param[out] data buffer to be read data
+ *  \param[in]  dev_type  to identify device
+ *  \param[in]  zone      to write data
+ *  \param[in]  address   of pointed zone
+ *  \param[in]  len       length to be read
+ *  \param[out] data      buffer to be read data
  *  \return ATCA_STATUS
  */
 ATCA_STATUS atcab_read_bytes_zone(ATCADeviceType dev_type, uint8_t zone, uint16_t address, uint8_t len, uint8_t *data)
@@ -2499,10 +2566,10 @@ ATCA_STATUS atcab_read_bytes_zone(ATCADeviceType dev_type, uint8_t zone, uint16_
 
 
 /** \brief Get a 32 byte MAC from the CryptoAuth device given a key ID and a challenge
- *	\param[in] mode Controls which fields within the device are used in the message
- *	\param[in] key_id The key in the CryptoAuth device to use for the MAC
- *	\param[in] challenge The 32 byte challenge number
- *	\param[out] mac_response The response of the MAC command using the given challenge
+ *	\param[in]  mode       Controls which fields within the device are used in the message
+ *	\param[in]  key_id     The key in the CryptoAuth device to use for the MAC
+ *	\param[in]  challenge  The 32 byte challenge number
+ *	\param[out] digest     The response of the MAC command using the given challenge
  *  \return ATCA_STATUS
  */
 ATCA_STATUS atcab_mac( uint8_t mode, uint16_t key_id, const uint8_t* challenge, uint8_t* digest )
@@ -2540,17 +2607,16 @@ ATCA_STATUS atcab_mac( uint8_t mode, uint16_t key_id, const uint8_t* challenge, 
 
 		// receive the response
 		if ( (status = atreceive( _gIface, packet.data, &(packet.rxsize))) != ATCA_SUCCESS )
-            break;
+			break;
 
-        // Check response size
-        if (packet.rxsize < 4)
-        {
-            if (packet.rxsize > 0)
-                status = ATCA_RX_FAIL;
-            else
-                status = ATCA_RX_NO_RESPONSE;
-            break;
-        }
+		// Check response size
+		if (packet.rxsize < 4) {
+			if (packet.rxsize > 0)
+				status = ATCA_RX_FAIL;
+			else
+				status = ATCA_RX_NO_RESPONSE;
+			break;
+		}
 
 		// check for response
 		if ( (status = isATCAError(packet.data)) != ATCA_SUCCESS )
@@ -2609,17 +2675,16 @@ ATCA_STATUS atcab_checkmac( uint8_t mode, uint16_t key_id, const uint8_t *challe
 
 		// receive the response
 		if ( (status = atreceive( _gIface, packet.data, &(packet.rxsize))) != ATCA_SUCCESS )
-            break;
+			break;
 
-        // Check response size
-        if (packet.rxsize < 4)
-        {
-            if (packet.rxsize > 0)
-                status = ATCA_RX_FAIL;
-            else
-                status = ATCA_RX_NO_RESPONSE;
-            break;
-        }
+		// Check response size
+		if (packet.rxsize < 4) {
+			if (packet.rxsize > 0)
+				status = ATCA_RX_FAIL;
+			else
+				status = ATCA_RX_NO_RESPONSE;
+			break;
+		}
 
 		// check for response
 		if ( (status = isATCAError(packet.data)) != ATCA_SUCCESS )
@@ -2663,17 +2728,16 @@ ATCA_STATUS atcab_sha_start(void)
 
 		// receive the response
 		if ( (status = atreceive( _gIface, packet.data, &(packet.rxsize))) != ATCA_SUCCESS )
-            break;
+			break;
 
-        // Check response size
-        if (packet.rxsize < 4)
-        {
-            if (packet.rxsize > 0)
-                status = ATCA_RX_FAIL;
-            else
-                status = ATCA_RX_NO_RESPONSE;
-            break;
-        }
+		// Check response size
+		if (packet.rxsize < 4) {
+			if (packet.rxsize > 0)
+				status = ATCA_RX_FAIL;
+			else
+				status = ATCA_RX_NO_RESPONSE;
+			break;
+		}
 
 		// check for response
 		if ( (status = isATCAError(packet.data)) != ATCA_SUCCESS )
@@ -2699,7 +2763,7 @@ ATCA_STATUS atcab_sha_update(uint16_t length, const uint8_t *message)
 	do {
 
 		// Verify the inputs
-		if ( message == NULL || length > SHA_DATA_MAX ) {
+		if ( message == NULL || length > SHA_BLOCK_SIZE ) {
 			status = ATCA_BAD_PARAM;
 			break;
 		}
@@ -2725,17 +2789,16 @@ ATCA_STATUS atcab_sha_update(uint16_t length, const uint8_t *message)
 
 		// receive the response
 		if ( (status = atreceive( _gIface, packet.data, &(packet.rxsize))) != ATCA_SUCCESS )
-            break;
+			break;
 
-        // Check response size
-        if (packet.rxsize < 4)
-        {
-            if (packet.rxsize > 0)
-                status = ATCA_RX_FAIL;
-            else
-                status = ATCA_RX_NO_RESPONSE;
-            break;
-        }
+		// Check response size
+		if (packet.rxsize < 4) {
+			if (packet.rxsize > 0)
+				status = ATCA_RX_FAIL;
+			else
+				status = ATCA_RX_NO_RESPONSE;
+			break;
+		}
 
 		// check for response
 		if ( (status = isATCAError(packet.data)) != ATCA_SUCCESS )
@@ -2751,11 +2814,17 @@ ATCA_STATUS atcab_sha_update(uint16_t length, const uint8_t *message)
  *	\param[out] digest The SHA256 digest that is calculated
  *  \return ATCA_STATUS
  */
-ATCA_STATUS atcab_sha_end(uint8_t *digest)
+ATCA_STATUS atcab_sha_end(uint8_t *digest, uint16_t length, const uint8_t *message)
 {
 	ATCA_STATUS status = ATCA_GEN_FAIL;
 	ATCAPacket packet;
 	uint16_t execution_time = 0;
+
+	if ( length > 63 || digest == NULL )
+		return ATCA_BAD_PARAM;
+
+	if ( length > 0 && message == NULL )
+		return ATCA_BAD_PARAM;
 
 	do {
 
@@ -2765,9 +2834,11 @@ ATCA_STATUS atcab_sha_end(uint8_t *digest)
 			break;
 		}
 
-		// build checkmac command
+		// build SHA command
 		packet.param1 = SHA_SHA256_END_MASK;
-		packet.param2 = 0;
+		packet.param2 = length;
+		if ( length > 0 )
+			memcpy(&packet.data[0], message, length);
 
 		if ( (status = atSHA( _gCommandObj, &packet )) != ATCA_SUCCESS )
 			break;
@@ -2785,17 +2856,16 @@ ATCA_STATUS atcab_sha_end(uint8_t *digest)
 
 		// receive the response
 		if ( (status = atreceive( _gIface, packet.data, &(packet.rxsize))) != ATCA_SUCCESS )
-            break;
+			break;
 
-        // Check response size
-        if (packet.rxsize < 4)
-        {
-            if (packet.rxsize > 0)
-                status = ATCA_RX_FAIL;
-            else
-                status = ATCA_RX_NO_RESPONSE;
-            break;
-        }
+		// Check response size
+		if (packet.rxsize < 4) {
+			if (packet.rxsize > 0)
+				status = ATCA_RX_FAIL;
+			else
+				status = ATCA_RX_NO_RESPONSE;
+			break;
+		}
 
 		// check for response
 		if ( (status = isATCAError(packet.data)) != ATCA_SUCCESS )
@@ -2811,25 +2881,36 @@ ATCA_STATUS atcab_sha_end(uint8_t *digest)
 
 /** \brief Computes a SHA-256 digest
  *	\param[in] length The number of bytes in the message parameter
- *	\param[in] message up to 64 bytes of data to be included into the hash operation.
+ *	\param[in] message - pointer to variable length message
  *	\param[out] digest The SHA256 digest
  *  \return ATCA_STATUS
  */
 ATCA_STATUS atcab_sha(uint16_t length, const uint8_t *message, uint8_t *digest)
 {
 	ATCA_STATUS status = ATCA_GEN_FAIL;
+	int blocks = 0, remainder = 0, msgIndex = 0;
+
+	if ( length == 0 || message == NULL || digest == NULL )
+		return ATCA_BAD_PARAM;
 
 	do {
+
+		blocks = length / SHA_BLOCK_SIZE;
+		remainder = length % SHA_BLOCK_SIZE;
 
 		status = atcab_sha_start();
 		if ( status != ATCA_SUCCESS )
 			break;
 
-		status = atcab_sha_update(length, message);
-		if ( status != ATCA_SUCCESS )
-			break;
+		while ( blocks-- > 0 ) {
+			status = atcab_sha_update(SHA_BLOCK_SIZE, &message[msgIndex]);
+			if ( status != ATCA_SUCCESS )
+				break;
+			msgIndex += SHA_BLOCK_SIZE;
+		}
 
-		status = atcab_sha_end(digest);
+		status = atcab_sha_end(digest, remainder, &message[msgIndex]);
+
 		if ( status != ATCA_SUCCESS )
 			break;
 

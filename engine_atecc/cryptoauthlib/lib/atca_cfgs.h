@@ -1,6 +1,5 @@
-/** \file atca_cfgs.h
- * a set of default configurations for various ATCA devices and interfaces
- *
+/**
+ * \file
  * \brief a set of default configurations for various ATCA devices and interfaces
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.

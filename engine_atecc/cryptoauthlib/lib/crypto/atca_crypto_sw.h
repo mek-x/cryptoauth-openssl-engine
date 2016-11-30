@@ -1,4 +1,6 @@
-/** \brief Common defines for CryptoAuthLib software crypto wrappers.
+/**
+ * \file
+ * \brief Common defines for CryptoAuthLib software crypto wrappers.
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *

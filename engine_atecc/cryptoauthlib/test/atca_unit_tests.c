@@ -1,4 +1,6 @@
-/** \brief  Unit tests for CryptoAuthLib.  These tests are based on the Unity C unit test framework.
+/**
+ * \file
+ * \brief  Unit tests for CryptoAuthLib.  These tests are based on the Unity C unit test framework.
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *
@@ -545,7 +547,7 @@ void test_derivekey(void)
 	// receive the response
 	status = atreceive( iface, packet.data, &(packet.rxsize) );
 	TEST_ASSERT_EQUAL( ATCA_SUCCESS, status );
-    status = isATCAError( packet.data );
+	status = isATCAError( packet.data );
 	TEST_ASSERT_EQUAL( ATCA_SUCCESS, status );
 
 	// build a deriveKey command (Roll Key operation)
@@ -567,8 +569,8 @@ void test_derivekey(void)
 	// receive the response
 	status = atreceive( iface, packet.data, &(packet.rxsize) );
 	TEST_ASSERT_EQUAL( ATCA_SUCCESS, status );
-    status = isATCAError( packet.data );
-    TEST_ASSERT_EQUAL( ATCA_SUCCESS, status );
+	status = isATCAError( packet.data );
+	TEST_ASSERT_EQUAL( ATCA_SUCCESS, status );
 
 	// check for derive key response if it's success or not
 	TEST_ASSERT_EQUAL_INT8( ATCA_SUCCESS, packet.data[1] );
@@ -604,7 +606,7 @@ void test_ecdh(void)
 	// char displaystr[256]; int displen = sizeof(displaystr);
 	uint8_t non_clear_response[3] = { 0x00, 0x03, 0x40 };
 	static uint8_t NUM_IN[20] = {
-		0x50, 0xDF, 0xD7, 0x82, 0x5B, 0x10, 0x0F, 0x2D, 0x8C, 0xD2,	 0x0A, 0x91, 0x15, 0xAC, 0xED, 0xCF,
+		0x50, 0xDF, 0xD7, 0x82, 0x5B, 0x10, 0x0F, 0x2D, 0x8C, 0xD2, 0x0A, 0x91, 0x15, 0xAC, 0xED,  0xCF,
 		0x5A, 0xEE, 0x76, 0x94
 	};
 	uint8_t i;
@@ -648,7 +650,7 @@ void test_ecdh(void)
 	// receive the response
 	status = atreceive( iface, packet.data, &(packet.rxsize) );
 	TEST_ASSERT_EQUAL( ATCA_SUCCESS, status );
-    status = isATCAError(packet.data);
+	status = isATCAError(packet.data);
 	TEST_ASSERT_EQUAL( ATCA_SUCCESS, status );
 
 	memcpy(pub_alice, &packet.data[ATCA_RSP_DATA_IDX], sizeof(pub_alice));
@@ -682,7 +684,7 @@ void test_ecdh(void)
 	TEST_ASSERT_EQUAL( ATCA_SUCCESS, status );
 	memcpy(pub_bob, &packet.data[ATCA_RSP_DATA_IDX], sizeof(pub_bob));
 	TEST_ASSERT_NOT_EQUAL_MESSAGE(0, memcmp(pub_bob, frag, sizeof(frag)), "Bob pub key not initialized");
-    status = isATCAError(packet.data);
+	status = isATCAError(packet.data);
 	TEST_ASSERT_EQUAL( ATCA_SUCCESS, status );
 
 	// sleep or idle
@@ -807,7 +809,7 @@ void test_ecdh(void)
 	// receive the response
 	status = atreceive( iface, packet.data, &(packet.rxsize) );
 	TEST_ASSERT_EQUAL( ATCA_SUCCESS, status );
-    status = isATCAError( packet.data );
+	status = isATCAError( packet.data );
 	TEST_ASSERT_EQUAL( ATCA_SUCCESS, status );
 
 	memcpy( rand_out, &packet.data[1], sizeof(rand_out) );
@@ -956,7 +958,7 @@ void test_gendig(void)
 	// receive the response
 	status = atreceive( iface, packet.data, &(packet.rxsize) );
 	TEST_ASSERT_EQUAL( ATCA_SUCCESS, status );
-    status = isATCAError( packet.data );
+	status = isATCAError( packet.data );
 	TEST_ASSERT_EQUAL( ATCA_SUCCESS, status );
 
 	// check for nonce response for pass through mode
@@ -1111,7 +1113,7 @@ void test_hmac(void)
 
 	status = atreceive( iface, packet.data, &(packet.rxsize) );
 	TEST_ASSERT_EQUAL( ATCA_SUCCESS, status );
-    status = isATCAError( packet.data );
+	status = isATCAError( packet.data );
 	TEST_ASSERT_EQUAL( ATCA_SUCCESS, status );
 
 	TEST_ASSERT_EQUAL_INT8( ATCA_SUCCESS, packet.data[1] );
@@ -1391,7 +1393,7 @@ void test_nonce_passthrough(void)
 	// receive the response
 	status = atreceive( iface, packet.data, &(packet.rxsize) );
 	TEST_ASSERT_EQUAL( ATCA_SUCCESS, status );
-    status = isATCAError( packet.data );
+	status = isATCAError( packet.data );
 	TEST_ASSERT_EQUAL( ATCA_SUCCESS, status );
 
 	// check for nonce response for pass through mode
@@ -1750,7 +1752,7 @@ void test_sign(void)
 	// receive the response
 	status = atreceive( iface, packet.data, &(packet.rxsize) );
 	TEST_ASSERT_EQUAL( ATCA_SUCCESS, status );
-    status = isATCAError( packet.data );
+	status = isATCAError( packet.data );
 	TEST_ASSERT_EQUAL( ATCA_SUCCESS, status );
 
 	// check for nonce response for pass through mode

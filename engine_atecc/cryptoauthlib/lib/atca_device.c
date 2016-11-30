@@ -1,4 +1,6 @@
-/**  \brief  Atmel CryptoAuth device object
+/**
+ * \file
+ * \brief  Atmel CryptoAuth device object
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *
@@ -54,7 +56,7 @@ struct atca_device {
 };
 
 /** \brief constructor for an Atmel CryptoAuth device
- * \param[in] pointer to an interface configuration object
+ * \param[in] cfg  pointer to an interface configuration object
  * \return reference to a new ATCADevice
  */
 
@@ -78,7 +80,7 @@ ATCADevice newATCADevice(ATCAIfaceCfg *cfg )
 }
 
 /** \brief returns a reference to the ATCACommand object for the device
- * \param[in] reference to a device
+ * \param[in] dev  reference to a device
  * \return reference to the ATCACommand object for the device
  */
 ATCACommand atGetCommands( ATCADevice dev )
@@ -87,7 +89,7 @@ ATCACommand atGetCommands( ATCADevice dev )
 }
 
 /** \brief returns a reference to the ATCAIface interface object for the device
- * \param[in] reference to a device
+ * \param[in] dev  reference to a device
  * \return reference to the ATCAIface object for the device
  */
 
@@ -97,7 +99,7 @@ ATCAIface atGetIFace( ATCADevice dev )
 }
 
 /** \brief destructor for a device NULLs reference after object is freed
- * \param[in] pointer to a reference to a device
+ * \param[in] cadev  pointer to a reference to a device
  *
  */
 

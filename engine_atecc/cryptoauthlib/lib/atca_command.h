@@ -1,7 +1,9 @@
-/** \file atca_command.h
- * Atmel Crypto Auth device command object - this is a command builder only, it does
+/**
+ * \file
+ * \brief Atmel Crypto Auth device command object - this is a command builder only, it does
  * not send the command.  The result of a command method is a fully formed packet, ready to send
  * to the ATCAIFace object to dispatch.
+ *
  * This command object supports the ATSHA and ATECC device family.
  * The command list is a superset of all device commands for this family.  The command object
  * differentiates the packet contents based on specific device type within the family.
@@ -315,6 +317,8 @@ typedef enum {
 #define SHA_COUNT_LONG                      (7)
 #define ATCA_SHA_DIGEST_SIZE                        (32)
 #define SHA_DATA_MAX                        (64)
+#define SHA_BLOCK_SIZE                      (64)
+
 typedef enum {
 	SHA_MODE_SHA256_START = ((uint8_t) 0x00),               //!< Initialization, does not accept a message
 	SHA_MODE_SHA256_UPDATE = ((uint8_t) 0x01),              //!< Add 64 bytes in the meesage to the SHA context

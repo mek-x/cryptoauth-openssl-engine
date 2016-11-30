@@ -1,5 +1,4 @@
-/* atca_iface.c
- *
+/**
  * \file
  *
  * \brief  Atmel Crypto Auth hardware interface object
@@ -75,7 +74,7 @@ struct atca_iface {
 ATCA_STATUS _atinit(ATCAIface caiface, ATCAHAL_t *hal);
 
 /** \brief constructor for ATCAIface objects
- * \param[in] ATCAIfaceCfg pointer - points to the logical configuration for the interface
+ * \param[in] cfg  points to the logical configuration for the interface
  * \return ATCAIface
  */
 

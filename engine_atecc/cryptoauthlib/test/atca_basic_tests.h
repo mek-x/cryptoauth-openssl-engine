@@ -1,5 +1,6 @@
-/** \file atca_basic_tests.h
- * Unity tests for the cryptoauthlib Basic API
+/**
+ * \file
+ * \brief Unity tests for the cryptoauthlib Basic API
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *
@@ -90,6 +91,8 @@ void test_basic_gendig(void);
 void test_basic_mac(void);
 void test_basic_checkmac(void);
 void test_basic_sha(void);
+void test_basic_sha_long(void);
+void test_basic_sha_short(void);
 
 // test the extra function used with provisioning FW
 // use the default customer configuration same as the provisioning config for the configuration zone

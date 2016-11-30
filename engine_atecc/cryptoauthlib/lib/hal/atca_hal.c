@@ -1,4 +1,6 @@
-/** \brief low-level HAL - methods used to setup indirection to physical layer interface.
+/**
+ * \file
+ * \brief low-level HAL - methods used to setup indirection to physical layer interface.
  * this level does the dirty work of abstracting the higher level ATCAIFace methods from the
  * low-level physical interfaces.  Its main goal is to keep low-level details from bleeding into
  * the logical interface implemetation.

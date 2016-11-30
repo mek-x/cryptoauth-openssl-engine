@@ -1,5 +1,6 @@
-/** \file hal_linux_kit_cdc.h
- * ATCA Hardware abstraction layer for Linux using kit protocol over a USB CDC device.
+/**
+ * \file
+ * \brief ATCA Hardware abstraction layer for Linux using kit protocol over a USB CDC device.
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *

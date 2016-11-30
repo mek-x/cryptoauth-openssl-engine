@@ -1,5 +1,4 @@
-/* atca_utests.h
- *
+/**
  * \file
  *
  * \brief  Unit tests for atcalib

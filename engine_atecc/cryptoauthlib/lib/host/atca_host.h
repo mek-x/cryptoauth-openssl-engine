@@ -1,8 +1,9 @@
-/** \file
- *  \brief  Definitions and Prototypes for ATCA Utility Functions
- *  \author Atmel Crypto Products
+/**
+ * \file
+ * \brief  Definitions and Prototypes for ATCA Utility Functions
+ * \author Atmel Crypto Products
  *
- *  \copyright Copyright (c) 2014 Atmel Corporation. All rights reserved.
+ * \copyright Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *
  * \atmel_crypto_device_library_license_start
  *
@@ -277,21 +278,21 @@ typedef struct atca_gen_dig_in_out {
 	struct atca_temp_key *temp_key;
 } atca_gen_dig_in_out_t;
 
-/** \struct atca_privWrite_mac_in_out
+/** \struct atca_write_mac_in_out
  *  \brief Input/output parameters for function atca_auth_mac().
- *  \var atca_privWrite_mac_in_out::zone
+ *  \var atca_write_mac_in_out::zone
  *       \brief [in] Zone parameter used in PrivWrite command (Param1).
- *  \var atca_privWrite_mac_in_out::key_id
+ *  \var atca_write_mac_in_out::key_id
  *       \brief [in] KeyID parameter used in PrivWrite command (Param2).
- *  \var atca_privWrite_mac_in_out::private_key
- *       \brief [in] Pointer to 32-byte private_key.
- *  \var atca_privWrite_mac_in_out::input_data
+ *  \var atca_write_mac_in_out::encryption_key
+ *       \brief [in] Pointer to 32-byte key.
+ *  \var atca_write_mac_in_out::input_data
  *       \brief [in] Pointer to 36-byte data value, Input cleartext data.
- *  \var atca_privWrite_mac_in_out::crypto_data
- *       \brief [out] Pointer to 32-byte data. Output encrypted data to PrivWrite command.
- *  \var atca_privWrite_mac_in_out::mac
+ *  \var atca_write_mac_in_out::encrypted_data
+ *       \brief [out] Pointer to 32-byte data. Output encrypted data to MAC command.
+ *  \var atca_write_mac_in_out::auth_mac
  *       \brief [out] Pointer to 32-byte Mac.
- *  \var atca_privWrite_mac_in_out::temp_key
+ *  \var atca_write_mac_in_out::temp_key
  *       \brief [in,out] Pointer to TempKey structure.
  */
 typedef struct atca_write_mac_in_out {
@@ -412,11 +413,11 @@ struct atca_check_mac_in_out {
  *  \brief Input/output parameters for function atca_verify().
  *  \var atca_verify_in_out::curve_type
  *       \brief [in] Curve type used in Verify command (Param2).
- *  \var atca_decrypt_in_out::signature
+ *  \var atca_verify_in_out::signature
  *       \brief [in] Pointer to ECDSA signature to be verified
- *  \var atca_decrypt_in_out::public_key
+ *  \var atca_verify_in_out::public_key
  *       \brief [in] Pointer to the public key to be used for verification
- *  \var atca_decrypt_in_out::temp_key
+ *  \var atca_verify_in_out::temp_key
  *       \brief [in,out] Pointer to TempKey structure.
  */
 struct atca_verify_in_out {

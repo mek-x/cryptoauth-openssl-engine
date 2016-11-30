@@ -1,5 +1,5 @@
 /**
- *
+ * \file
  * \brief  Atmel Crypto Auth
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.

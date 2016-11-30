@@ -1,5 +1,4 @@
-/* atcatls.h
- *
+/**
  * \file
  *
  * \brief  Collection of functions for hardware abstraction of TLS implementations (e.g. OpenSSL)
@@ -80,16 +79,17 @@ ATCA_STATUS atcatls_ecdh(uint8_t slotid, const uint8_t* pubkey, uint8_t* pmk);
 ATCA_STATUS atcatls_ecdh_enc(uint8_t slotid, uint8_t enckeyId, const uint8_t* pubkey, uint8_t* pmk);
 ATCA_STATUS atcatls_ecdhe(uint8_t slotid, const uint8_t* pubkey, uint8_t* pubkeyret, uint8_t* pmk);
 ATCA_STATUS atcatls_create_key(uint8_t slotid, uint8_t *pubkey);
-ATCA_STATUS atcatls_gen_pubkey(uint8_t slotid, uint8_t *pubkey);
+ATCA_STATUS atcatls_calc_pubkey(uint8_t slotid, uint8_t *pubkey);
+ATCA_STATUS atcatls_write_pubkey(uint8_t slotid, uint8_t pubkey[PUB_KEY_SIZE], bool lock);
 ATCA_STATUS atcatls_read_pubkey(uint8_t slotid, uint8_t *pubkey);
 ATCA_STATUS atcatls_random(uint8_t* randout);
 ATCA_STATUS atcatls_get_sn(uint8_t sn_out[ATCA_SERIAL_NUM_SIZE]);
 
 // Certificate Handling
 ATCA_STATUS atcatls_get_cert(const atcacert_def_t* cert_def, const uint8_t *ca_public_key, uint8_t *certout, size_t* certsize);
-ATCA_STATUS atcatls_get_ca_pubkey(uint8_t *caPubkey);
 ATCA_STATUS atcatls_get_ca_cert(uint8_t *certout, size_t* certsize);
 ATCA_STATUS atcatls_verify_cert(const atcacert_def_t* cert_def, const uint8_t* cert, size_t cert_size, const uint8_t* ca_public_key);
+ATCA_STATUS atcatls_read_ca_pubkey(uint8_t slotid, uint8_t caPubkey[PUB_KEY_SIZE]);
 
 // Test Certificates
 ATCA_STATUS atcatls_get_device_cert(uint8_t *certout, size_t* certsize);
@@ -101,11 +101,13 @@ ATCA_STATUS atcatls_set_enckey(uint8_t* enckeyin, uint8_t enckeyId, bool lock);
 ATCA_STATUS atcatls_get_enckey(uint8_t* enckeyout);
 ATCA_STATUS atcatls_enc_read(uint8_t slotid, uint8_t block, uint8_t enckeyId, uint8_t* data, int16_t* bufsize);
 ATCA_STATUS atcatls_enc_write(uint8_t slotid, uint8_t block, uint8_t enckeyId, uint8_t* data, int16_t bufsize);
-ATCA_STATUS atcatls_enc_rsakey_read(uint8_t enckeyId, uint8_t rsakey[RSA2048_KEY_SIZE]);
-ATCA_STATUS atcatls_enc_rsakey_write(uint8_t enckeyId, uint8_t rsakey[RSA2048_KEY_SIZE]);
+ATCA_STATUS atcatls_enc_rsakey_read(uint8_t enckeyId, uint8_t* rsakey, int16_t* keysize);
+ATCA_STATUS atcatls_enc_rsakey_write(uint8_t enckeyId, uint8_t* rsakey, int16_t keysize);
 
 // Interface to get the encryption key from the platform
 typedef ATCA_STATUS (atcatlsfn_get_enckey)(uint8_t* enckey, int16_t keysize);
 ATCA_STATUS atcatlsfn_set_get_enckey(atcatlsfn_get_enckey* fn_get_enckey);
+
+/** @} */
 
 #endif // ATCATLS_H

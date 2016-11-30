@@ -1,4 +1,6 @@
-/** \brief host side methods using software implementations
+/**
+ * \file
+ * \brief host side methods using software implementations
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *

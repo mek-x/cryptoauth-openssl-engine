@@ -1,4 +1,6 @@
-/** \brief function declarations required to work with DER encoded data related to X.509 certificates.
+/**
+ * \file
+ * \brief function declarations required to work with DER encoded data related to X.509 certificates.
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *

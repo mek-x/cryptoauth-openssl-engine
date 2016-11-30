@@ -1,4 +1,6 @@
-/** \brief Software implementation of the SHA256 algorithm.
+/**
+ * \file
+ * \brief Software implementation of the SHA256 algorithm.
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *

@@ -1,5 +1,7 @@
-/** \file hal_win_kit_hid.h
- * ATCA Hardware abstraction layer physical send & receive function definitions.
+/**
+ * \file
+ * \brief  ATCA Hardware abstraction layer physical send & receive function definitions.
+ *
  * This is included for kit protocol implementations.
  * It is included in the kit protocol callback to actually send and recieve bytes.
  *

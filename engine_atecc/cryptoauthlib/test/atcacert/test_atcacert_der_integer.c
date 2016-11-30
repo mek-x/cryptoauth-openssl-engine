@@ -1,4 +1,6 @@
-/** \brief cert DER format tests
+/**
+ * \file
+ * \brief cert DER format tests
  *
  * \copyright Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *
@@ -57,7 +59,7 @@ TEST_TEAR_DOWN(atcacert_der_enc_integer)
 static void atcacert_der_enc_integer_test(const uint8_t* int_data, size_t int_data_size, const uint8_t* der_int_ref, size_t der_int_ref_size, uint8_t is_signed)
 {
 	int ret = 0;
-	uint8_t der_int[2048];
+	uint8_t der_int[300];
 	size_t der_int_size = sizeof(der_int);
 
 	if (der_int_ref_size > sizeof(der_int))
@@ -75,7 +77,7 @@ static void atcacert_der_enc_integer_test(const uint8_t* int_data, size_t int_da
 	TEST_ASSERT_EQUAL(der_int_ref_size, der_int_size);
 }
 
-TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_min)
+TEST(atcacert_der_enc_integer, signed_min)
 {
 	uint8_t int_data[] = { 0x00 };
 	uint8_t der_int_ref[] = { 0x02, 0x01, 0x00 };
@@ -83,7 +85,7 @@ TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_min)
 	atcacert_der_enc_integer_test(int_data, sizeof(int_data), der_int_ref, sizeof(der_int_ref), FALSE);
 }
 
-TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_1byte)
+TEST(atcacert_der_enc_integer, signed_1byte)
 {
 	uint8_t int_data[] = { 0x64 };
 	uint8_t der_int_ref[] = { 0x02, 0x01, 0x64 };
@@ -91,7 +93,7 @@ TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_1byte)
 	atcacert_der_enc_integer_test(int_data, sizeof(int_data), der_int_ref, sizeof(der_int_ref), FALSE);
 }
 
-TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_multi_byte)
+TEST(atcacert_der_enc_integer, signed_multi_byte)
 {
 	uint8_t int_data[] = { 0x01, 0x02, 0x03, 0x04, 0x05 };
 	uint8_t der_int_ref[] = { 0x02, 0x05, 0x01, 0x02, 0x03, 0x04, 0x05 };
@@ -99,9 +101,9 @@ TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_multi_byte)
 	atcacert_der_enc_integer_test(int_data, sizeof(int_data), der_int_ref, sizeof(der_int_ref), FALSE);
 }
 
-TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_large)
+TEST(atcacert_der_enc_integer, signed_large)
 {
-	uint8_t int_data[1000];
+	uint8_t int_data[256];
 	uint8_t der_int_ref[1 + 3 + sizeof(int_data)];
 	size_t i;
 
@@ -117,7 +119,7 @@ TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_large)
 	atcacert_der_enc_integer_test(int_data, sizeof(int_data), der_int_ref, sizeof(der_int_ref), FALSE);
 }
 
-TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_trim_1_pos)
+TEST(atcacert_der_enc_integer, signed_trim_1_pos)
 {
 	uint8_t int_data[] = { 0x00, 0x02, 0x03, 0x04, 0x05 };
 	uint8_t der_int_ref[] = { 0x02, 0x04, 0x02, 0x03, 0x04, 0x05 };
@@ -125,7 +127,7 @@ TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_trim_1_pos)
 	atcacert_der_enc_integer_test(int_data, sizeof(int_data), der_int_ref, sizeof(der_int_ref), FALSE);
 }
 
-TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_trim_multi_pos)
+TEST(atcacert_der_enc_integer, signed_trim_multi_pos)
 {
 	uint8_t int_data[] = { 0x00, 0x00, 0x00, 0x04, 0x05 };
 	uint8_t der_int_ref[] = { 0x02, 0x02, 0x04, 0x05 };
@@ -133,7 +135,7 @@ TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_trim_multi_pos)
 	atcacert_der_enc_integer_test(int_data, sizeof(int_data), der_int_ref, sizeof(der_int_ref), FALSE);
 }
 
-TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_trim_all_pos)
+TEST(atcacert_der_enc_integer, signed_trim_all_pos)
 {
 	uint8_t int_data[] = { 0x00, 0x00, 0x00, 0x00, 0x00 };
 	uint8_t der_int_ref[] = { 0x02, 0x01, 0x00 };
@@ -141,7 +143,7 @@ TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_trim_all_pos)
 	atcacert_der_enc_integer_test(int_data, sizeof(int_data), der_int_ref, sizeof(der_int_ref), FALSE);
 }
 
-TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_trim_1_neg)
+TEST(atcacert_der_enc_integer, signed_trim_1_neg)
 {
 	uint8_t int_data[] = { 0xFF, 0xFE, 0xFD, 0xFC, 0xFB };
 	uint8_t der_int_ref[] = { 0x02, 0x04, 0xFE, 0xFD, 0xFC, 0xFB };
@@ -149,7 +151,7 @@ TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_trim_1_neg)
 	atcacert_der_enc_integer_test(int_data, sizeof(int_data), der_int_ref, sizeof(der_int_ref), FALSE);
 }
 
-TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_trim_multi_neg)
+TEST(atcacert_der_enc_integer, signed_trim_multi_neg)
 {
 	uint8_t int_data[] = { 0xFF, 0xFF, 0xFF, 0xFC, 0xFB };
 	uint8_t der_int_ref[] = { 0x02, 0x02, 0xFC, 0xFB };
@@ -157,7 +159,7 @@ TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_trim_multi_neg)
 	atcacert_der_enc_integer_test(int_data, sizeof(int_data), der_int_ref, sizeof(der_int_ref), FALSE);
 }
 
-TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_trim_all_neg)
+TEST(atcacert_der_enc_integer, signed_trim_all_neg)
 {
 	uint8_t int_data[] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
 	uint8_t der_int_ref[] = { 0x02, 0x01, 0xFF };
@@ -165,7 +167,7 @@ TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_trim_all_neg)
 	atcacert_der_enc_integer_test(int_data, sizeof(int_data), der_int_ref, sizeof(der_int_ref), FALSE);
 }
 
-TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_min)
+TEST(atcacert_der_enc_integer, unsigned_min)
 {
 	uint8_t int_data[] = { 0x00 };
 	uint8_t der_int_ref[] = { 0x02, 0x01, 0x00 };
@@ -173,7 +175,7 @@ TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_min)
 	atcacert_der_enc_integer_test(int_data, sizeof(int_data), der_int_ref, sizeof(der_int_ref), TRUE);
 }
 
-TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_min_pad)
+TEST(atcacert_der_enc_integer, unsigned_min_pad)
 {
 	uint8_t int_data[] = { 0x80 };
 	uint8_t der_int_ref[] = { 0x02, 0x02, 0x00, 0x80 };
@@ -181,7 +183,7 @@ TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_min_pad)
 	atcacert_der_enc_integer_test(int_data, sizeof(int_data), der_int_ref, sizeof(der_int_ref), TRUE);
 }
 
-TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_multi_byte)
+TEST(atcacert_der_enc_integer, unsigned_multi_byte)
 {
 	uint8_t int_data[] = { 0x01, 0x02, 0x03, 0x04, 0x05 };
 	uint8_t der_int_ref[] = { 0x02, 0x05, 0x01, 0x02, 0x03, 0x04, 0x05 };
@@ -189,7 +191,7 @@ TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_multi_byte)
 	atcacert_der_enc_integer_test(int_data, sizeof(int_data), der_int_ref, sizeof(der_int_ref), TRUE);
 }
 
-TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_multi_byte_pad)
+TEST(atcacert_der_enc_integer, unsigned_multi_byte_pad)
 {
 	uint8_t int_data[] = { 0x81, 0x02, 0x03, 0x04, 0x05 };
 	uint8_t der_int_ref[] = { 0x02, 0x06, 0x00, 0x81, 0x02, 0x03, 0x04, 0x05 };
@@ -197,9 +199,9 @@ TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_multi_byte_pad
 	atcacert_der_enc_integer_test(int_data, sizeof(int_data), der_int_ref, sizeof(der_int_ref), TRUE);
 }
 
-TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_large)
+TEST(atcacert_der_enc_integer, unsigned_large)
 {
-	uint8_t int_data[300];
+	uint8_t int_data[256];
 	uint8_t der_int_ref[1 + 3 + sizeof(int_data)];
 	size_t i;
 
@@ -215,9 +217,9 @@ TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_large)
 	atcacert_der_enc_integer_test(int_data, sizeof(int_data), der_int_ref, sizeof(der_int_ref), TRUE);
 }
 
-TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_large_pad)
+TEST(atcacert_der_enc_integer, unsigned_large_pad)
 {
-	uint8_t int_data[300];
+	uint8_t int_data[256];
 	uint8_t der_int_ref[1 + 3 + 1 + sizeof(int_data)];
 	size_t i;
 
@@ -235,7 +237,7 @@ TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_large_pad)
 	atcacert_der_enc_integer_test(int_data, sizeof(int_data), der_int_ref, sizeof(der_int_ref), TRUE);
 }
 
-TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_trim_1_pos)
+TEST(atcacert_der_enc_integer, unsigned_trim_1_pos)
 {
 	uint8_t int_data[] = { 0x00, 0x02, 0x03, 0x04, 0x05 };
 	uint8_t der_int_ref[] = { 0x02, 0x04, 0x02, 0x03, 0x04, 0x05 };
@@ -243,7 +245,7 @@ TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_trim_1_pos)
 	atcacert_der_enc_integer_test(int_data, sizeof(int_data), der_int_ref, sizeof(der_int_ref), TRUE);
 }
 
-TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_trim_multi_pos)
+TEST(atcacert_der_enc_integer, unsigned_trim_multi_pos)
 {
 	uint8_t int_data[] = { 0x00, 0x00, 0x00, 0xF4, 0x05 };
 	uint8_t der_int_ref[] = { 0x02, 0x03, 0x00, 0xF4, 0x05 };
@@ -251,7 +253,7 @@ TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_trim_multi_pos
 	atcacert_der_enc_integer_test(int_data, sizeof(int_data), der_int_ref, sizeof(der_int_ref), TRUE);
 }
 
-TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_trim_all_pos)
+TEST(atcacert_der_enc_integer, unsigned_trim_all_pos)
 {
 	uint8_t int_data[] = { 0x00, 0x00, 0x00, 0x00, 0x80 };
 	uint8_t der_int_ref[] = { 0x02, 0x02, 0x00, 0x80 };
@@ -259,7 +261,7 @@ TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_trim_all_pos)
 	atcacert_der_enc_integer_test(int_data, sizeof(int_data), der_int_ref, sizeof(der_int_ref), TRUE);
 }
 
-TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_trim_neg_pad)
+TEST(atcacert_der_enc_integer, unsigned_trim_neg_pad)
 {
 	uint8_t int_data[] = { 0xFF, 0xFE, 0xFD, 0xFC, 0xFB };
 	uint8_t der_int_ref[] = { 0x02, 0x06, 0x00, 0xFF, 0xFE, 0xFD, 0xFC, 0xFB };
@@ -267,7 +269,7 @@ TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_trim_neg_pad)
 	atcacert_der_enc_integer_test(int_data, sizeof(int_data), der_int_ref, sizeof(der_int_ref), TRUE);
 }
 
-TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__small_buf)
+TEST(atcacert_der_enc_integer, small_buf)
 {
 	int ret = 0;
 	uint8_t int_data[] = { 0x01, 0x02, 0x03, 0x04, 0x05 };
@@ -279,7 +281,7 @@ TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__small_buf)
 	TEST_ASSERT_EQUAL(sizeof(int_data) + 2, der_int_size);
 }
 
-TEST(atcacert_der_enc_integer, atcacert_der_enc_integer__bad_params)
+TEST(atcacert_der_enc_integer, bad_params)
 {
 	int ret = 0;
 	uint8_t int_data[] = { 0x01, 0x02, 0x03, 0x04, 0x05 };
@@ -306,19 +308,19 @@ TEST_TEAR_DOWN(atcacert_der_dec_integer)
 {
 }
 
-struct atcacert_der_dec_integer__good_s {
+struct good_s {
 	size_t int_data_size;
 	uint8_t int_data[3];
 	size_t der_integer_size;
 	uint8_t der_integer[5];
 };
 
-TEST(atcacert_der_dec_integer, atcacert_der_dec_integer__good)
+TEST(atcacert_der_dec_integer, good)
 {
 	int ret = 0;
 	size_t i;
 
-	const struct atcacert_der_dec_integer__good_s tests[] = {
+	const struct good_s tests[] = {
 		{ 1, { 0x00, 0x00, 0x00 }, 3, { 0x02, 0x01, 0x00, 0x00, 0x00 } },
 		{ 1, { 0x01, 0x00, 0x00 }, 3, { 0x02, 0x01, 0x01, 0x00, 0x00 } },
 		{ 1, { 0xFF, 0x00, 0x00 }, 3, { 0x02, 0x01, 0xFF, 0x00, 0x00 } },
@@ -328,7 +330,7 @@ TEST(atcacert_der_dec_integer, atcacert_der_dec_integer__good)
 		{ 3, { 0xFF, 0xFF, 0xFF }, 5, { 0x02, 0x03, 0xFF, 0xFF, 0xFF } }
 	};
 
-	for (i = 0; i < sizeof(tests) / sizeof(struct atcacert_der_dec_integer__good_s); i++) {
+	for (i = 0; i < sizeof(tests) / sizeof(struct good_s); i++) {
 		size_t der_integer_size = sizeof(tests[i].der_integer);
 		uint8_t int_data[3];
 		size_t int_data_size = sizeof(int_data);
@@ -354,10 +356,10 @@ TEST(atcacert_der_dec_integer, atcacert_der_dec_integer__good)
 	}
 }
 
-TEST(atcacert_der_dec_integer, atcacert_der_dec_integer__good_large)
+TEST(atcacert_der_dec_integer, good_large)
 {
 	int ret = 0;
-	uint8_t int_data_ref[1000];
+	uint8_t int_data_ref[256];
 	uint8_t der_integer[1 + 3 + sizeof(int_data_ref)];
 	size_t der_integer_size = sizeof(der_integer);
 	uint8_t int_data[sizeof(int_data_ref)];
@@ -393,7 +395,7 @@ TEST(atcacert_der_dec_integer, atcacert_der_dec_integer__good_large)
 	TEST_ASSERT_EQUAL(sizeof(int_data_ref), int_data_size);
 }
 
-TEST(atcacert_der_dec_integer, atcacert_der_dec_integer__zero_size)
+TEST(atcacert_der_dec_integer, zero_size)
 {
 	int ret = 0;
 	uint8_t der_integer[] = { 0x00 };
@@ -405,7 +407,7 @@ TEST(atcacert_der_dec_integer, atcacert_der_dec_integer__zero_size)
 	TEST_ASSERT_EQUAL(ATCACERT_E_DECODING_ERROR, ret);
 }
 
-TEST(atcacert_der_dec_integer, atcacert_der_dec_integer__not_enough_data)
+TEST(atcacert_der_dec_integer, not_enough_data)
 {
 	int ret = 0;
 	uint8_t der_integer[] = { 0x02, 0x02, 0x01, 0x02, 0x03 };
@@ -436,7 +438,7 @@ TEST(atcacert_der_dec_integer, atcacert_der_dec_integer__not_enough_data)
 	TEST_ASSERT_EQUAL(ATCACERT_E_DECODING_ERROR, ret);
 }
 
-TEST(atcacert_der_dec_integer, atcacert_der_dec_integer__small_buf)
+TEST(atcacert_der_dec_integer, small_buf)
 {
 	int ret = 0;
 	uint8_t der_integer[] = { 0x02, 0x05, 0x01, 0x02, 0x03, 0x04, 0x05 };
@@ -449,7 +451,7 @@ TEST(atcacert_der_dec_integer, atcacert_der_dec_integer__small_buf)
 	TEST_ASSERT_EQUAL(5, int_data_size);
 }
 
-TEST(atcacert_der_dec_integer, atcacert_der_dec_integer__bad_params)
+TEST(atcacert_der_dec_integer, bad_params)
 {
 	int ret = 0;
 	uint8_t der_integer[] = { 0x02, 0x05, 0x01, 0x02, 0x03, 0x04, 0x05 };

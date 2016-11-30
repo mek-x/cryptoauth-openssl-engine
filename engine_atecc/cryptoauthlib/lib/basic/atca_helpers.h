@@ -1,4 +1,6 @@
-/** \brief Helpers to support the CryptoAuthLib Basic API methods
+/**
+ * \file
+ * \brief Helpers to support the CryptoAuthLib Basic API methods
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *

@@ -2,7 +2,7 @@
  *  \brief Timer Utility Functions
  *  \author Atmel Crypto Products
  *  \date June 20, 2013
- * \copyright Copyright (c) 2014 Atmel Corporation. All rights reserved.
+ * \copyright Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *
  * \atmel_crypto_device_library_license_start
  *

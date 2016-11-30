@@ -1,4 +1,6 @@
-/** \brief cert date tests
+/**
+ * \file
+ * \brief cert date tests
  *
  * \copyright Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *
@@ -44,6 +46,9 @@
 #include "test/unity_fixture.h"
 #include <string.h>
 
+#undef min
+#undef max
+
 static void set_tm(atcacert_tm_utc_t* ts, int year, int month, int day, int hour, int min, int sec)
 {
 	size_t size = sizeof(*ts);
@@ -68,7 +73,7 @@ TEST_TEAR_DOWN(atcacert_date_enc_iso8601_sep)
 {
 }
 
-TEST(atcacert_date_enc_iso8601_sep, atcacert_date__atcacert_date_enc_iso8601_sep_good)
+TEST(atcacert_date_enc_iso8601_sep, good)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_ISO8601_SEP_SIZE];
@@ -82,7 +87,7 @@ TEST(atcacert_date_enc_iso8601_sep, atcacert_date__atcacert_date_enc_iso8601_sep
 	TEST_ASSERT_EQUAL_MEMORY(ts_str_ref, ts_str, sizeof(ts_str));
 }
 
-TEST(atcacert_date_enc_iso8601_sep, atcacert_date__atcacert_date_enc_iso8601_sep_min)
+TEST(atcacert_date_enc_iso8601_sep, min)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_ISO8601_SEP_SIZE];
@@ -96,7 +101,7 @@ TEST(atcacert_date_enc_iso8601_sep, atcacert_date__atcacert_date_enc_iso8601_sep
 	TEST_ASSERT_EQUAL_MEMORY(ts_str_ref, ts_str, sizeof(ts_str));
 }
 
-TEST(atcacert_date_enc_iso8601_sep, atcacert_date__atcacert_date_enc_iso8601_sep_max)
+TEST(atcacert_date_enc_iso8601_sep, max)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_ISO8601_SEP_SIZE];
@@ -110,7 +115,7 @@ TEST(atcacert_date_enc_iso8601_sep, atcacert_date__atcacert_date_enc_iso8601_sep
 	TEST_ASSERT_EQUAL_MEMORY(ts_str_ref, ts_str, sizeof(ts_str));
 }
 
-TEST(atcacert_date_enc_iso8601_sep, atcacert_date__atcacert_date_enc_iso8601_sep_bad_year)
+TEST(atcacert_date_enc_iso8601_sep, bad_year)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_ISO8601_SEP_SIZE];
@@ -125,7 +130,7 @@ TEST(atcacert_date_enc_iso8601_sep, atcacert_date__atcacert_date_enc_iso8601_sep
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_iso8601_sep, atcacert_date__atcacert_date_enc_iso8601_sep_bad_month)
+TEST(atcacert_date_enc_iso8601_sep, bad_month)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_ISO8601_SEP_SIZE];
@@ -140,7 +145,7 @@ TEST(atcacert_date_enc_iso8601_sep, atcacert_date__atcacert_date_enc_iso8601_sep
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_iso8601_sep, atcacert_date__atcacert_date_enc_iso8601_sep_bad_day)
+TEST(atcacert_date_enc_iso8601_sep, bad_day)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_ISO8601_SEP_SIZE];
@@ -155,7 +160,7 @@ TEST(atcacert_date_enc_iso8601_sep, atcacert_date__atcacert_date_enc_iso8601_sep
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_iso8601_sep, atcacert_date__atcacert_date_enc_iso8601_sep_bad_hour)
+TEST(atcacert_date_enc_iso8601_sep, bad_hour)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_ISO8601_SEP_SIZE];
@@ -170,7 +175,7 @@ TEST(atcacert_date_enc_iso8601_sep, atcacert_date__atcacert_date_enc_iso8601_sep
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_iso8601_sep, atcacert_date__atcacert_date_enc_iso8601_sep_bad_min)
+TEST(atcacert_date_enc_iso8601_sep, bad_min)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_ISO8601_SEP_SIZE];
@@ -185,7 +190,7 @@ TEST(atcacert_date_enc_iso8601_sep, atcacert_date__atcacert_date_enc_iso8601_sep
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_iso8601_sep, atcacert_date__atcacert_date_enc_iso8601_sep_bad_sec)
+TEST(atcacert_date_enc_iso8601_sep, bad_sec)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_ISO8601_SEP_SIZE];
@@ -200,7 +205,7 @@ TEST(atcacert_date_enc_iso8601_sep, atcacert_date__atcacert_date_enc_iso8601_sep
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_iso8601_sep, atcacert_date__atcacert_date_enc_iso8601_sep_bad_params)
+TEST(atcacert_date_enc_iso8601_sep, bad_params)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_ISO8601_SEP_SIZE];
@@ -232,7 +237,7 @@ TEST_TEAR_DOWN(atcacert_date_enc_rfc5280_utc)
 {
 }
 
-TEST(atcacert_date_enc_rfc5280_utc, atcacert_date__atcacert_date_enc_rfc5280_utc_good)
+TEST(atcacert_date_enc_rfc5280_utc, good)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_UTC_SIZE];
@@ -246,7 +251,7 @@ TEST(atcacert_date_enc_rfc5280_utc, atcacert_date__atcacert_date_enc_rfc5280_utc
 	TEST_ASSERT_EQUAL_MEMORY(ts_str_ref, ts_str, sizeof(ts_str));
 }
 
-TEST(atcacert_date_enc_rfc5280_utc, atcacert_date__atcacert_date_enc_rfc5280_utc_min)
+TEST(atcacert_date_enc_rfc5280_utc, min)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_UTC_SIZE];
@@ -260,7 +265,7 @@ TEST(atcacert_date_enc_rfc5280_utc, atcacert_date__atcacert_date_enc_rfc5280_utc
 	TEST_ASSERT_EQUAL_MEMORY(ts_str_ref, ts_str, sizeof(ts_str));
 }
 
-TEST(atcacert_date_enc_rfc5280_utc, atcacert_date__atcacert_date_enc_rfc5280_utc_max)
+TEST(atcacert_date_enc_rfc5280_utc, max)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_UTC_SIZE];
@@ -274,7 +279,7 @@ TEST(atcacert_date_enc_rfc5280_utc, atcacert_date__atcacert_date_enc_rfc5280_utc
 	TEST_ASSERT_EQUAL_MEMORY(ts_str_ref, ts_str, sizeof(ts_str));
 }
 
-TEST(atcacert_date_enc_rfc5280_utc, atcacert_date__atcacert_date_enc_rfc5280_utc_y2k)
+TEST(atcacert_date_enc_rfc5280_utc, y2k)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_UTC_SIZE];
@@ -294,7 +299,7 @@ TEST(atcacert_date_enc_rfc5280_utc, atcacert_date__atcacert_date_enc_rfc5280_utc
 	TEST_ASSERT_EQUAL_MEMORY(ts_str_ref, ts_str, sizeof(ts_str));
 }
 
-TEST(atcacert_date_enc_rfc5280_utc, atcacert_date__atcacert_date_enc_rfc5280_utc_bad_year)
+TEST(atcacert_date_enc_rfc5280_utc, bad_year)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_UTC_SIZE];
@@ -309,7 +314,7 @@ TEST(atcacert_date_enc_rfc5280_utc, atcacert_date__atcacert_date_enc_rfc5280_utc
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_rfc5280_utc, atcacert_date__atcacert_date_enc_rfc5280_utc_bad_month)
+TEST(atcacert_date_enc_rfc5280_utc, bad_month)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_UTC_SIZE];
@@ -324,7 +329,7 @@ TEST(atcacert_date_enc_rfc5280_utc, atcacert_date__atcacert_date_enc_rfc5280_utc
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_rfc5280_utc, atcacert_date__atcacert_date_enc_rfc5280_utc_bad_day)
+TEST(atcacert_date_enc_rfc5280_utc, bad_day)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_UTC_SIZE];
@@ -339,7 +344,7 @@ TEST(atcacert_date_enc_rfc5280_utc, atcacert_date__atcacert_date_enc_rfc5280_utc
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_rfc5280_utc, atcacert_date__atcacert_date_enc_rfc5280_utc_bad_hour)
+TEST(atcacert_date_enc_rfc5280_utc, bad_hour)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_UTC_SIZE];
@@ -354,7 +359,7 @@ TEST(atcacert_date_enc_rfc5280_utc, atcacert_date__atcacert_date_enc_rfc5280_utc
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_rfc5280_utc, atcacert_date__atcacert_date_enc_rfc5280_utc_bad_min)
+TEST(atcacert_date_enc_rfc5280_utc, bad_min)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_UTC_SIZE];
@@ -369,7 +374,7 @@ TEST(atcacert_date_enc_rfc5280_utc, atcacert_date__atcacert_date_enc_rfc5280_utc
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_rfc5280_utc, atcacert_date__atcacert_date_enc_rfc5280_utc_bad_sec)
+TEST(atcacert_date_enc_rfc5280_utc, bad_sec)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_UTC_SIZE];
@@ -384,7 +389,7 @@ TEST(atcacert_date_enc_rfc5280_utc, atcacert_date__atcacert_date_enc_rfc5280_utc
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_rfc5280_utc, atcacert_date__atcacert_date_enc_rfc5280_utc_bad_params)
+TEST(atcacert_date_enc_rfc5280_utc, bad_params)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_UTC_SIZE];
@@ -415,7 +420,7 @@ TEST_TEAR_DOWN(atcacert_date_enc_posix_uint32_be)
 {
 }
 
-TEST(atcacert_date_enc_posix_uint32_be, atcacert_date__atcacert_date_enc_posix_uint32_be_good)
+TEST(atcacert_date_enc_posix_uint32_be, good)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_BE_SIZE];
@@ -429,7 +434,7 @@ TEST(atcacert_date_enc_posix_uint32_be, atcacert_date__atcacert_date_enc_posix_u
 	TEST_ASSERT_EQUAL_MEMORY(ts_str_ref, ts_str, sizeof(ts_str));
 }
 
-TEST(atcacert_date_enc_posix_uint32_be, atcacert_date__atcacert_date_enc_posix_uint32_be_min)
+TEST(atcacert_date_enc_posix_uint32_be, min)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_BE_SIZE];
@@ -443,7 +448,7 @@ TEST(atcacert_date_enc_posix_uint32_be, atcacert_date__atcacert_date_enc_posix_u
 	TEST_ASSERT_EQUAL_MEMORY(ts_str_ref, ts_str, sizeof(ts_str));
 }
 
-TEST(atcacert_date_enc_posix_uint32_be, atcacert_date__atcacert_date_enc_posix_uint32_be_large)
+TEST(atcacert_date_enc_posix_uint32_be, large)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_BE_SIZE];
@@ -457,7 +462,7 @@ TEST(atcacert_date_enc_posix_uint32_be, atcacert_date__atcacert_date_enc_posix_u
 	TEST_ASSERT_EQUAL_MEMORY(ts_str_ref, ts_str, sizeof(ts_str));
 }
 
-TEST(atcacert_date_enc_posix_uint32_be, atcacert_date__atcacert_date_enc_posix_uint32_be_max)
+TEST(atcacert_date_enc_posix_uint32_be, max)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_BE_SIZE];
@@ -471,7 +476,7 @@ TEST(atcacert_date_enc_posix_uint32_be, atcacert_date__atcacert_date_enc_posix_u
 	TEST_ASSERT_EQUAL_MEMORY(ts_str_ref, ts_str, sizeof(ts_str));
 }
 
-TEST(atcacert_date_enc_posix_uint32_be, atcacert_date__atcacert_date_enc_posix_uint32_be_bad_low)
+TEST(atcacert_date_enc_posix_uint32_be, bad_low)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_BE_SIZE];
@@ -482,7 +487,7 @@ TEST(atcacert_date_enc_posix_uint32_be, atcacert_date__atcacert_date_enc_posix_u
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_posix_uint32_be, atcacert_date__atcacert_date_enc_posix_uint32_be_bad_high)
+TEST(atcacert_date_enc_posix_uint32_be, bad_high)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_BE_SIZE];
@@ -493,7 +498,7 @@ TEST(atcacert_date_enc_posix_uint32_be, atcacert_date__atcacert_date_enc_posix_u
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_posix_uint32_be, atcacert_date__atcacert_date_enc_posix_uint32_be_bad_params)
+TEST(atcacert_date_enc_posix_uint32_be, bad_params)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_BE_SIZE];
@@ -524,7 +529,7 @@ TEST_TEAR_DOWN(atcacert_date_enc_posix_uint32_le)
 {
 }
 
-TEST(atcacert_date_enc_posix_uint32_le, atcacert_date__atcacert_date_enc_posix_uint32_le_good)
+TEST(atcacert_date_enc_posix_uint32_le, good)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_LE_SIZE];
@@ -538,7 +543,7 @@ TEST(atcacert_date_enc_posix_uint32_le, atcacert_date__atcacert_date_enc_posix_u
 	TEST_ASSERT_EQUAL_MEMORY(ts_str_ref, ts_str, sizeof(ts_str));
 }
 
-TEST(atcacert_date_enc_posix_uint32_le, atcacert_date__atcacert_date_enc_posix_uint32_le_min)
+TEST(atcacert_date_enc_posix_uint32_le, min)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_LE_SIZE];
@@ -552,7 +557,7 @@ TEST(atcacert_date_enc_posix_uint32_le, atcacert_date__atcacert_date_enc_posix_u
 	TEST_ASSERT_EQUAL_MEMORY(ts_str_ref, ts_str, sizeof(ts_str));
 }
 
-TEST(atcacert_date_enc_posix_uint32_le, atcacert_date__atcacert_date_enc_posix_uint32_le_large)
+TEST(atcacert_date_enc_posix_uint32_le, large)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_LE_SIZE];
@@ -566,7 +571,7 @@ TEST(atcacert_date_enc_posix_uint32_le, atcacert_date__atcacert_date_enc_posix_u
 	TEST_ASSERT_EQUAL_MEMORY(ts_str_ref, ts_str, sizeof(ts_str));
 }
 
-TEST(atcacert_date_enc_posix_uint32_le, atcacert_date__atcacert_date_enc_posix_uint32_le_max)
+TEST(atcacert_date_enc_posix_uint32_le, max)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_LE_SIZE];
@@ -580,7 +585,7 @@ TEST(atcacert_date_enc_posix_uint32_le, atcacert_date__atcacert_date_enc_posix_u
 	TEST_ASSERT_EQUAL_MEMORY(ts_str_ref, ts_str, sizeof(ts_str));
 }
 
-TEST(atcacert_date_enc_posix_uint32_le, atcacert_date__atcacert_date_enc_posix_uint32_le_bad_low)
+TEST(atcacert_date_enc_posix_uint32_le, bad_low)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_LE_SIZE];
@@ -591,7 +596,7 @@ TEST(atcacert_date_enc_posix_uint32_le, atcacert_date__atcacert_date_enc_posix_u
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_posix_uint32_le, atcacert_date__atcacert_date_enc_posix_uint32_le_bad_high)
+TEST(atcacert_date_enc_posix_uint32_le, bad_high)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_LE_SIZE];
@@ -602,7 +607,7 @@ TEST(atcacert_date_enc_posix_uint32_le, atcacert_date__atcacert_date_enc_posix_u
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_posix_uint32_le, atcacert_date__atcacert_date_enc_posix_uint32_le_bad_params)
+TEST(atcacert_date_enc_posix_uint32_le, bad_params)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_LE_SIZE];
@@ -633,7 +638,7 @@ TEST_TEAR_DOWN(atcacert_date_enc_rfc5280_gen)
 {
 }
 
-TEST(atcacert_date_enc_rfc5280_gen, atcacert_date__atcacert_date_enc_rfc5280_gen_good)
+TEST(atcacert_date_enc_rfc5280_gen, good)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_GEN_SIZE];
@@ -647,7 +652,7 @@ TEST(atcacert_date_enc_rfc5280_gen, atcacert_date__atcacert_date_enc_rfc5280_gen
 	TEST_ASSERT_EQUAL_MEMORY(ts_str_ref, ts_str, sizeof(ts_str));
 }
 
-TEST(atcacert_date_enc_rfc5280_gen, atcacert_date__atcacert_date_enc_rfc5280_gen_min)
+TEST(atcacert_date_enc_rfc5280_gen, min)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_GEN_SIZE];
@@ -661,7 +666,7 @@ TEST(atcacert_date_enc_rfc5280_gen, atcacert_date__atcacert_date_enc_rfc5280_gen
 	TEST_ASSERT_EQUAL_MEMORY(ts_str_ref, ts_str, sizeof(ts_str));
 }
 
-TEST(atcacert_date_enc_rfc5280_gen, atcacert_date__atcacert_date_enc_rfc5280_gen_max)
+TEST(atcacert_date_enc_rfc5280_gen, max)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_GEN_SIZE];
@@ -675,7 +680,7 @@ TEST(atcacert_date_enc_rfc5280_gen, atcacert_date__atcacert_date_enc_rfc5280_gen
 	TEST_ASSERT_EQUAL_MEMORY(ts_str_ref, ts_str, sizeof(ts_str));
 }
 
-TEST(atcacert_date_enc_rfc5280_gen, atcacert_date__atcacert_date_enc_rfc5280_gen_bad_year)
+TEST(atcacert_date_enc_rfc5280_gen, bad_year)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_GEN_SIZE];
@@ -690,7 +695,7 @@ TEST(atcacert_date_enc_rfc5280_gen, atcacert_date__atcacert_date_enc_rfc5280_gen
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_rfc5280_gen, atcacert_date__atcacert_date_enc_rfc5280_gen_bad_month)
+TEST(atcacert_date_enc_rfc5280_gen, bad_month)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_GEN_SIZE];
@@ -705,7 +710,7 @@ TEST(atcacert_date_enc_rfc5280_gen, atcacert_date__atcacert_date_enc_rfc5280_gen
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_rfc5280_gen, atcacert_date__atcacert_date_enc_rfc5280_gen_bad_day)
+TEST(atcacert_date_enc_rfc5280_gen, bad_day)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_GEN_SIZE];
@@ -720,7 +725,7 @@ TEST(atcacert_date_enc_rfc5280_gen, atcacert_date__atcacert_date_enc_rfc5280_gen
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_rfc5280_gen, atcacert_date__atcacert_date_enc_rfc5280_gen_bad_hour)
+TEST(atcacert_date_enc_rfc5280_gen, bad_hour)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_GEN_SIZE];
@@ -735,7 +740,7 @@ TEST(atcacert_date_enc_rfc5280_gen, atcacert_date__atcacert_date_enc_rfc5280_gen
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_rfc5280_gen, atcacert_date__atcacert_date_enc_rfc5280_gen_bad_min)
+TEST(atcacert_date_enc_rfc5280_gen, bad_min)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_GEN_SIZE];
@@ -750,7 +755,7 @@ TEST(atcacert_date_enc_rfc5280_gen, atcacert_date__atcacert_date_enc_rfc5280_gen
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_rfc5280_gen, atcacert_date__atcacert_date_enc_rfc5280_gen_bad_sec)
+TEST(atcacert_date_enc_rfc5280_gen, bad_sec)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_GEN_SIZE];
@@ -765,7 +770,7 @@ TEST(atcacert_date_enc_rfc5280_gen, atcacert_date__atcacert_date_enc_rfc5280_gen
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_rfc5280_gen, atcacert_date__atcacert_date_enc_rfc5280_gen_bad_params)
+TEST(atcacert_date_enc_rfc5280_gen, bad_params)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_GEN_SIZE];
@@ -797,7 +802,7 @@ TEST_TEAR_DOWN(atcacert_date_enc_compcert)
 {
 }
 
-TEST(atcacert_date_enc_compcert, atcacert_date__atcacert_date_enc_compcert_good)
+TEST(atcacert_date_enc_compcert, good)
 {
 	int ret = 0;
 	atcacert_tm_utc_t issue_date;
@@ -812,7 +817,7 @@ TEST(atcacert_date_enc_compcert, atcacert_date__atcacert_date_enc_compcert_good)
 	TEST_ASSERT_EQUAL_MEMORY(enc_dates_ref, enc_dates, sizeof(enc_dates));
 }
 
-TEST(atcacert_date_enc_compcert, atcacert_date__atcacert_date_enc_compcert_min)
+TEST(atcacert_date_enc_compcert, min)
 {
 	int ret = 0;
 	atcacert_tm_utc_t issue_date;
@@ -827,7 +832,7 @@ TEST(atcacert_date_enc_compcert, atcacert_date__atcacert_date_enc_compcert_min)
 	TEST_ASSERT_EQUAL_MEMORY(enc_dates_ref, enc_dates, sizeof(enc_dates));
 }
 
-TEST(atcacert_date_enc_compcert, atcacert_date__atcacert_date_enc_compcert_max)
+TEST(atcacert_date_enc_compcert, max)
 {
 	int ret = 0;
 	atcacert_tm_utc_t issue_date;
@@ -842,7 +847,7 @@ TEST(atcacert_date_enc_compcert, atcacert_date__atcacert_date_enc_compcert_max)
 	TEST_ASSERT_EQUAL_MEMORY(enc_dates_ref, enc_dates, sizeof(enc_dates));
 }
 
-TEST(atcacert_date_enc_compcert, atcacert_date__atcacert_date_enc_compcert_bad_year)
+TEST(atcacert_date_enc_compcert, bad_year)
 {
 	int ret = 0;
 	atcacert_tm_utc_t issue_date;
@@ -860,7 +865,7 @@ TEST(atcacert_date_enc_compcert, atcacert_date__atcacert_date_enc_compcert_bad_y
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_compcert, atcacert_date__atcacert_date_enc_compcert_bad_month)
+TEST(atcacert_date_enc_compcert, bad_month)
 {
 	int ret = 0;
 	atcacert_tm_utc_t issue_date;
@@ -878,7 +883,7 @@ TEST(atcacert_date_enc_compcert, atcacert_date__atcacert_date_enc_compcert_bad_m
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_compcert, atcacert_date__atcacert_date_enc_compcert_bad_day)
+TEST(atcacert_date_enc_compcert, bad_day)
 {
 	int ret = 0;
 	atcacert_tm_utc_t issue_date;
@@ -896,7 +901,7 @@ TEST(atcacert_date_enc_compcert, atcacert_date__atcacert_date_enc_compcert_bad_d
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_compcert, atcacert_date__atcacert_date_enc_compcert_bad_hour)
+TEST(atcacert_date_enc_compcert, bad_hour)
 {
 	int ret = 0;
 	atcacert_tm_utc_t issue_date;
@@ -914,7 +919,7 @@ TEST(atcacert_date_enc_compcert, atcacert_date__atcacert_date_enc_compcert_bad_h
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_compcert, atcacert_date__atcacert_date_enc_compcert_bad_expire)
+TEST(atcacert_date_enc_compcert, bad_expire)
 {
 	int ret = 0;
 	atcacert_tm_utc_t issue_date;
@@ -927,7 +932,7 @@ TEST(atcacert_date_enc_compcert, atcacert_date__atcacert_date_enc_compcert_bad_e
 	TEST_ASSERT_EQUAL(ATCACERT_E_INVALID_DATE, ret);
 }
 
-TEST(atcacert_date_enc_compcert, atcacert_date__atcacert_date_enc_compcert_bad_params)
+TEST(atcacert_date_enc_compcert, bad_params)
 {
 	int ret = 0;
 	atcacert_tm_utc_t issue_date;
@@ -963,7 +968,7 @@ TEST_TEAR_DOWN(atcacert_date_enc)
 {
 }
 
-TEST(atcacert_date_enc, atcacert_date__atcacert_date_enc_iso8601_sep)
+TEST(atcacert_date_enc, iso8601_sep)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_ISO8601_SEP_SIZE + 1];
@@ -985,7 +990,7 @@ TEST(atcacert_date_enc, atcacert_date__atcacert_date_enc_iso8601_sep)
 	TEST_ASSERT_EQUAL(DATEFMT_ISO8601_SEP_SIZE, ts_str_size);
 }
 
-TEST(atcacert_date_enc, atcacert_date__atcacert_date_enc_rfc5280_utc)
+TEST(atcacert_date_enc, rfc5280_utc)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_UTC_SIZE + 1];
@@ -1007,7 +1012,7 @@ TEST(atcacert_date_enc, atcacert_date__atcacert_date_enc_rfc5280_utc)
 	TEST_ASSERT_EQUAL(DATEFMT_RFC5280_UTC_SIZE, ts_str_size);
 }
 
-TEST(atcacert_date_enc, atcacert_date__atcacert_date_enc_posix_uint32_be)
+TEST(atcacert_date_enc, posix_uint32_be)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_BE_SIZE + 1];
@@ -1029,7 +1034,7 @@ TEST(atcacert_date_enc, atcacert_date__atcacert_date_enc_posix_uint32_be)
 	TEST_ASSERT_EQUAL(DATEFMT_POSIX_UINT32_BE_SIZE, ts_str_size);
 }
 
-TEST(atcacert_date_enc, atcacert_date__atcacert_date_enc_posix_uint32_le)
+TEST(atcacert_date_enc, posix_uint32_le)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_LE_SIZE + 1];
@@ -1051,7 +1056,7 @@ TEST(atcacert_date_enc, atcacert_date__atcacert_date_enc_posix_uint32_le)
 	TEST_ASSERT_EQUAL(DATEFMT_POSIX_UINT32_BE_SIZE, ts_str_size);
 }
 
-TEST(atcacert_date_enc, atcacert_date__atcacert_date_enc_rfc5280_gen)
+TEST(atcacert_date_enc, rfc5280_gen)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_GEN_SIZE + 1];
@@ -1073,7 +1078,7 @@ TEST(atcacert_date_enc, atcacert_date__atcacert_date_enc_rfc5280_gen)
 	TEST_ASSERT_EQUAL(DATEFMT_RFC5280_GEN_SIZE, ts_str_size);
 }
 
-TEST(atcacert_date_enc, atcacert_date__atcacert_date_enc_small_buf)
+TEST(atcacert_date_enc, small_buf)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_UTC_SIZE - 1];
@@ -1087,7 +1092,7 @@ TEST(atcacert_date_enc, atcacert_date__atcacert_date_enc_small_buf)
 	TEST_ASSERT_EQUAL(DATEFMT_RFC5280_UTC_SIZE, ts_str_size);
 }
 
-TEST(atcacert_date_enc, atcacert_date__atcacert_date_enc_bad_format)
+TEST(atcacert_date_enc, bad_format)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_GEN_SIZE + 1];
@@ -1099,11 +1104,11 @@ TEST(atcacert_date_enc, atcacert_date__atcacert_date_enc_bad_format)
 	ret = atcacert_date_enc(-1, &ts, ts_str, &ts_str_size);
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 
-    ret = atcacert_date_enc(DATEFMT_RFC5280_GEN+1, &ts, ts_str, &ts_str_size);
-    TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
+	ret = atcacert_date_enc(DATEFMT_RFC5280_GEN + 1, &ts, ts_str, &ts_str_size);
+	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_date_enc, atcacert_date__atcacert_date_enc_bad_params)
+TEST(atcacert_date_enc, bad_params)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_GEN_SIZE + 1];
@@ -1150,7 +1155,7 @@ TEST_TEAR_DOWN(atcacert_date_dec_iso8601_sep)
 {
 }
 
-TEST(atcacert_date_dec_iso8601_sep, atcacert_date__atcacert_date_dec_iso8601_sep_good)
+TEST(atcacert_date_dec_iso8601_sep, good)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_ISO8601_SEP_SIZE + 1] = "2014-12-11T10:09:08Z";
@@ -1164,7 +1169,7 @@ TEST(atcacert_date_dec_iso8601_sep, atcacert_date__atcacert_date_dec_iso8601_sep
 	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_dec_iso8601_sep, atcacert_date__atcacert_date_dec_iso8601_sep_min)
+TEST(atcacert_date_dec_iso8601_sep, min)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_ISO8601_SEP_SIZE + 1] = "0000-01-01T00:00:00Z";
@@ -1178,7 +1183,7 @@ TEST(atcacert_date_dec_iso8601_sep, atcacert_date__atcacert_date_dec_iso8601_sep
 	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_dec_iso8601_sep, atcacert_date__atcacert_date_dec_iso8601_sep_max)
+TEST(atcacert_date_dec_iso8601_sep, max)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_ISO8601_SEP_SIZE + 1] = "9999-12-31T23:59:59Z";
@@ -1192,7 +1197,7 @@ TEST(atcacert_date_dec_iso8601_sep, atcacert_date__atcacert_date_dec_iso8601_sep
 	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_dec_iso8601_sep, atcacert_date__atcacert_date_dec_iso8601_sep_bad_int)
+TEST(atcacert_date_dec_iso8601_sep, bad_int)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_ISO8601_SEP_SIZE + 1];
@@ -1223,7 +1228,7 @@ TEST(atcacert_date_dec_iso8601_sep, atcacert_date__atcacert_date_dec_iso8601_sep
 	TEST_ASSERT_EQUAL(ATCACERT_E_DECODING_ERROR, ret);
 }
 
-TEST(atcacert_date_dec_iso8601_sep, atcacert_date__atcacert_date_dec_iso8601_sep_bad_params)
+TEST(atcacert_date_dec_iso8601_sep, bad_params)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_ISO8601_SEP_SIZE + 1];
@@ -1255,7 +1260,7 @@ TEST_TEAR_DOWN(atcacert_date_dec_rfc5280_utc)
 {
 }
 
-TEST(atcacert_date_dec_rfc5280_utc, atcacert_date__atcacert_date_dec_rfc5280_utc_good)
+TEST(atcacert_date_dec_rfc5280_utc, good)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_UTC_SIZE + 1] = "141211100908Z";
@@ -1269,7 +1274,7 @@ TEST(atcacert_date_dec_rfc5280_utc, atcacert_date__atcacert_date_dec_rfc5280_utc
 	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_dec_rfc5280_utc, atcacert_date__atcacert_date_dec_rfc5280_utc_min)
+TEST(atcacert_date_dec_rfc5280_utc, min)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_UTC_SIZE + 1] = "500101000000Z";
@@ -1283,7 +1288,7 @@ TEST(atcacert_date_dec_rfc5280_utc, atcacert_date__atcacert_date_dec_rfc5280_utc
 	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_dec_rfc5280_utc, atcacert_date__atcacert_date_dec_rfc5280_utc_max)
+TEST(atcacert_date_dec_rfc5280_utc, max)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_UTC_SIZE + 1] = "491231235959Z";
@@ -1297,7 +1302,7 @@ TEST(atcacert_date_dec_rfc5280_utc, atcacert_date__atcacert_date_dec_rfc5280_utc
 	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_dec_rfc5280_utc, atcacert_date__atcacert_date_dec_rfc5280_utc_y2k)
+TEST(atcacert_date_dec_rfc5280_utc, y2k)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_UTC_SIZE + 1];
@@ -1317,7 +1322,7 @@ TEST(atcacert_date_dec_rfc5280_utc, atcacert_date__atcacert_date_dec_rfc5280_utc
 	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_dec_rfc5280_utc, atcacert_date__atcacert_date_dec_rfc5280_utc_bad_int)
+TEST(atcacert_date_dec_rfc5280_utc, bad_int)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_UTC_SIZE + 1];
@@ -1348,7 +1353,7 @@ TEST(atcacert_date_dec_rfc5280_utc, atcacert_date__atcacert_date_dec_rfc5280_utc
 	TEST_ASSERT_EQUAL(ATCACERT_E_DECODING_ERROR, ret);
 }
 
-TEST(atcacert_date_dec_rfc5280_utc, atcacert_date__atcacert_date_dec_rfc5280_utc_bad_params)
+TEST(atcacert_date_dec_rfc5280_utc, bad_params)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_UTC_SIZE + 1];
@@ -1381,7 +1386,7 @@ TEST_TEAR_DOWN(atcacert_date_dec_posix_uint32_be)
 {
 }
 
-TEST(atcacert_date_dec_posix_uint32_be, atcacert_date__atcacert_date_dec_posix_uint32_be_good)
+TEST(atcacert_date_dec_posix_uint32_be, good)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_BE_SIZE] = { 0x52, 0x7F, 0x4C, 0xF7 };
@@ -1395,7 +1400,7 @@ TEST(atcacert_date_dec_posix_uint32_be, atcacert_date__atcacert_date_dec_posix_u
 	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_dec_posix_uint32_be, atcacert_date__atcacert_date_dec_posix_uint32_be_min)
+TEST(atcacert_date_dec_posix_uint32_be, min)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_BE_SIZE] = { 0x00, 0x00, 0x00, 0x00 };
@@ -1409,7 +1414,7 @@ TEST(atcacert_date_dec_posix_uint32_be, atcacert_date__atcacert_date_dec_posix_u
 	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_dec_posix_uint32_be, atcacert_date__atcacert_date_dec_posix_uint32_be_int32_max)
+TEST(atcacert_date_dec_posix_uint32_be, int32_max)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_BE_SIZE] = { 0x7F, 0xFF, 0xFF, 0xFF };
@@ -1423,7 +1428,7 @@ TEST(atcacert_date_dec_posix_uint32_be, atcacert_date__atcacert_date_dec_posix_u
 	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_dec_posix_uint32_be, atcacert_date__atcacert_date_dec_posix_uint32_be_large)
+TEST(atcacert_date_dec_posix_uint32_be, large)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_BE_SIZE] = { 0xFE, 0xFD, 0xFC, 0xFB };
@@ -1437,7 +1442,7 @@ TEST(atcacert_date_dec_posix_uint32_be, atcacert_date__atcacert_date_dec_posix_u
 	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_dec_posix_uint32_be, atcacert_date__atcacert_date_dec_posix_uint32_be_max)
+TEST(atcacert_date_dec_posix_uint32_be, max)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_BE_SIZE] = { 0xFF, 0xFF, 0xFF, 0xFE };
@@ -1451,7 +1456,7 @@ TEST(atcacert_date_dec_posix_uint32_be, atcacert_date__atcacert_date_dec_posix_u
 	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_dec_posix_uint32_be, atcacert_date__atcacert_date_dec_posix_uint32_be_bad_params)
+TEST(atcacert_date_dec_posix_uint32_be, bad_params)
 {
 	int ret = 0;
 	uint8_t ts_str_good[DATEFMT_POSIX_UINT32_BE_SIZE] = { 0x52, 0x7F, 0x4C, 0xF7 };
@@ -1484,7 +1489,7 @@ TEST_TEAR_DOWN(atcacert_date_dec_posix_uint32_le)
 {
 }
 
-TEST(atcacert_date_dec_posix_uint32_le, atcacert_date__atcacert_date_dec_posix_uint32_le_good)
+TEST(atcacert_date_dec_posix_uint32_le, good)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_LE_SIZE] = { 0xF7, 0x4C, 0x7F, 0x52 };
@@ -1498,7 +1503,7 @@ TEST(atcacert_date_dec_posix_uint32_le, atcacert_date__atcacert_date_dec_posix_u
 	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_dec_posix_uint32_le, atcacert_date__atcacert_date_dec_posix_uint32_le_min)
+TEST(atcacert_date_dec_posix_uint32_le, min)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_LE_SIZE] = { 0x00, 0x00, 0x00, 0x00 };
@@ -1512,7 +1517,7 @@ TEST(atcacert_date_dec_posix_uint32_le, atcacert_date__atcacert_date_dec_posix_u
 	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_dec_posix_uint32_le, atcacert_date__atcacert_date_dec_posix_uint32_le_int32_max)
+TEST(atcacert_date_dec_posix_uint32_le, int32_max)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_LE_SIZE] = { 0xFF, 0xFF, 0xFF, 0x7F };
@@ -1526,7 +1531,7 @@ TEST(atcacert_date_dec_posix_uint32_le, atcacert_date__atcacert_date_dec_posix_u
 	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_dec_posix_uint32_le, atcacert_date__atcacert_date_dec_posix_uint32_le_large)
+TEST(atcacert_date_dec_posix_uint32_le, large)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_LE_SIZE] = { 0xFB, 0xFC, 0xFD, 0xFE };
@@ -1540,7 +1545,7 @@ TEST(atcacert_date_dec_posix_uint32_le, atcacert_date__atcacert_date_dec_posix_u
 	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_dec_posix_uint32_le, atcacert_date__atcacert_date_dec_posix_uint32_le_max)
+TEST(atcacert_date_dec_posix_uint32_le, max)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_POSIX_UINT32_LE_SIZE] = { 0xFE, 0xFF, 0xFF, 0xFF };
@@ -1554,7 +1559,7 @@ TEST(atcacert_date_dec_posix_uint32_le, atcacert_date__atcacert_date_dec_posix_u
 	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_dec_posix_uint32_le, atcacert_date__atcacert_date_dec_posix_uint32_le_bad_params)
+TEST(atcacert_date_dec_posix_uint32_le, bad_params)
 {
 	int ret = 0;
 	uint8_t ts_str_good[DATEFMT_POSIX_UINT32_LE_SIZE] = { 0xF7, 0x4C, 0x7F, 0x52 };
@@ -1586,7 +1591,7 @@ TEST_TEAR_DOWN(atcacert_date_dec_rfc5280_gen)
 {
 }
 
-TEST(atcacert_date_dec_rfc5280_gen, atcacert_date__atcacert_date_dec_rfc5280_gen_good)
+TEST(atcacert_date_dec_rfc5280_gen, good)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_GEN_SIZE + 1] = "20141211100908Z";
@@ -1600,7 +1605,7 @@ TEST(atcacert_date_dec_rfc5280_gen, atcacert_date__atcacert_date_dec_rfc5280_gen
 	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_dec_rfc5280_gen, atcacert_date__atcacert_date_dec_rfc5280_gen_min)
+TEST(atcacert_date_dec_rfc5280_gen, min)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_GEN_SIZE + 1] = "00000101000000Z";
@@ -1614,7 +1619,7 @@ TEST(atcacert_date_dec_rfc5280_gen, atcacert_date__atcacert_date_dec_rfc5280_gen
 	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_dec_rfc5280_gen, atcacert_date__atcacert_date_dec_rfc5280_gen_max)
+TEST(atcacert_date_dec_rfc5280_gen, max)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_GEN_SIZE + 1] = "99991231235959Z";
@@ -1628,7 +1633,7 @@ TEST(atcacert_date_dec_rfc5280_gen, atcacert_date__atcacert_date_dec_rfc5280_gen
 	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_dec_rfc5280_gen, atcacert_date__atcacert_date_dec_rfc5280_gen_bad_int)
+TEST(atcacert_date_dec_rfc5280_gen, bad_int)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_GEN_SIZE + 1];
@@ -1659,7 +1664,7 @@ TEST(atcacert_date_dec_rfc5280_gen, atcacert_date__atcacert_date_dec_rfc5280_gen
 	TEST_ASSERT_EQUAL(ATCACERT_E_DECODING_ERROR, ret);
 }
 
-TEST(atcacert_date_dec_rfc5280_gen, atcacert_date__atcacert_date_dec_rfc5280_gen_bad_params)
+TEST(atcacert_date_dec_rfc5280_gen, bad_params)
 {
 	int ret = 0;
 	uint8_t ts_str[DATEFMT_RFC5280_GEN_SIZE + 1];
@@ -1690,93 +1695,93 @@ TEST_TEAR_DOWN(atcacert_date_get_max_date)
 {
 }
 
-TEST(atcacert_date_get_max_date, atcacert_date__atcacert_date_get_max_date_iso8601_sep)
+TEST(atcacert_date_get_max_date, iso8601_sep)
 {
-    int ret = ATCACERT_E_SUCCESS;
-    atcacert_tm_utc_t ts;
-    atcacert_tm_utc_t ts_ref;
+	int ret = ATCACERT_E_SUCCESS;
+	atcacert_tm_utc_t ts;
+	atcacert_tm_utc_t ts_ref;
 
-    set_tm(&ts_ref, 9999, 12, 31, 23, 59, 59);
+	set_tm(&ts_ref, 9999, 12, 31, 23, 59, 59);
 
-    ret = atcacert_date_get_max_date(DATEFMT_ISO8601_SEP, &ts);
-    TEST_ASSERT_EQUAL(ATCACERT_E_SUCCESS, ret);
-    TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
+	ret = atcacert_date_get_max_date(DATEFMT_ISO8601_SEP, &ts);
+	TEST_ASSERT_EQUAL(ATCACERT_E_SUCCESS, ret);
+	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_get_max_date, atcacert_date__atcacert_date_get_max_date_rfc5280_utc)
+TEST(atcacert_date_get_max_date, rfc5280_utc)
 {
-    int ret = ATCACERT_E_SUCCESS;
-    atcacert_tm_utc_t ts;
-    atcacert_tm_utc_t ts_ref;
+	int ret = ATCACERT_E_SUCCESS;
+	atcacert_tm_utc_t ts;
+	atcacert_tm_utc_t ts_ref;
 
-    set_tm(&ts_ref, 2049, 12, 31, 23, 59, 59);
+	set_tm(&ts_ref, 2049, 12, 31, 23, 59, 59);
 
-    ret = atcacert_date_get_max_date(DATEFMT_RFC5280_UTC, &ts);
-    TEST_ASSERT_EQUAL(ATCACERT_E_SUCCESS, ret);
-    TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
+	ret = atcacert_date_get_max_date(DATEFMT_RFC5280_UTC, &ts);
+	TEST_ASSERT_EQUAL(ATCACERT_E_SUCCESS, ret);
+	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_get_max_date, atcacert_date__atcacert_date_get_max_date_posix_uint32_be)
+TEST(atcacert_date_get_max_date, posix_uint32_be)
 {
-    int ret = ATCACERT_E_SUCCESS;
-    atcacert_tm_utc_t ts;
-    atcacert_tm_utc_t ts_ref;
+	int ret = ATCACERT_E_SUCCESS;
+	atcacert_tm_utc_t ts;
+	atcacert_tm_utc_t ts_ref;
 
-    set_tm(&ts_ref, 2106, 2, 7, 6, 28, 15);
+	set_tm(&ts_ref, 2106, 2, 7, 6, 28, 15);
 
-    ret = atcacert_date_get_max_date(DATEFMT_POSIX_UINT32_BE, &ts);
-    TEST_ASSERT_EQUAL(ATCACERT_E_SUCCESS, ret);
-    TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
+	ret = atcacert_date_get_max_date(DATEFMT_POSIX_UINT32_BE, &ts);
+	TEST_ASSERT_EQUAL(ATCACERT_E_SUCCESS, ret);
+	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_get_max_date, atcacert_date__atcacert_date_get_max_date_posix_uint32_le)
+TEST(atcacert_date_get_max_date, posix_uint32_le)
 {
-    int ret = ATCACERT_E_SUCCESS;
-    atcacert_tm_utc_t ts;
-    atcacert_tm_utc_t ts_ref;
+	int ret = ATCACERT_E_SUCCESS;
+	atcacert_tm_utc_t ts;
+	atcacert_tm_utc_t ts_ref;
 
-    set_tm(&ts_ref, 2106, 2, 7, 6, 28, 15);
+	set_tm(&ts_ref, 2106, 2, 7, 6, 28, 15);
 
-    ret = atcacert_date_get_max_date(DATEFMT_POSIX_UINT32_LE, &ts);
-    TEST_ASSERT_EQUAL(ATCACERT_E_SUCCESS, ret);
-    TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
+	ret = atcacert_date_get_max_date(DATEFMT_POSIX_UINT32_LE, &ts);
+	TEST_ASSERT_EQUAL(ATCACERT_E_SUCCESS, ret);
+	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_get_max_date, atcacert_date__atcacert_date_get_max_date_rfc5280_gen)
+TEST(atcacert_date_get_max_date, rfc5280_gen)
 {
-    int ret = ATCACERT_E_SUCCESS;
-    atcacert_tm_utc_t ts;
-    atcacert_tm_utc_t ts_ref;
+	int ret = ATCACERT_E_SUCCESS;
+	atcacert_tm_utc_t ts;
+	atcacert_tm_utc_t ts_ref;
 
-    set_tm(&ts_ref, 9999, 12, 31, 23, 59, 59);
+	set_tm(&ts_ref, 9999, 12, 31, 23, 59, 59);
 
-    ret = atcacert_date_get_max_date(DATEFMT_RFC5280_GEN, &ts);
-    TEST_ASSERT_EQUAL(ATCACERT_E_SUCCESS, ret);
-    TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
+	ret = atcacert_date_get_max_date(DATEFMT_RFC5280_GEN, &ts);
+	TEST_ASSERT_EQUAL(ATCACERT_E_SUCCESS, ret);
+	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_get_max_date, atcacert_date__atcacert_date_get_max_date_new_format)
+TEST(atcacert_date_get_max_date, new_format)
 {
-    int ret = ATCACERT_E_SUCCESS;
-    atcacert_tm_utc_t ts;
+	int ret = ATCACERT_E_SUCCESS;
+	atcacert_tm_utc_t ts;
 
-    ret = atcacert_date_get_max_date(DATEFMT_RFC5280_GEN + 1, &ts);
-    TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
+	ret = atcacert_date_get_max_date(DATEFMT_RFC5280_GEN + 1, &ts);
+	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_date_get_max_date, atcacert_date__atcacert_date_get_max_date_bad_params)
+TEST(atcacert_date_get_max_date, bad_params)
 {
-    int ret = ATCACERT_E_SUCCESS;
-    atcacert_tm_utc_t ts;
+	int ret = ATCACERT_E_SUCCESS;
+	atcacert_tm_utc_t ts;
 
-    ret = atcacert_date_get_max_date(-1, &ts);
-    TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
+	ret = atcacert_date_get_max_date(-1, &ts);
+	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 
-    ret = atcacert_date_get_max_date(DATEFMT_ISO8601_SEP, NULL);
-    TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
+	ret = atcacert_date_get_max_date(DATEFMT_ISO8601_SEP, NULL);
+	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 
-    ret = atcacert_date_get_max_date(-1, NULL);
-    TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
+	ret = atcacert_date_get_max_date(-1, NULL);
+	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
 
@@ -1791,7 +1796,7 @@ TEST_TEAR_DOWN(atcacert_date_dec_compcert)
 {
 }
 
-TEST(atcacert_date_dec_compcert, atcacert_date__atcacert_date_dec_compcert_good)
+TEST(atcacert_date_dec_compcert, good)
 {
 	int ret = 0;
 	atcacert_tm_utc_t issue_date, issue_date_ref;
@@ -1807,7 +1812,7 @@ TEST(atcacert_date_dec_compcert, atcacert_date__atcacert_date_dec_compcert_good)
 	TEST_ASSERT_EQUAL_MEMORY(&expire_date_ref, &expire_date, sizeof(expire_date));
 }
 
-TEST(atcacert_date_dec_compcert, atcacert_date__atcacert_date_dec_compcert_min)
+TEST(atcacert_date_dec_compcert, min)
 {
 	int ret = 0;
 	atcacert_tm_utc_t issue_date, issue_date_ref;
@@ -1817,13 +1822,13 @@ TEST(atcacert_date_dec_compcert, atcacert_date__atcacert_date_dec_compcert_min)
 	set_tm(&issue_date_ref,  2000, 1, 1, 0, 0, 0);
 	set_tm(&expire_date_ref, 9999, 12, 31, 23, 59, 59);
 
-    ret = atcacert_date_dec_compcert(enc_dates, DATEFMT_RFC5280_GEN, &issue_date, &expire_date);
+	ret = atcacert_date_dec_compcert(enc_dates, DATEFMT_RFC5280_GEN, &issue_date, &expire_date);
 	TEST_ASSERT_EQUAL(ATCACERT_E_SUCCESS, ret);
 	TEST_ASSERT_EQUAL_MEMORY(&issue_date_ref, &issue_date, sizeof(issue_date));
 	TEST_ASSERT_EQUAL_MEMORY(&expire_date_ref, &expire_date, sizeof(expire_date));
 }
 
-TEST(atcacert_date_dec_compcert, atcacert_date__atcacert_date_dec_compcert_max)
+TEST(atcacert_date_dec_compcert, max)
 {
 	int ret = 0;
 	atcacert_tm_utc_t issue_date, issue_date_ref;
@@ -1833,79 +1838,79 @@ TEST(atcacert_date_dec_compcert, atcacert_date__atcacert_date_dec_compcert_max)
 	set_tm(&issue_date_ref,  2031,      12, 31, 23, 0, 0);
 	set_tm(&expire_date_ref, 2031 + 31, 12, 31, 23, 0, 0);
 
-    ret = atcacert_date_dec_compcert(enc_dates, DATEFMT_RFC5280_GEN, &issue_date, &expire_date);
+	ret = atcacert_date_dec_compcert(enc_dates, DATEFMT_RFC5280_GEN, &issue_date, &expire_date);
 	TEST_ASSERT_EQUAL(ATCACERT_E_SUCCESS, ret);
 	TEST_ASSERT_EQUAL_MEMORY(&issue_date_ref, &issue_date, sizeof(issue_date));
 	TEST_ASSERT_EQUAL_MEMORY(&expire_date_ref, &expire_date, sizeof(expire_date));
 }
 
-TEST(atcacert_date_dec_compcert, atcacert_date__atcacert_date_dec_compcert_posix_uint32_be)
+TEST(atcacert_date_dec_compcert, posix_uint32_be)
 {
-    int ret = 0;
-    atcacert_tm_utc_t issue_date, issue_date_ref;
-    atcacert_tm_utc_t expire_date, expire_date_ref;
-    uint8_t enc_dates[3] = { 0x00, 0x84, 0x00 };
+	int ret = 0;
+	atcacert_tm_utc_t issue_date, issue_date_ref;
+	atcacert_tm_utc_t expire_date, expire_date_ref;
+	uint8_t enc_dates[3] = { 0x00, 0x84, 0x00 };
 
-    set_tm(&issue_date_ref, 2000, 1, 1, 0, 0, 0);
-    set_tm(&expire_date_ref, 2106, 2, 7, 6, 28, 15);
+	set_tm(&issue_date_ref, 2000, 1, 1, 0, 0, 0);
+	set_tm(&expire_date_ref, 2106, 2, 7, 6, 28, 15);
 
-    ret = atcacert_date_dec_compcert(enc_dates, DATEFMT_POSIX_UINT32_BE, &issue_date, &expire_date);
-    TEST_ASSERT_EQUAL(ATCACERT_E_SUCCESS, ret);
-    TEST_ASSERT_EQUAL_MEMORY(&issue_date_ref, &issue_date, sizeof(issue_date));
-    TEST_ASSERT_EQUAL_MEMORY(&expire_date_ref, &expire_date, sizeof(expire_date));
+	ret = atcacert_date_dec_compcert(enc_dates, DATEFMT_POSIX_UINT32_BE, &issue_date, &expire_date);
+	TEST_ASSERT_EQUAL(ATCACERT_E_SUCCESS, ret);
+	TEST_ASSERT_EQUAL_MEMORY(&issue_date_ref, &issue_date, sizeof(issue_date));
+	TEST_ASSERT_EQUAL_MEMORY(&expire_date_ref, &expire_date, sizeof(expire_date));
 }
 
-TEST(atcacert_date_dec_compcert, atcacert_date__atcacert_date_dec_compcert_bad_params)
+TEST(atcacert_date_dec_compcert, bad_params)
 {
 	int ret = 0;
 	atcacert_tm_utc_t issue_date;
 	atcacert_tm_utc_t expire_date;
 	uint8_t enc_dates[3] = { 0xA9, 0x9D, 0x5C };
 
-    ret = atcacert_date_dec_compcert(NULL, DATEFMT_RFC5280_GEN, &issue_date, &expire_date);
-    TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
+	ret = atcacert_date_dec_compcert(NULL, DATEFMT_RFC5280_GEN, &issue_date, &expire_date);
+	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 
-    ret = atcacert_date_dec_compcert(enc_dates, -1, &issue_date, &expire_date);
-    TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
+	ret = atcacert_date_dec_compcert(enc_dates, -1, &issue_date, &expire_date);
+	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 
-    ret = atcacert_date_dec_compcert(NULL, -1, &issue_date, &expire_date);
-    TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
+	ret = atcacert_date_dec_compcert(NULL, -1, &issue_date, &expire_date);
+	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 
-    ret = atcacert_date_dec_compcert(enc_dates, DATEFMT_RFC5280_GEN, NULL, &expire_date);
-    TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
+	ret = atcacert_date_dec_compcert(enc_dates, DATEFMT_RFC5280_GEN, NULL, &expire_date);
+	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 
-    ret = atcacert_date_dec_compcert(NULL, DATEFMT_RFC5280_GEN, NULL, &expire_date);
-    TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
+	ret = atcacert_date_dec_compcert(NULL, DATEFMT_RFC5280_GEN, NULL, &expire_date);
+	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 
-    ret = atcacert_date_dec_compcert(enc_dates, -1, NULL, &expire_date);
-    TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
+	ret = atcacert_date_dec_compcert(enc_dates, -1, NULL, &expire_date);
+	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 
-    ret = atcacert_date_dec_compcert(NULL, -1, NULL, &expire_date);
-    TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
+	ret = atcacert_date_dec_compcert(NULL, -1, NULL, &expire_date);
+	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 
-    ret = atcacert_date_dec_compcert(enc_dates, DATEFMT_RFC5280_GEN, &issue_date, NULL);
-    TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
+	ret = atcacert_date_dec_compcert(enc_dates, DATEFMT_RFC5280_GEN, &issue_date, NULL);
+	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 
-    ret = atcacert_date_dec_compcert(NULL, DATEFMT_RFC5280_GEN, &issue_date, NULL);
-    TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
+	ret = atcacert_date_dec_compcert(NULL, DATEFMT_RFC5280_GEN, &issue_date, NULL);
+	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 
-    ret = atcacert_date_dec_compcert(enc_dates, -1, &issue_date, NULL);
-    TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
+	ret = atcacert_date_dec_compcert(enc_dates, -1, &issue_date, NULL);
+	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 
-    ret = atcacert_date_dec_compcert(NULL, -1, &issue_date, NULL);
-    TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
+	ret = atcacert_date_dec_compcert(NULL, -1, &issue_date, NULL);
+	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 
-    ret = atcacert_date_dec_compcert(enc_dates, DATEFMT_RFC5280_GEN, NULL, NULL);
-    TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
+	ret = atcacert_date_dec_compcert(enc_dates, DATEFMT_RFC5280_GEN, NULL, NULL);
+	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 
-    ret = atcacert_date_dec_compcert(NULL, DATEFMT_RFC5280_GEN, NULL, NULL);
-    TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
+	ret = atcacert_date_dec_compcert(NULL, DATEFMT_RFC5280_GEN, NULL, NULL);
+	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 
-    ret = atcacert_date_dec_compcert(enc_dates, -1, NULL, NULL);
-    TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
+	ret = atcacert_date_dec_compcert(enc_dates, -1, NULL, NULL);
+	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 
-    ret = atcacert_date_dec_compcert(NULL, -1, NULL, NULL);
-    TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
+	ret = atcacert_date_dec_compcert(NULL, -1, NULL, NULL);
+	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
 
@@ -1922,7 +1927,7 @@ TEST_TEAR_DOWN(atcacert_date_dec)
 {
 }
 
-TEST(atcacert_date_dec, atcacert_date__atcacert_date_dec_iso8601_sep)
+TEST(atcacert_date_dec, iso8601_sep)
 {
 	int ret = 0;
 	const uint8_t ts_str[DATEFMT_ISO8601_SEP_SIZE + 1] = "2013-11-10T09:08:07Z";
@@ -1937,7 +1942,7 @@ TEST(atcacert_date_dec, atcacert_date__atcacert_date_dec_iso8601_sep)
 	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_dec, atcacert_date__atcacert_date_dec_rfc5280_utc)
+TEST(atcacert_date_dec, rfc5280_utc)
 {
 	int ret = 0;
 	const uint8_t ts_str[DATEFMT_RFC5280_UTC_SIZE + 1] = "131110090807Z";
@@ -1952,7 +1957,7 @@ TEST(atcacert_date_dec, atcacert_date__atcacert_date_dec_rfc5280_utc)
 	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_dec, atcacert_date__atcacert_date_dec_posix_uint32_be)
+TEST(atcacert_date_dec, posix_uint32_be)
 {
 	int ret = 0;
 	const uint8_t ts_str[DATEFMT_POSIX_UINT32_BE_SIZE] = { 0x52, 0x7F, 0x4C, 0xF7 };
@@ -1967,7 +1972,7 @@ TEST(atcacert_date_dec, atcacert_date__atcacert_date_dec_posix_uint32_be)
 	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_dec, atcacert_date__atcacert_date_dec_posix_uint32_le)
+TEST(atcacert_date_dec, posix_uint32_le)
 {
 	int ret = 0;
 	const uint8_t ts_str[DATEFMT_POSIX_UINT32_LE_SIZE] = { 0xF7, 0x4C, 0x7F, 0x52 };
@@ -1982,7 +1987,7 @@ TEST(atcacert_date_dec, atcacert_date__atcacert_date_dec_posix_uint32_le)
 	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_dec, atcacert_date__atcacert_date_dec_rfc5280_gen)
+TEST(atcacert_date_dec, rfc5280_gen)
 {
 	int ret = 0;
 	const uint8_t ts_str[DATEFMT_RFC5280_GEN_SIZE + 1] = "20131110090807Z";
@@ -1997,7 +2002,7 @@ TEST(atcacert_date_dec, atcacert_date__atcacert_date_dec_rfc5280_gen)
 	TEST_ASSERT_EQUAL_MEMORY(&ts_ref, &ts, sizeof(ts));
 }
 
-TEST(atcacert_date_dec, atcacert_date__atcacert_date_dec_small_buf)
+TEST(atcacert_date_dec, small_buf)
 {
 	int ret = 0;
 	const uint8_t ts_str[DATEFMT_RFC5280_UTC_SIZE + 1] = "131110090807Z";
@@ -2008,7 +2013,7 @@ TEST(atcacert_date_dec, atcacert_date__atcacert_date_dec_small_buf)
 	TEST_ASSERT_EQUAL(ATCACERT_E_DECODING_ERROR, ret);
 }
 
-TEST(atcacert_date_dec, atcacert_date__atcacert_date_dec_bad_format)
+TEST(atcacert_date_dec, bad_format)
 {
 	int ret = 0;
 	const uint8_t ts_str[DATEFMT_RFC5280_GEN_SIZE + 1];
@@ -2018,11 +2023,11 @@ TEST(atcacert_date_dec, atcacert_date__atcacert_date_dec_bad_format)
 	ret = atcacert_date_dec(-1, ts_str, ts_str_size, &ts);
 	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 
-    ret = atcacert_date_dec(DATEFMT_RFC5280_GEN+1, ts_str, ts_str_size, &ts);
-    TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
+	ret = atcacert_date_dec(DATEFMT_RFC5280_GEN + 1, ts_str, ts_str_size, &ts);
+	TEST_ASSERT_EQUAL(ATCACERT_E_BAD_PARAMS, ret);
 }
 
-TEST(atcacert_date_dec, atcacert_date__atcacert_date_dec_bad_params)
+TEST(atcacert_date_dec, bad_params)
 {
 	int ret = 0;
 	const uint8_t ts_str[DATEFMT_RFC5280_GEN_SIZE + 1] = "20131110090807Z";

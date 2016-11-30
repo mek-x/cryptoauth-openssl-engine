@@ -1,4 +1,6 @@
-/** \brief Declarations for date handling with regard to certificates.
+/**
+ * \file
+ * \brief Declarations for date handling with regard to certificates.
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *
@@ -54,12 +56,12 @@
  * Holds a broken-down date in UTC. Mimics atcacert_tm_utc_t from time.h.
  */
 typedef struct atcacert_tm_utc_s {
-    int tm_sec;  // 0 to 59
-    int tm_min;  // 0 to 59
-    int tm_hour; // 0 to 23
-    int tm_mday; // 1 to 31
-    int tm_mon;  // 0 to 11
-    int tm_year; // years since 1900
+	int tm_sec;     // 0 to 59
+	int tm_min;     // 0 to 59
+	int tm_hour;    // 0 to 23
+	int tm_mday;    // 1 to 31
+	int tm_mon;     // 0 to 11
+	int tm_year;    // years since 1900
 } atcacert_tm_utc_t;
 
 /**
@@ -104,7 +106,7 @@ extern "C" {
  *
  * \return 0 on success
  */
-int atcacert_date_enc( atcacert_date_format_t    format,
+int atcacert_date_enc( atcacert_date_format_t format,
                        const atcacert_tm_utc_t*  timestamp,
                        uint8_t*                  formatted_date,
                        size_t*                   formatted_date_size);
@@ -119,9 +121,9 @@ int atcacert_date_enc( atcacert_date_format_t    format,
  *
  * \return 0 on success
  */
-int atcacert_date_dec( atcacert_date_format_t  format,
+int atcacert_date_dec( atcacert_date_format_t format,
                        const uint8_t*          formatted_date,
-                       size_t                  formatted_date_size,
+                       size_t formatted_date_size,
                        atcacert_tm_utc_t*      timestamp);
 
 /**
@@ -135,9 +137,9 @@ int atcacert_date_dec( atcacert_date_format_t  format,
  *
  * \return 0 on success
  */
-int atcacert_date_enc_compcert( const atcacert_tm_utc_t*  issue_date,
-                                uint8_t                   expire_years,
-                                uint8_t                   enc_dates[3]);
+int atcacert_date_enc_compcert( const atcacert_tm_utc_t *  issue_date,
+                                uint8_t expire_years,
+                                uint8_t enc_dates[3]);
 
 /**
  * \brief Decode the issue and expire dates from the format used by the compressed certificate.
@@ -152,11 +154,11 @@ int atcacert_date_enc_compcert( const atcacert_tm_utc_t*  issue_date,
  *
  * \return 0 on success
  */
-int atcacert_date_dec_compcert( const uint8_t           enc_dates[3],
-                                atcacert_date_format_t  expire_date_format,
+int atcacert_date_dec_compcert( const uint8_t enc_dates[3],
+                                atcacert_date_format_t expire_date_format,
                                 atcacert_tm_utc_t*      issue_date,
                                 atcacert_tm_utc_t*      expire_date);
-                                
+
 /**
  * \brief Return the maximum date available for the given format.
  *
@@ -167,34 +169,34 @@ int atcacert_date_dec_compcert( const uint8_t           enc_dates[3],
  */
 int atcacert_date_get_max_date( atcacert_date_format_t format, atcacert_tm_utc_t* timestamp );
 
-int atcacert_date_enc_iso8601_sep( const atcacert_tm_utc_t*  timestamp,
-                                   uint8_t                   formatted_date[DATEFMT_ISO8601_SEP_SIZE]);
+int atcacert_date_enc_iso8601_sep( const atcacert_tm_utc_t *  timestamp,
+                                   uint8_t formatted_date[DATEFMT_ISO8601_SEP_SIZE]);
 
-int atcacert_date_dec_iso8601_sep( const uint8_t       formatted_date[DATEFMT_ISO8601_SEP_SIZE],
+int atcacert_date_dec_iso8601_sep( const uint8_t formatted_date[DATEFMT_ISO8601_SEP_SIZE],
                                    atcacert_tm_utc_t*  timestamp);
 
-int atcacert_date_enc_rfc5280_utc( const atcacert_tm_utc_t*  timestamp,
-                                   uint8_t                   formatted_date[DATEFMT_RFC5280_UTC_SIZE]);
+int atcacert_date_enc_rfc5280_utc( const atcacert_tm_utc_t *  timestamp,
+                                   uint8_t formatted_date[DATEFMT_RFC5280_UTC_SIZE]);
 
-int atcacert_date_dec_rfc5280_utc( const uint8_t       formatted_date[DATEFMT_RFC5280_UTC_SIZE],
+int atcacert_date_dec_rfc5280_utc( const uint8_t formatted_date[DATEFMT_RFC5280_UTC_SIZE],
                                    atcacert_tm_utc_t*  timestamp);
 
-int atcacert_date_enc_rfc5280_gen( const atcacert_tm_utc_t*  timestamp,
-                                   uint8_t                   formatted_date[DATEFMT_RFC5280_GEN_SIZE]);
+int atcacert_date_enc_rfc5280_gen( const atcacert_tm_utc_t *  timestamp,
+                                   uint8_t formatted_date[DATEFMT_RFC5280_GEN_SIZE]);
 
-int atcacert_date_dec_rfc5280_gen( const uint8_t       formatted_date[DATEFMT_RFC5280_GEN_SIZE],
+int atcacert_date_dec_rfc5280_gen( const uint8_t formatted_date[DATEFMT_RFC5280_GEN_SIZE],
                                    atcacert_tm_utc_t*  timestamp);
 
-int atcacert_date_enc_posix_uint32_be( const atcacert_tm_utc_t*  timestamp,
-                                       uint8_t                   formatted_date[DATEFMT_POSIX_UINT32_BE_SIZE]);
+int atcacert_date_enc_posix_uint32_be( const atcacert_tm_utc_t *  timestamp,
+                                       uint8_t formatted_date[DATEFMT_POSIX_UINT32_BE_SIZE]);
 
-int atcacert_date_dec_posix_uint32_be( const uint8_t       formatted_date[DATEFMT_POSIX_UINT32_BE_SIZE],
+int atcacert_date_dec_posix_uint32_be( const uint8_t formatted_date[DATEFMT_POSIX_UINT32_BE_SIZE],
                                        atcacert_tm_utc_t*  timestamp);
 
-int atcacert_date_enc_posix_uint32_le( const atcacert_tm_utc_t*  timestamp,
-                                       uint8_t                   formatted_date[DATEFMT_POSIX_UINT32_LE_SIZE]);
+int atcacert_date_enc_posix_uint32_le( const atcacert_tm_utc_t *  timestamp,
+                                       uint8_t formatted_date[DATEFMT_POSIX_UINT32_LE_SIZE]);
 
-int atcacert_date_dec_posix_uint32_le( const uint8_t       formatted_date[DATEFMT_POSIX_UINT32_LE_SIZE],
+int atcacert_date_dec_posix_uint32_le( const uint8_t formatted_date[DATEFMT_POSIX_UINT32_LE_SIZE],
                                        atcacert_tm_utc_t*  timestamp);
 
 

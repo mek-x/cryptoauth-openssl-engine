@@ -1,4 +1,6 @@
-/** \brief functions required to work with DER encoded data related to X.509 certificates.
+/**
+ * \file
+ * \brief functions required to work with DER encoded data related to X.509 certificates.
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *
@@ -53,11 +55,11 @@ int atcacert_der_enc_length(uint32_t length, uint8_t* der_length, size_t* der_le
 		// The length can take the short form with only one byte
 		der_length_size_calc = 1;
 		exp = 0;
-	}else  {
+	}else {
 		// Length is long-form, encoded as a multi-byte big-endian unsigned integer
 
 		// Find first non-zero octet
-		while (length / ((size_t)1 << (8 * exp)) == 0)
+		while (length / ((uint32_t)1 << (8 * exp)) == 0)
 			exp--;
 
 		der_length_size_calc = 2 + exp;
@@ -106,10 +108,10 @@ int atcacert_der_dec_length(const uint8_t* der_length, size_t* der_length_size, 
 			// Decode integer in big-endian format
 			*length = 0;
 			for (i = 1; i <= num_bytes; i++)
-				*length += der_length[i] * ((size_t)1 << (8 * (num_bytes - i)));
+				*length += der_length[i] * ((uint32_t)1 << (8 * (num_bytes - i)));
 		}
 		*der_length_size = num_bytes + 1; // Return the actual number of bytes the DER length encoding used.
-	}else  {
+	}else {
 		if (length != NULL)
 			*length = der_length[0];
 		*der_length_size = 1; // Return the actual number of bytes the DER length encoding used.

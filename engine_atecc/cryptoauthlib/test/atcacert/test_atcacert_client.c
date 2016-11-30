@@ -1,4 +1,6 @@
-/** \brief cert client tests
+/**
+ * \file
+ * \brief cert client tests
  *
  * \copyright Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *
@@ -92,12 +94,11 @@ static void build_and_save_cert(
 	atcacert_device_loc_t device_locs[4];
 	size_t device_locs_count = 0;
 	size_t i;
-    
-    if (cert_def->expire_years == 0)
-    {
-        ret = atcacert_date_get_max_date(cert_def->expire_date_format, &expire_date);
-        TEST_ASSERT_EQUAL(ATCACERT_E_SUCCESS, ret);
-    }
+
+	if (cert_def->expire_years == 0) {
+		ret = atcacert_date_get_max_date(cert_def->expire_date_format, &expire_date);
+		TEST_ASSERT_EQUAL(ATCACERT_E_SUCCESS, ret);
+	}
 
 	ret = atcacert_cert_build_start(&build_state, cert_def, cert, cert_size, ca_public_key);
 	TEST_ASSERT_EQUAL(ATCACERT_E_SUCCESS, ret);

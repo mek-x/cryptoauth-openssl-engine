@@ -1,4 +1,5 @@
 /**
+ * \file
  * \brief Main certificate definition implementation.
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
@@ -168,8 +169,8 @@ int atcacert_get_device_locs( const atcacert_def_t*  cert_def,
 		// Device SN is config zone bytes 0-3 and 8-12
 		atcacert_device_loc_t device_sn_loc = {
 			.zone		= DEVZONE_CONFIG,
-			.slot		= 0,            // Ignored
-			.is_genkey	= FALSE,        // Ignored
+			.slot		= 0,                // Ignored
+			.is_genkey	= FALSE,            // Ignored
 			.offset		= 0,
 			.count		= 13
 		};
@@ -614,7 +615,7 @@ int atcacert_get_signature( const atcacert_def_t* cert_def,
 
 int atcacert_set_issue_date( const atcacert_def_t*     cert_def,
                              uint8_t*                  cert,
-                             size_t                    cert_size,
+                             size_t cert_size,
                              const atcacert_tm_utc_t*  timestamp)
 {
 	int ret = 0;
@@ -640,7 +641,7 @@ int atcacert_set_issue_date( const atcacert_def_t*     cert_def,
 
 int atcacert_get_issue_date( const atcacert_def_t*  cert_def,
                              const uint8_t*         cert,
-                             size_t                 cert_size,
+                             size_t cert_size,
                              atcacert_tm_utc_t*     timestamp)
 {
 	int ret = 0;
@@ -670,7 +671,7 @@ int atcacert_get_issue_date( const atcacert_def_t*  cert_def,
 
 int atcacert_set_expire_date( const atcacert_def_t*     cert_def,
                               uint8_t*                  cert,
-                              size_t                    cert_size,
+                              size_t cert_size,
                               const atcacert_tm_utc_t*  timestamp)
 {
 	int ret = 0;
@@ -696,7 +697,7 @@ int atcacert_set_expire_date( const atcacert_def_t*     cert_def,
 
 int atcacert_get_expire_date( const atcacert_def_t*  cert_def,
                               const uint8_t*         cert,
-                              size_t                 cert_size,
+                              size_t cert_size,
                               atcacert_tm_utc_t*     timestamp)
 {
 	int ret = 0;

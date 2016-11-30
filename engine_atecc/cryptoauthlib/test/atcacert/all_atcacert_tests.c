@@ -1,5 +1,5 @@
 /**
- *
+ * \file
  * \copyright Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *
  * \atmel_crypto_device_library_license_start
@@ -59,7 +59,7 @@ void RunAllCertDataTests(void)
 	RUN_TEST_GROUP(atcacert_date_enc_iso8601_sep);
 	RUN_TEST_GROUP(atcacert_date_enc_rfc5280_utc);
 	RUN_TEST_GROUP(atcacert_date_enc_posix_uint32_be);
-    RUN_TEST_GROUP(atcacert_date_enc_posix_uint32_le);
+	RUN_TEST_GROUP(atcacert_date_enc_posix_uint32_le);
 	RUN_TEST_GROUP(atcacert_date_enc_rfc5280_gen);
 	RUN_TEST_GROUP(atcacert_date_enc_compcert);
 	RUN_TEST_GROUP(atcacert_date_enc);
@@ -67,13 +67,42 @@ void RunAllCertDataTests(void)
 	RUN_TEST_GROUP(atcacert_date_dec_iso8601_sep);
 	RUN_TEST_GROUP(atcacert_date_dec_rfc5280_utc);
 	RUN_TEST_GROUP(atcacert_date_dec_posix_uint32_be);
-    RUN_TEST_GROUP(atcacert_date_dec_posix_uint32_le);
+	RUN_TEST_GROUP(atcacert_date_dec_posix_uint32_le);
 	RUN_TEST_GROUP(atcacert_date_dec_rfc5280_gen);
-    RUN_TEST_GROUP(atcacert_date_get_max_date);
+	RUN_TEST_GROUP(atcacert_date_get_max_date);
 	RUN_TEST_GROUP(atcacert_date_dec_compcert);
 	RUN_TEST_GROUP(atcacert_date_dec);
 
-	RUN_TEST_GROUP(atcacert_def);
+	RUN_TEST_GROUP(atcacert_get_key_id);
+	RUN_TEST_GROUP(atcacert_set_cert_element);
+	RUN_TEST_GROUP(atcacert_get_cert_element);
+	RUN_TEST_GROUP(atcacert_public_key_add_padding);
+	RUN_TEST_GROUP(atcacert_public_key_remove_padding);
+	RUN_TEST_GROUP(atcacert_set_subj_public_key);
+	RUN_TEST_GROUP(atcacert_get_subj_public_key);
+	RUN_TEST_GROUP(atcacert_get_subj_key_id);
+	RUN_TEST_GROUP(atcacert_set_signature);
+	RUN_TEST_GROUP(atcacert_get_signature);
+	RUN_TEST_GROUP(atcacert_set_issue_date);
+	RUN_TEST_GROUP(atcacert_get_issue_date);
+	RUN_TEST_GROUP(atcacert_set_expire_date);
+	RUN_TEST_GROUP(atcacert_get_expire_date);
+	RUN_TEST_GROUP(atcacert_set_signer_id);
+	RUN_TEST_GROUP(atcacert_get_signer_id);
+	RUN_TEST_GROUP(atcacert_set_cert_sn);
+	RUN_TEST_GROUP(atcacert_gen_cert_sn);
+	RUN_TEST_GROUP(atcacert_get_cert_sn);
+	RUN_TEST_GROUP(atcacert_set_auth_key_id);
+	RUN_TEST_GROUP(atcacert_get_auth_key_id);
+	RUN_TEST_GROUP(atcacert_set_comp_cert);
+	RUN_TEST_GROUP(atcacert_get_comp_cert);
+	RUN_TEST_GROUP(atcacert_get_tbs);
+	RUN_TEST_GROUP(atcacert_get_tbs_digest);
+	RUN_TEST_GROUP(atcacert_merge_device_loc);
+	RUN_TEST_GROUP(atcacert_get_device_locs);
+	RUN_TEST_GROUP(atcacert_cert_build);
+	RUN_TEST_GROUP(atcacert_is_device_loc_overlap);
+	RUN_TEST_GROUP(atcacert_get_device_data);
 }
 
 void RunAllCertIOTests(void)

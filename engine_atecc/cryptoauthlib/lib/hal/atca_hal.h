@@ -1,4 +1,6 @@
-/** \brief low-level HAL - methods used to setup indirection to physical layer interface
+/**
+ * \file
+ * \brief low-level HAL - methods used to setup indirection to physical layer interface
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *

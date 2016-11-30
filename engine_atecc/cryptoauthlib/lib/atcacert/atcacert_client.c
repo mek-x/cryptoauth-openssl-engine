@@ -1,6 +1,8 @@
-/** \brief client side cert i/o methods. These declarations deal with the client-side, the node being authenticated,
- * of the authentication process. It is assumed the client has an ECC CryptoAuthentication device (e.g. ATECC508A) and the
- * certificates are stored on that device.
+/**
+ * \file
+ * \brief Client side cert i/o methods. These declarations deal with the client-side, the node being authenticated,
+ *        of the authentication process. It is assumed the client has an ECC CryptoAuthentication device
+ *        (e.g. ATECC508A) and the certificates are stored on that device.
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *
@@ -77,7 +79,7 @@ int atcacert_read_cert( const atcacert_def_t* cert_def,
 			ret = atcab_get_pubkey(device_locs[i].slot, data);
 			if (ret != ATCA_SUCCESS)
 				return ret;
-		}else  {
+		}else {
 			size_t start_block = device_locs[i].offset / 32;
 			uint8_t block;
 			size_t end_block = (device_locs[i].offset + device_locs[i].count) / 32;

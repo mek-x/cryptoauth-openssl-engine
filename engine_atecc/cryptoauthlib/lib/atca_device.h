@@ -1,5 +1,4 @@
-/* atca_device.h
- *
+/**
  * \file
  *
  * \brief  Atmel Crypto Auth device object

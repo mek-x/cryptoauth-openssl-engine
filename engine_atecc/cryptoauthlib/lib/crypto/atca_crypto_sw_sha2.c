@@ -1,4 +1,6 @@
-/** \brief Wrapper API for software SHA 256 routines
+/**
+ * \file
+ * \brief Wrapper API for software SHA 256 routines
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *
@@ -41,7 +43,7 @@
 #include "hashes/sha2_routines.h"
 
 /** \brief initializes the SHA256 software
- * \param[in] atcac_sha2_256_ctx ptr to context data structure
+ * \param[in] ctx  ptr to context data structure
  * \return ATCA_STATUS value
  */
 
@@ -56,9 +58,9 @@ int atcac_sw_sha2_256_init(atcac_sha2_256_ctx* ctx)
 
 /** \brief updates the running hash with the next block of data, called iteratively for the entire
     stream of data to be hashed
-    \param[in] atcac_sha2_256 ptr to SHA context data structure
-    \param[in] data ptr to next block of data to hash
-    \param[in] size amount of data to hash in the given block, in bytes
+    \param[in] ctx        ptr to SHA context data structure
+    \param[in] data       ptr to next block of data to hash
+    \param[in] data_size  size amount of data to hash in the given block, in bytes
     \return ATCA_STATUS
  */
 
@@ -70,8 +72,8 @@ int atcac_sw_sha2_256_update(atcac_sha2_256_ctx* ctx, const uint8_t* data, size_
 }
 
 /** \brief completes the final SHA calculation and returns the final digest/hash
- * \param[in] atcac_sha2_256 ptr to context data structure
- * \param[out] digest - receives the computed digest of the SHA 256 has
+ * \param[in]  ctx     ptr to context data structure
+ * \param[out] digest  receives the computed digest of the SHA 256 has
  * \return ATCA_STATUS
  */
 
@@ -84,9 +86,9 @@ int atcac_sw_sha2_256_finish(atcac_sha2_256_ctx* ctx, uint8_t digest[ATCA_SHA2_2
 
 
 /** \brief single call convenience function to comput SHA256 of given data
- * \param[in] data pointer to stream of data to hash
- * \param[in] size of data stream to hash
- * \param[out] digest result
+ * \param[in]  data       pointer to stream of data to hash
+ * \param[in]  data_size  size of data stream to hash
+ * \param[out] digest     result
  * \return ATCA_STATUS
  */
 

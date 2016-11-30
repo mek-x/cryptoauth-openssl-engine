@@ -1,4 +1,5 @@
 /**
+ * \file
  *
  * \copyright Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *
@@ -47,36 +48,36 @@
 
 TEST_GROUP_RUNNER(atcacert_der_enc_integer)
 {
-	RUN_TEST_CASE(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_min);
-	RUN_TEST_CASE(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_1byte);
-	RUN_TEST_CASE(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_multi_byte);
-	RUN_TEST_CASE(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_large);
-	RUN_TEST_CASE(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_trim_1_pos);
-	RUN_TEST_CASE(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_trim_multi_pos);
-	RUN_TEST_CASE(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_trim_all_pos);
-	RUN_TEST_CASE(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_trim_1_neg);
-	RUN_TEST_CASE(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_trim_multi_neg);
-	RUN_TEST_CASE(atcacert_der_enc_integer, atcacert_der_enc_integer__signed_trim_all_neg);
-	RUN_TEST_CASE(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_min);
-	RUN_TEST_CASE(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_min_pad);
-	RUN_TEST_CASE(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_multi_byte);
-	RUN_TEST_CASE(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_multi_byte_pad);
-	RUN_TEST_CASE(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_large);
-	RUN_TEST_CASE(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_large_pad);
-	RUN_TEST_CASE(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_trim_1_pos);
-	RUN_TEST_CASE(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_trim_multi_pos);
-	RUN_TEST_CASE(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_trim_all_pos);
-	RUN_TEST_CASE(atcacert_der_enc_integer, atcacert_der_enc_integer__unsigned_trim_neg_pad);
-	RUN_TEST_CASE(atcacert_der_enc_integer, atcacert_der_enc_integer__small_buf);
-	RUN_TEST_CASE(atcacert_der_enc_integer, atcacert_der_enc_integer__bad_params);
+	RUN_TEST_CASE(atcacert_der_enc_integer, signed_min);
+	RUN_TEST_CASE(atcacert_der_enc_integer, signed_1byte);
+	RUN_TEST_CASE(atcacert_der_enc_integer, signed_multi_byte);
+	RUN_TEST_CASE(atcacert_der_enc_integer, signed_large);
+	RUN_TEST_CASE(atcacert_der_enc_integer, signed_trim_1_pos);
+	RUN_TEST_CASE(atcacert_der_enc_integer, signed_trim_multi_pos);
+	RUN_TEST_CASE(atcacert_der_enc_integer, signed_trim_all_pos);
+	RUN_TEST_CASE(atcacert_der_enc_integer, signed_trim_1_neg);
+	RUN_TEST_CASE(atcacert_der_enc_integer, signed_trim_multi_neg);
+	RUN_TEST_CASE(atcacert_der_enc_integer, signed_trim_all_neg);
+	RUN_TEST_CASE(atcacert_der_enc_integer, unsigned_min);
+	RUN_TEST_CASE(atcacert_der_enc_integer, unsigned_min_pad);
+	RUN_TEST_CASE(atcacert_der_enc_integer, unsigned_multi_byte);
+	RUN_TEST_CASE(atcacert_der_enc_integer, unsigned_multi_byte_pad);
+	RUN_TEST_CASE(atcacert_der_enc_integer, unsigned_large);
+	RUN_TEST_CASE(atcacert_der_enc_integer, unsigned_large_pad);
+	RUN_TEST_CASE(atcacert_der_enc_integer, unsigned_trim_1_pos);
+	RUN_TEST_CASE(atcacert_der_enc_integer, unsigned_trim_multi_pos);
+	RUN_TEST_CASE(atcacert_der_enc_integer, unsigned_trim_all_pos);
+	RUN_TEST_CASE(atcacert_der_enc_integer, unsigned_trim_neg_pad);
+	RUN_TEST_CASE(atcacert_der_enc_integer, small_buf);
+	RUN_TEST_CASE(atcacert_der_enc_integer, bad_params);
 }
 
 TEST_GROUP_RUNNER(atcacert_der_dec_integer)
 {
-	RUN_TEST_CASE(atcacert_der_dec_integer, atcacert_der_dec_integer__good);
-	RUN_TEST_CASE(atcacert_der_dec_integer, atcacert_der_dec_integer__good_large);
-	RUN_TEST_CASE(atcacert_der_dec_integer, atcacert_der_dec_integer__zero_size);
-	RUN_TEST_CASE(atcacert_der_dec_integer, atcacert_der_dec_integer__not_enough_data);
-	RUN_TEST_CASE(atcacert_der_dec_integer, atcacert_der_dec_integer__small_buf);
-	RUN_TEST_CASE(atcacert_der_dec_integer, atcacert_der_dec_integer__bad_params);
+	RUN_TEST_CASE(atcacert_der_dec_integer, good);
+	RUN_TEST_CASE(atcacert_der_dec_integer, good_large);
+	RUN_TEST_CASE(atcacert_der_dec_integer, zero_size);
+	RUN_TEST_CASE(atcacert_der_dec_integer, not_enough_data);
+	RUN_TEST_CASE(atcacert_der_dec_integer, small_buf);
+	RUN_TEST_CASE(atcacert_der_dec_integer, bad_params);
 }

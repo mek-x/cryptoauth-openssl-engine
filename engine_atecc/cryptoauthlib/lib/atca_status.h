@@ -1,5 +1,4 @@
-/* atca_status.h
- *
+/**
  * \file
  *
  * \brief  Atmel Crypto Auth status codes

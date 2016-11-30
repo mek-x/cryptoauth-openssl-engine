@@ -1,4 +1,6 @@
-/** \brief Declarations for certificates related to ECC CryptoAuthentication devices.
+/**
+ * \file
+ * \brief Declarations for certificates related to ECC CryptoAuthentication devices.
  * These are the definitions required to define a certificate and its various
  * elements with regards to the CryptoAuthentication ECC devices.
  *
@@ -276,7 +278,7 @@ int atcacert_cert_build_finish( atcacert_build_state_t* build_state );
  * \param[in]  cert         Certificate to get the device data from.
  * \param[in]  cert_size    Size of the certificate in bytes.
  * \param[in]  device_loc   Device location to request data for.
- * \param[out] device_data  Buffer that represents the device data in device_loc.  Required to be
+ * \param[out] device_data  Buffer that represents the device data in device_loc. Required to be
  *                          at least device_loc.count in size.
  *
  * \return 0 on success
@@ -290,11 +292,10 @@ int atcacert_get_device_data( const atcacert_def_t*        cert_def,
 /**
  * \brief Sets the subject public key and subject key ID in a certificate.
  *
- * \param[in]    cert_def            Certificate definition for the certificate.
- * \param[inout] cert                Certificate to update.
- * \param[in]    cert_size           Size of the certificate (cert) in bytes.
- * \param[in]    subject_public_key  Subject public key as X and Y integers concatenated together.
- *                                   64 bytes.
+ * \param[in]    cert_def         Certificate definition for the certificate.
+ * \param[inout] cert             Certificate to update.
+ * \param[in]    cert_size        Size of the certificate (cert) in bytes.
+ * \param[in]    subj_public_key  Subject public key as X and Y integers concatenated together. 64 bytes.
  *
  * \return 0 on success
  */
@@ -381,7 +382,7 @@ int atcacert_get_signature( const atcacert_def_t * cert_def,
  */
 int atcacert_set_issue_date( const atcacert_def_t*     cert_def,
                              uint8_t*                  cert,
-                             size_t                    cert_size,
+                             size_t cert_size,
                              const atcacert_tm_utc_t*  timestamp);
 
 /**
@@ -397,7 +398,7 @@ int atcacert_set_issue_date( const atcacert_def_t*     cert_def,
  */
 int atcacert_get_issue_date( const atcacert_def_t*  cert_def,
                              const uint8_t*         cert,
-                             size_t                 cert_size,
+                             size_t cert_size,
                              atcacert_tm_utc_t*     timestamp);
 
 /**
@@ -413,7 +414,7 @@ int atcacert_get_issue_date( const atcacert_def_t*  cert_def,
  */
 int atcacert_set_expire_date( const atcacert_def_t*     cert_def,
                               uint8_t*                  cert,
-                              size_t                    cert_size,
+                              size_t cert_size,
                               const atcacert_tm_utc_t*  timestamp);
 
 /**
@@ -429,7 +430,7 @@ int atcacert_set_expire_date( const atcacert_def_t*     cert_def,
  */
 int atcacert_get_expire_date( const atcacert_def_t*  cert_def,
                               const uint8_t*         cert,
-                              size_t                 cert_size,
+                              size_t cert_size,
                               atcacert_tm_utc_t*     timestamp);
 
 /**
@@ -627,6 +628,7 @@ int atcacert_get_tbs_digest( const atcacert_def_t * cert_def,
  * \param[in]    cert_size      Size of the certificate (cert) in bytes.
  * \param[in]    data           Element data to insert into the certificate. Buffer must contain
  *                              cert_loc.count bytes to be copied into the certificate.
+ * \param[in]    data_size      Size of the data in bytes.
  *
  * \return 0 on success
  */
@@ -644,6 +646,7 @@ int atcacert_set_cert_element( const atcacert_cert_loc_t* cert_loc,
  * \param[in]    cert_size  Size of the certificate (cert) in bytes.
  * \param[out]   data       Element data will be returned in this buffer. This buffer must be large
  *                          enough to hold cert_loc.count bytes.
+ * \param[in]    data_size  Expected size of the cert element data.
  *
  * \return 0 on success
  */

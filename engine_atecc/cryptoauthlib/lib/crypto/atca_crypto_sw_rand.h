@@ -1,4 +1,6 @@
-/** \brief
+/**
+ * \file
+ * \brief
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *

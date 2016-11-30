@@ -1,5 +1,6 @@
-/** \file atca_crypto_tests.h
- * Unity tests for the CryptoAuthLib software crypto API.
+/**
+ * \file
+ * \brief Unity tests for the CryptoAuthLib software crypto API.
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *

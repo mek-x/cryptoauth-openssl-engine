@@ -1,5 +1,4 @@
-/* kit_protocol.c
- *
+/**
  * \file
  *
  * \brief  Atmel Crypto Auth hardware interface object
@@ -57,7 +56,7 @@
 
 
 /** \brief HAL implementation of kit protocol init.  This function calls back to the physical protocol to send the bytes
- *  \param[in] ATCAIface instance
+ *  \param[in] iface  instance
  *  \return ATCA_STATUS
  */
 ATCA_STATUS kit_init(ATCAIface iface)
@@ -114,9 +113,9 @@ ATCA_STATUS kit_init(ATCAIface iface)
 }
 
 /** \brief HAL implementation of kit protocol send.  This function calls back to the physical protocol to send the bytes
- *  \param[in] ATCAIface instance
- *  \param[in] txdata pointer to bytes to send
- *  \param[in] txlength number of bytes to send
+ *  \param[in] iface     instance
+ *  \param[in] txdata    pointer to bytes to send
+ *  \param[in] txlength  number of bytes to send
  *  \return ATCA_STATUS
  */
 ATCA_STATUS kit_send(ATCAIface iface, uint8_t* txdata, int txlength)
@@ -151,9 +150,9 @@ ATCA_STATUS kit_send(ATCAIface iface, uint8_t* txdata, int txlength)
 }
 
 /** \brief HAL implementation to receive bytes and unwrap from kit protocol.  This function calls back to the physical protocol to receive the bytes
- * \param[in] ATCAIface instance
- * \param[in] rxdata pointer to space to receive the data
- * \param[inout] ptr to expected number of receive bytes to request
+ * \param[in]    iface   instance
+ * \param[in]    rxdata  pointer to space to receive the data
+ * \param[inout] rxsize  ptr to expected number of receive bytes to request
  * \return ATCA_STATUS
  */
 ATCA_STATUS kit_receive(ATCAIface iface, uint8_t* rxdata, uint16_t* rxsize)
@@ -198,7 +197,7 @@ ATCA_STATUS kit_receive(ATCAIface iface, uint8_t* rxdata, uint16_t* rxsize)
 }
 
 /** \brief Call the wake for kit protocol
- * \param[in] iface the interface object to send the bytes over
+ * \param[in] iface  the interface object to send the bytes over
  * \return ATCA_STATUS
  */
 ATCA_STATUS kit_wake(ATCAIface iface)
@@ -238,7 +237,7 @@ ATCA_STATUS kit_wake(ATCAIface iface)
 }
 
 /** \brief Call the idle for kit protocol
- * \param[in] iface the interface object to send the bytes over
+ * \param[in] iface  the interface object to send the bytes over
  * \return ATCA_STATUS
  */
 ATCA_STATUS kit_idle(ATCAIface iface)
@@ -278,7 +277,7 @@ ATCA_STATUS kit_idle(ATCAIface iface)
 }
 
 /** \brief Call the sleep for kit protocol
- * \param[in] iface the interface object to send the bytes over
+ * \param[in] iface  the interface object to send the bytes over
  * \return ATCA_STATUS
  */
 ATCA_STATUS kit_sleep(ATCAIface iface)
@@ -319,7 +318,7 @@ ATCA_STATUS kit_sleep(ATCAIface iface)
 
 /** \brief Wrap binary bytes in ascii kit protocol
  * \param[in] txdata pointer to the binary data to wrap
- * \param[in] txlength length of the binary data to wrap
+ * \param[in] txlen length of the binary data to wrap
  * \param[out] pkitcmd pointer to binary data converted to ascii kit protocol
  * \param[inout] nkitcmd pointer to the size of the binary data converted to ascii kit protocol
  * \return ATCA_STATUS

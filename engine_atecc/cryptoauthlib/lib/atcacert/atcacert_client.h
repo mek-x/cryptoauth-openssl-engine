@@ -1,6 +1,8 @@
-/** \brief client side cert i/o methods. These declarations deal with the client-side, the node being authenticated,
- * of the authentication process. It is assumed the client has an ECC CryptoAuthentication device (e.g. ATECC508A) and the
- * certificates are stored on that device.
+/**
+ * \file
+ * \brief Client side cert i/o methods. These declarations deal with the client-side, the node being authenticated,
+ *        of the authentication process. It is assumed the client has an ECC CryptoAuthentication device
+ *        (e.g. ATECC508A) and the certificates are stored on that device.
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *

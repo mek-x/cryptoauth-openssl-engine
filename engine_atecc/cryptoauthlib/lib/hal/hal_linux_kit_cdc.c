@@ -1,5 +1,6 @@
-/** \file hal_linux_kit_cdc.h
- * ATCA Hardware abstraction layer for Linux using kit protocol over a USB CDC device.
+/**
+ * \file
+ * \brief ATCA Hardware abstraction layer for Linux using kit protocol over a USB CDC device.
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *
@@ -165,7 +166,7 @@ ATCA_STATUS hal_kit_cdc_init(void* hal, ATCAIfaceCfg* cfg)
 }
 
 /** \brief HAL implementation of Kit USB CDC post init
- *  \param[in] ATCAIface instance
+ *  \param[in] iface  instance
  *  \return ATCA_STATUS
  */
 ATCA_STATUS hal_kit_cdc_post_init(ATCAIface iface)
@@ -190,9 +191,9 @@ ATCA_STATUS hal_kit_cdc_post_init(ATCAIface iface)
 }
 
 /** \brief HAL implementation of send over USB CDC
- *  \param[in] ATCAIface instance
- *  \param[in] txdata pointer to bytes to send
- *  \param[in] txlength number of bytes to send
+ *  \param[in] iface     instance
+ *  \param[in] txdata    pointer to bytes to send
+ *  \param[in] txlength  number of bytes to send
  *  \return ATCA_STATUS
  */
 ATCA_STATUS kit_phy_send(ATCAIface iface, uint8_t* txdata, int txlength)
@@ -221,9 +222,9 @@ ATCA_STATUS kit_phy_send(ATCAIface iface, uint8_t* txdata, int txlength)
 }
 
 /** \brief HAL implementation of kit protocol send over USB CDC
- * \param[in] ATCAIface instance
- * \param[out] rxdata pointer to space to receive the data
- * \param[inout] ptr to expected number of receive bytes to request
+ * \param[in]    iface   instance
+ * \param[out]   rxdata  pointer to space to receive the data
+ * \param[inout] rxsize  ptr to expected number of receive bytes to request
  * \return ATCA_STATUS
  */
 ATCA_STATUS kit_phy_receive(ATCAIface iface, uint8_t* rxdata, int* rxsize)
@@ -288,7 +289,7 @@ ATCA_STATUS kit_phy_receive(ATCAIface iface, uint8_t* rxdata, int* rxsize)
 }
 
 /** \brief Number of USB CDC devices found
- *  \param[out] ATCAIface num_found
+ *  \param[out] num_found
  *  \return ATCA_STATUS
  */
 ATCA_STATUS hal_kit_phy_num_found(int8_t* num_found)
@@ -298,9 +299,9 @@ ATCA_STATUS hal_kit_phy_num_found(int8_t* num_found)
 }
 
 /** \brief HAL implementation of kit protocol send over USB CDC
- *  \param[in] ATCAIface instance
- *  \param[in] txdata pointer to bytes to send
- *  \param[in] txlength number of bytes to send
+ *  \param[in] iface     instance
+ *  \param[in] txdata    pointer to bytes to send
+ *  \param[in] txlength  number of bytes to send
  *  \return ATCA_STATUS
  */
 ATCA_STATUS hal_kit_cdc_send(ATCAIface iface, uint8_t* txdata, int txlength)
@@ -310,9 +311,9 @@ ATCA_STATUS hal_kit_cdc_send(ATCAIface iface, uint8_t* txdata, int txlength)
 }
 
 /** \brief HAL implementation of send over USB CDC
- * \param[in] ATCAIface instance
- * \param[in] rxdata pointer to space to receive the data
- * \param[inout] ptr to expected number of receive bytes to request
+ * \param[in]    iface   instance
+ * \param[in]    rxdata  pointer to space to receive the data
+ * \param[inout] rxsize  ptr to expected number of receive bytes to request
  * \return ATCA_STATUS
  */
 ATCA_STATUS hal_kit_cdc_receive(ATCAIface iface, uint8_t* rxdata, uint16_t* rxsize)

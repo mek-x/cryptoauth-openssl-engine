@@ -1,5 +1,7 @@
-/** \brief API wrapper for software ECDSA verify.  Currently unimplemented but could be
- * implemented via a 3rd party library such as MicroECC.
+/**
+ * \file
+ * \brief API wrapper for software ECDSA verify.  Currently unimplemented but could be
+ *        implemented via a 3rd party library such as MicroECC.
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *
@@ -42,9 +44,9 @@
 #include "atca_crypto_sw_ecdsa.h"
 
 /** \brief return software generated ECDSA verification result
- * \param[in] msg ptr to message or challenge
- * \param[in] signature ptr to the signature to verify
- * \param[in] public key ptr to public key of device which signed the challenge
+ * \param[in] msg         ptr to message or challenge
+ * \param[in] signature   ptr to the signature to verify
+ * \param[in] public_key  ptr to public key of device which signed the challenge
  * return ATCA_STATUS
  */
 

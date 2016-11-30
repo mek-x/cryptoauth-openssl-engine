@@ -1,5 +1,4 @@
-/* atca_iface.h
- *
+/**
  * \file
  *
  * \brief  Atmel Crypto Auth hardware interface object

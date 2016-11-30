@@ -1,4 +1,6 @@
-/** \brief Single aggregation point for all CryptoAuthLib header files
+/**
+ * \file
+ * \brief Single aggregation point for all CryptoAuthLib header files
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *

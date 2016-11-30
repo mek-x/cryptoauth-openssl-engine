@@ -1,4 +1,6 @@
-/** \brief API wrapper for software random
+/**
+ * \file
+ * \brief API wrapper for software random
  *
  * Copyright (c) 2015 Atmel Corporation. All rights reserved.
  *
@@ -40,8 +42,8 @@
 #include "atca_crypto_sw_rand.h"
 
 /** \brief return software generated random number
- * \param[out] data ptr to space to receive the random
- * \param[in] size of data buffer
+ * \param[out] data       ptr to space to receive the random number
+ * \param[in]  data_size  size of data buffer
  * return ATCA_STATUS
  */
 
