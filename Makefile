@@ -15,6 +15,7 @@ ARCH:= 		$(shell arch)
 #HW= 		-DECC_DEBUG
 #HW=		-DUSE_SLOT2_FOR_CERT -DUSE_ECCX08 -DECC_DEBUG
 HW=		-DUSE_ECCX08 -DECC_DEBUG
+HAL=		-DATCA_HAL_I2C
 CFLAGS_EXT=	
 
 ifeq ($(UNAME_S),Darwin)
@@ -101,7 +102,7 @@ tgt_openssl_main:
 
 # ENGINE_ATECC
 build_engine_atecc:
-	make -w -C engine_atecc OPENSSL_VER=$(OPENSSL_VER) HW='$(HW)' CFLAGS_EXT='$(CFLAGS_EXT)' gnu
+	make -w -C engine_atecc OPENSSL_VER=$(OPENSSL_VER) HW='$(HW)' HAL='$(HAL)' CFLAGS_EXT='$(CFLAGS_EXT)' gnu
 
 clean_engine_atecc:
 	make -w -C engine_atecc clean
