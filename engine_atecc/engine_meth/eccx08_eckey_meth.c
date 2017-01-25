@@ -333,7 +333,7 @@ static int eccx08_pkey_ec_init(EVP_PKEY_CTX *ctx)
         goto done;
     }
     //Get public key without private key generation
-    status = atcatls_gen_pubkey(slotid, raw_pubkey);
+    status = atcatls_calc_pubkey(slotid, raw_pubkey);
     if (status != ATCA_SUCCESS) {
         eccx08_debug("eccx08_pkey_ec_init() - error in atcatls_get_pubkey \n");
         goto done;
@@ -423,9 +423,9 @@ static int eccx08_pkey_ec_keygen(EVP_PKEY_CTX *ctx, EVP_PKEY *pkey)
         eccx08_debug("eccx08_pkey_ec_keygen() - error atcatls_create_key \n");
         eccx08_debug("probably the key is locked. Just get a public key from it \n");
         //Get public key without private key generation
-        status = atcatls_gen_pubkey(slotid, raw_pubkey);
+        status = atcatls_calc_pubkey(slotid, raw_pubkey);
         if (status != ATCA_SUCCESS) {
-            eccx08_debug("eccx08_pkey_ec_keygen() - error atcatls_gen_pubkey \n");
+            eccx08_debug("eccx08_pkey_ec_keygen() - error atcatls_calc_pubkey \n");
             goto done;
         }
     }
