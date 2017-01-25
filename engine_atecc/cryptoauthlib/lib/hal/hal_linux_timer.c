@@ -66,7 +66,7 @@ void atca_delay_us(uint32_t delay)
 	do {
 		clock_gettime(CLOCK_REALTIME, &spec);
 		us = round(spec.tv_nsec / 1.0e3);
-	} while (delay < (us - us_start));
+	} while (delay > (us - us_start));
 }
 
 /** \brief This function delays for a number of tens of microseconds.
@@ -75,7 +75,7 @@ void atca_delay_us(uint32_t delay)
  */
 void atca_delay_10us(uint32_t delay)
 {
-	atca_delay_us(round(delay / 10));
+	atca_delay_us(delay * 10);
 }
 
 
@@ -87,9 +87,13 @@ void atca_delay_10us(uint32_t delay)
  */
 
 /* ASF already has delay_ms - see delay.h */
-void atca_delay_ms(uint32_t delay)
+void atca_delay_ms(uint32_t delay_ms)
 {
-	atca_delay_us(round(delay / 1.0e3));
+	uint32_t i;
+
+	for (i = 0; i < delay_ms; i++) {
+		atca_delay_us(1000);
+	}
 }
 
 /** @} */

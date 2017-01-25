@@ -56,6 +56,7 @@ typedef enum {
 	ATCA_SUCCESS                = 0x00, //!< Function succeeded.
 	ATCA_CONFIG_ZONE_LOCKED     = 0x01,
 	ATCA_DATA_ZONE_LOCKED       = 0x02,
+	ATCA_IOCTL_ERROR            = 0xC0, //!< ioctl failed
 	ATCA_WAKE_FAILED            = 0xD0, //!< response status byte indicates CheckMac failure (status byte = 0x01)
 	ATCA_CHECKMAC_VERIFY_FAILED = 0xD1, //!< response status byte indicates CheckMac failure (status byte = 0x01)
 	ATCA_PARSE_ERROR            = 0xD2, //!< response status byte indicates parsing error (status byte = 0x03)
