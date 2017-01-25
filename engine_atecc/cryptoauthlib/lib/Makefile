@@ -1,5 +1,6 @@
+HAL?=-DATCA_HAL_KIT_CDC
 CWD:=$(shell pwd)
-CFLAGS=-I. -I../.. -I./host -fPIC -g -O0
+CFLAGS=-I. -I../.. -I./host -fPIC -g -O0 $(HAL)
 SRC:=$(wildcard *.c)
 CC=	gcc
 

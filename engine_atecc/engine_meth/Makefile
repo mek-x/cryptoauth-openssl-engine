@@ -5,6 +5,7 @@ OPENSSL_VER?=   _1_0_2
 OPENSSL=	openssl$(OPENSSL_VER)
 #HW?= 		-DECC_DEBUG
 HW?=		-DUSE_ECCX08 -DECC_DEBUG
+HAL?=		-DATCA_HAL_KIT_CDC
 
 CFLAGS= -I. -I.. -I../.. \
 	-I../../$(OPENSSL) \
@@ -15,7 +16,7 @@ CFLAGS= -I. -I.. -I../.. \
         -I../../$(OPENSSL)/crypto/include/internal \
 	-I../cryptoauthlib/lib \
 	-I../cryptoauthlib/lib/tls \
-	-fPIC -g -O0 $(HW) -DATCA_HAL_KIT_CDC $(CFLAGS_EXT)
+	-fPIC -g -O0 $(HW) $(HAL) $(CFLAGS_EXT)
 
 SRC=	$(wildcard *.c)
 

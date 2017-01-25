@@ -1,9 +1,10 @@
+HAL?=	-DATCA_HAL_KIT_CDC
 CWD:=	$(shell pwd)
-CFLAGS=	-I. -I.. -I../.. -I../../.. -I../../../.. -I../../lib -I../lib -fPIC -g -O0 -DATCA_HAL_KIT_CDC -DATCAPRINTF
+CFLAGS=	-I. -I.. -I../.. -I../../.. -I../../../.. -I../../lib -I../lib -fPIC -g -O0 $(HAL) -DATCAPRINTF
 SRC:=	$(wildcard *.c)
 CC=	gcc
 
-DIRECTORIES=	$(shell find . -maxdepth 1 ! -path . -type d)
+DIRECTORIES=	$(shell find . -maxdepth 1 ! -path . -type d -exec test -f '{}/Makefile' \; -print)
 SUBDIRS=	$(DIRECTORIES)
 
 .PHONY:	clean tgt_local

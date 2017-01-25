@@ -9,13 +9,15 @@ HEADER=		ecc-crypto_openssl.h
 HW?=		-DUSE_ECCX08 -DECC_DEBUG
 #HW?=		-DUSE_SW_ECDHE -DUSE_ECCX08 -DECC_DEBUG
 #HW?=		-DUSE_SLOT2_FOR_CERT -DUSE_ECCX08 -DECC_DEBUG
+HAL?=		-DATCA_HAL_I2C
+#HAL?=		-DATCA_HAL_KIT_CDC
 
 CC=		gcc
 PIC=		-fPIC
 CFLAGS=		-g -O0 -Iengine_meth -Icryptoauthlib/test -Icryptoauthlib/lib \
 		-I./cryptoauthlib -Icryptoauthlib/lib/tls \
 		-I../install_dir/include -I../../../include -I../$(OPENSSL) \
-		$(PIC) -DENGINE_DYNAMIC_SUPPORT -DFLAT_INC -DATCA_HAL_KIT_CDC \
+		$(PIC) -DENGINE_DYNAMIC_SUPPORT -DFLAT_INC $(HAL) \
 		$(HW) $(CFLAGS_EXT)
 AR=		ar r
 RANLIB=		ranlib
@@ -36,10 +38,10 @@ all:
 		@echo ''
 
 tgt_cryptoauthlib:
-	make -w -C cryptoauthlib HW='$(HW)' 
+	make -w -C cryptoauthlib HW='$(HW)' HAL='$(HAL)'
 
 tgt_engine_meth:
-	make -w -C engine_meth HW='$(HW)' CFLAGS_EXT='$(CFLAGS_EXT)'
+	make -w -C engine_meth HW='$(HW)' HAL='$(HAL)' CFLAGS_EXT='$(CFLAGS_EXT)'
 
 # CHANGE
 ecc-test: tgt_engine_meth tgt_cryptoauthlib Makefile
@@ -59,7 +61,7 @@ update:		FORCE.update
 		perl ../../../util/mkerr.pl -conf ecc-crypto.ec \
 			-nostatic -staticloader -write ecc-crypto.c
 
-gnu:		$(SHLIB).gnu  
+gnu:		$(SHLIB).gnu
 tru64:		$(SHLIB).tru64
 solaris:	$(SHLIB).solaris
 irix:		$(SHLIB).irix
