@@ -20,8 +20,6 @@ atcai2c_t i2c_dev;
  */
 ATCA_STATUS hal_i2c_init(void *hal, ATCAIfaceCfg *cfg)
 {
-	printf("[%s] Enter\n", __FUNCTION__);
-
 	unsigned long funcs = 0;
 	int file;
 	char filename_i2c_bus[32];
@@ -36,32 +34,22 @@ ATCA_STATUS hal_i2c_init(void *hal, ATCAIfaceCfg *cfg)
 
 	sprintf(filename_i2c_bus, "/dev/i2c-%d", cfg->atcai2c.bus);
 
-	printf("[%s] slave_address: 0x%X\n", __FUNCTION__, cfg->atcai2c.slave_address);
-	printf("[%s] bus file: %s\n", __FUNCTION__, filename_i2c_bus);
-
 	//
 	// Open the i2c device, check capabitlities and set slave address
 	//
 	if ((file = open(filename_i2c_bus, O_RDWR)) == -1) {
-		perror("Failed to open the i2c bus");
 		return ATCA_ASSERT_FAILURE;
 	}
 
 	if (ioctl(file, I2C_FUNCS, &funcs) == -1) {
-		perror("Failed to get capabitlities");
 		return ATCA_IOCTL_ERROR;
 	}
 
-	if (funcs & I2C_FUNC_I2C) {
-		printf("I2C_FUNC_I2C supported\n");
-	} else {
-		printf("I2C_FUNC_I2C NOT supported\n");
-
+	if (!(funcs & I2C_FUNC_I2C)) {
 		return ATCA_IOCTL_ERROR;
 	}
 
 	if (ioctl(file, I2C_SLAVE, cfg->atcai2c.slave_address >> 1) == -1) {
-		perror("Failed to set i2c slave address");
 		return ATCA_IOCTL_ERROR;
 	}
 
@@ -80,8 +68,6 @@ ATCA_STATUS hal_i2c_init(void *hal, ATCAIfaceCfg *cfg)
  */
 ATCA_STATUS hal_i2c_post_init(ATCAIface iface)
 {
-	printf("[%s] Enter\n", __FUNCTION__);
-
 	return ATCA_SUCCESS;
 }
 
@@ -98,15 +84,12 @@ ATCA_STATUS hal_i2c_post_init(ATCAIface iface)
  */
 ATCA_STATUS hal_i2c_receive(ATCAIface iface, uint8_t *rxdata, uint16_t *rxlength)
 {
-	printf("[%s] Enter\n", __FUNCTION__);
-
 	atcai2c_t* i2c_dev = atgetifacehaldat(iface);
 	int file           = i2c_dev->fd;
 	int rcv;
 
 	rcv = read(file, rxdata, *rxlength);
 	if (rcv == -1) {
-		perror("Unable to receive");
 		return ATCA_COMM_FAIL;
 	}
 
@@ -127,8 +110,6 @@ ATCA_STATUS hal_i2c_receive(ATCAIface iface, uint8_t *rxdata, uint16_t *rxlength
  */
 ATCA_STATUS hal_i2c_send(ATCAIface iface, uint8_t *txdata, int txlength)
 {
-	printf("[%s] Enter\n", __FUNCTION__);
-
 	atcai2c_t* i2c_dev = atgetifacehaldat(iface);
 	int file           = i2c_dev->fd;
 
@@ -145,7 +126,6 @@ ATCA_STATUS hal_i2c_send(ATCAIface iface, uint8_t *txdata, int txlength)
 	txlength++;         // account for word address value byte.
 
 	if (write(file, txdata, txlength) == -1) {
-		perror("Unable to send");
 		return ATCA_COMM_FAIL;
 	}
 
@@ -161,8 +141,6 @@ ATCA_STATUS hal_i2c_send(ATCAIface iface, uint8_t *txdata, int txlength)
  */
 ATCA_STATUS hal_i2c_wake(ATCAIface iface)
 {
-	printf("[%s] Enter\n", __FUNCTION__);
-
 	atcai2c_t* i2c_dev = atgetifacehaldat(iface);
 	ATCAIfaceCfg *cfg  = atgetifacecfg(iface);
 	int file           = i2c_dev->fd;
@@ -203,14 +181,12 @@ ATCA_STATUS hal_i2c_wake(ATCAIface iface)
 	} while (retries-- > 0 && (status == -1));
 
 	if (status == -1) {
-		printf("Wake retries (%d) exceeded. Communication failure\n", cfg->rx_retries);
 		return ATCA_COMM_FAIL;
 	}
 
 	if (memcmp(buf, expected, sizeof(buf)) == 0) {
 		return ATCA_SUCCESS;
 	} else {
-		printf("Wake magic packet is not correct. Failure\n");
 		return ATCA_COMM_FAIL;
 	}
 }
@@ -224,8 +200,6 @@ ATCA_STATUS hal_i2c_wake(ATCAIface iface)
  */
 ATCA_STATUS hal_i2c_sleep(ATCAIface iface)
 {
-	printf("[%s] Enter\n", __FUNCTION__);
-
 	atcai2c_t* i2c_dev = atgetifacehaldat(iface);
 	int file           = i2c_dev->fd;
 	uint8_t data[1];
@@ -250,8 +224,6 @@ ATCA_STATUS hal_i2c_sleep(ATCAIface iface)
  */
 ATCA_STATUS hal_i2c_idle(ATCAIface iface)
 {
-	printf("[%s] Enter\n", __FUNCTION__);
-
 	atcai2c_t* i2c_dev = atgetifacehaldat(iface);
 	int file = i2c_dev->fd;
 
@@ -260,7 +232,6 @@ ATCA_STATUS hal_i2c_idle(ATCAIface iface)
 	data[0] = 0x02; // idle word address value
 
 	if (write(file, data, sizeof(data)) == -1) {
-		perror("Unable to send idle command");
 		return ATCA_COMM_FAIL;
 	}
 
@@ -278,8 +249,6 @@ ATCA_STATUS hal_i2c_idle(ATCAIface iface)
  */
 ATCA_STATUS hal_i2c_release(void *hal_data)
 {
-	printf("[%s] Enter\n", __FUNCTION__);
-
 	atcai2c_t* i2c_dev = hal_data;
 
 	int file = i2c_dev->fd;
@@ -299,8 +268,6 @@ ATCA_STATUS hal_i2c_release(void *hal_data)
 
 ATCA_STATUS hal_i2c_discover_buses(int i2c_buses[], int max_buses)
 {
-	printf("[%s] Enter\n", __FUNCTION__);
-
 	return ATCA_UNIMPLEMENTED;
 }
 
@@ -312,8 +279,5 @@ ATCA_STATUS hal_i2c_discover_buses(int i2c_buses[], int max_buses)
 
 ATCA_STATUS hal_i2c_discover_devices(int busNum, ATCAIfaceCfg *cfg, int *found )
 {
-	printf("[%s] Enter\n", __FUNCTION__);
-
 	return ATCA_UNIMPLEMENTED;
 }
-
