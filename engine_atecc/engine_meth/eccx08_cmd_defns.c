@@ -362,7 +362,7 @@ int eccx08_cmd_ctrl(ENGINE *e, int cmd, long i, void *p, void (*f)(void))
 
     strncpy(path, p, 256);
     //ctx = ENGINE_get_ex_data(e, capi_idx);
-    status = atcatls_init(&cfg_ecc508_kitcdc_default);
+    status = atcatls_init(pCfg);
     if (status != ATCA_SUCCESS) {
         eccx08_debug("eccx08_cmd_ctrl(): error in atcatls_init\n");
         return ret;
@@ -433,5 +433,3 @@ int eccx08_cmd_defn_init(ENGINE *e)
 
     return 1;
 }
-
-
