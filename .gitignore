@@ -67,4 +67,7 @@ AT_*
 
 # TeXlipse plugin
 .texlipse
-.tags
+
+# developer files
+.tags*
+*cscope*
