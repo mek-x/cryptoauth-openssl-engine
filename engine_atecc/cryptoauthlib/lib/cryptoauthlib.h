@@ -44,6 +44,7 @@
 
 #include <stddef.h>
 #include <string.h>
+#include <stdio.h>
 
 #include "hal/atca_hal.h"
 #include "atca_status.h"
@@ -53,7 +54,7 @@
 #include "basic/atca_basic.h"
 #include "basic/atca_helpers.h"
 
-#define BREAK(status, message) break
+#define BREAK(status, message) {printf("DBG [%d]: %s\n", status, message); break;}
 #define DBGOUT(message) break
 #define PRINT(message) break
 

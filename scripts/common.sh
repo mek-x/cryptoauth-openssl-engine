@@ -19,7 +19,7 @@ export ROOT_CERT=${CERTSTORE}/trusted/AT_root
 export SIGNER_BUNDLE=${CERTSTORE}/trusted/AT_bundle.crt
 
 export LD_LIBRARY_PATH=$TREE_TOP/install_dir/lib
-export LD_PRELOAD=/lib/x86_64-linux-gnu/libpthread.so.0
+export LD_PRELOAD=/lib/arm-linux-gnueabihf/libpthread.so.0
 
 if [ -z "$PORT_NUMBER" ]; then
     export PORT_NUMBER=49917
@@ -88,9 +88,7 @@ else
 fi
 
 export CMD=${BIN_DIR}/openssl
-#export CMD=${TREE_TOP}/cmd_openssl gdb 
+#export CMD=${TREE_TOP}/cmd_openssl gdb
 #export CMD="gdb --args ${BIN_DIR}/openssl"
 export CMD_EX="${EX_DIR}/exchange-tls12"
 #export CMD_EX="gdb --args ${EX_DIR}/exchange-tls12"
-
-
